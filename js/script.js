@@ -47,15 +47,9 @@ function sortData(sortBy, sortOrder) {
 
 
 // Viser data i HTML
-<<<<<<< HEAD
 function displayData(data) {
   const dataVisning = document.getElementById("dataDisplay");
   dataVisning.innerHTML = "";
-=======
-function showData(data) {
-  const displayData = document.getElementById("dataDisplay");
-  displayData.innerHTML = "";
->>>>>>> 1b3497e72a07e3dde9dcb3502875d5b1a974ec6b
 
   data.forEach((item) => {
     const dataRow = document.createElement("div");
@@ -74,9 +68,6 @@ function showData(data) {
   });
 }
 
-<<<<<<< HEAD
-export {displayData}
-=======
 function updateMedlemClicked(event) {
   const form = event.target;
 
@@ -96,4 +87,3 @@ function updateClicked(medlemObject) {
 }
 
 export {showData}
->>>>>>> 1b3497e72a07e3dde9dcb3502875d5b1a974ec6b

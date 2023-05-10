@@ -1,9 +1,5 @@
 
-<<<<<<< HEAD
 import { displayData } from "./script.js";
-=======
-import { showData } from "./script.js";
->>>>>>> 1b3497e72a07e3dde9dcb3502875d5b1a974ec6b
 
 // Opretter knapper til redigering og sletning
 function createButtonContainer(item) {
@@ -55,11 +51,7 @@ function searchData() {
           );
         });
 
-<<<<<<< HEAD
         displayData(filtreretData.slice(0, 24));
-=======
-        showData(filtreredData.slice(0, 24));
->>>>>>> 1b3497e72a07e3dde9dcb3502875d5b1a974ec6b
       }
 });
 }
