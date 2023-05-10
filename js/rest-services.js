@@ -1,4 +1,4 @@
-import { visData } from "./script.js";
+import { displayData } from "./script.js";
 
 // Henter data fra JSON fil
 async function hentData() {
@@ -7,7 +7,7 @@ async function hentData() {
   const medlemmer = data.medlemmer;
 
   if (Array.isArray(medlemmer)) {
-    visData(medlemmer.slice(0, 24));
+    displayData(medlemmer.slice(0, 24));
   }
 }
 

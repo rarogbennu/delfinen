@@ -1,5 +1,5 @@
 
-import { visData } from "./script.js";
+import { displayData } from "./script.js";
 
 // Opretter knapper til redigering og sletning
 function opretKnapContainer(item) {
@@ -51,7 +51,7 @@ function søgData() {
           );
         });
 
-        visData(filtreretData.slice(0, 24));
+        displayData(filtreretData.slice(0, 24));
       }
 });
 }

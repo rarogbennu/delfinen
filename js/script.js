@@ -13,8 +13,41 @@ hentData();
 // Event listener for the keyup event on the search field
 document.getElementById("searchField").addEventListener("keyup", søgData);
 
+// Event listener for sort buttons
+document.querySelectorAll(".sort-btn").forEach((button) => {
+  button.addEventListener("click", () => {
+    const sortBy = button.dataset.sort;
+    const sortOrder = button.dataset.order;
+    sortData(sortBy, sortOrder);
+  });
+});
+
+// Sort data and refresh the display
+function sortData(sortBy, sortOrder) {
+  fetch("data.json")
+    .then((response) => response.json())
+    .then((data) => {
+      const medlemmer = data.medlemmer;
+
+      if (Array.isArray(medlemmer)) {
+        medlemmer.sort((a, b) => {
+          if (sortOrder === "asc") {
+            return a[sortBy].localeCompare(b[sortBy], undefined, { numeric: true });
+          } else {
+            return b[sortBy].localeCompare(a[sortBy], undefined, { numeric: true });
+          }
+        });
+
+        displayData(medlemmer.slice(0, 24));
+      } else {
+        console.error("JSON data is not formatted as expected. Please ensure it is an array of objects.");
+      }
+    });
+}
+
+
 // Viser data i HTML
-function visData(data) {
+function displayData(data) {
   const dataVisning = document.getElementById("dataDisplay");
   dataVisning.innerHTML = "";
 
@@ -35,4 +68,4 @@ function visData(data) {
   });
 }
 
-export {visData}
+export {displayData}

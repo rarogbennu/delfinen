@@ -10,8 +10,27 @@
 </head>
 <body>
     <div class="container">
-    <input type="text" id="searchField" placeholder="Søg her..." />
-    <div id="dataDisplay"></div>
+  <input type="text" id="searchField" placeholder="Søg her..." />
+  <div id="headerRow" class="header-row">
+    <div class="header-cell">
+      <span>Fornavn</span>
+      <button class="sort-btn" data-sort="fornavn" data-order="asc">▲</button>
+      <button class="sort-btn" data-sort="fornavn" data-order="desc">▼</button>
+    </div>
+    <div class="header-cell">
+      <span>Efternavn</span>
+      <button class="sort-btn" data-sort="efternavn" data-order="asc">▲</button>
+      <button class="sort-btn" data-sort="efternavn" data-order="desc">▼</button>
+    </div>
+    <div class="header-cell">
+      <span>Fødselsdag</span>
+      <button class="sort-btn" data-sort="fødselsdato" data-order="asc">▲</button>
+      <button class="sort-btn" data-sort="fødselsdato" data-order="desc">▼</button>
+    </div>
+    <!-- Add more header cells for other columns if needed -->
+  </div>
+  <div id="dataDisplay"></div>
+</div>
   </div>
     <script type="module" src="./js/script.js"></script>
 </body>
