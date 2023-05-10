@@ -32,10 +32,19 @@ function sortData(sortBy, sortOrder) {
 
       if (Array.isArray(medlemmer)) {
         medlemmer.sort((a, b) => {
-          if (sortOrder === "asc") {
-            return a[sortBy].localeCompare(b[sortBy], undefined, { numeric: true });
+        let valueA;
+        let valueB;
+
+        if (sortBy === 'fødselsdato') {
+          valueA = transformDateFormat(a[sortBy]);
+          valueB = transformDateFormat(b[sortBy]);
+        } else {
+          valueA = a[sortBy];
+          valueB = b[sortBy];
+        } if (sortOrder === "asc") {
+            return valueA.localeCompare(valueB, undefined, { numeric: true });
           } else {
-            return b[sortBy].localeCompare(a[sortBy], undefined, { numeric: true });
+            return valueB.localeCompare(valueA, undefined, { numeric: true });
           }
         });
 
@@ -44,6 +53,14 @@ function sortData(sortBy, sortOrder) {
         console.error("JSON data is not formatted as expected. Please ensure it is an array of objects.");
       }
     });
+}
+
+function transformDateFormat(dateString) {
+  const parts = dateString.split("/");
+  const day = parts[0].padStart(2, "0");
+  const month = parts[1].padStart(2, "0");
+  const year = parts[2];
+  return `${year}-${month}-${day}`;
 }
 
 // Viser data i HTML
