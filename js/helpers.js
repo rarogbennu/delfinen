@@ -21,13 +21,13 @@ function createButtonContainer(item) {
   const editButton = document.createElement("button");
   editButton.classList.add("edit");
   editButton.innerHTML = "&#9998;";
-  editButton.addEventListener("click", () => redigerData(item));
+  editButton.addEventListener("click", () => editData(item));
   buttonContainer.appendChild(editButton);
 
   const deletebutton = document.createElement("button");
   deletebutton.classList.add("delete");
   deletebutton.innerHTML = "&#128465;";
-  deletebutton.addEventListener("click", () => sletData(item));
+  deletebutton.addEventListener("click", () => deleteData(item));
   buttonContainer.appendChild(deletebutton);
 
   return buttonContainer;
