@@ -117,4 +117,26 @@ button.edit, button.delete {
 
 button.delete {
   margin-left: 8px;
+
+}
+
+/* Container for the header row */
+.header-row {
+  display: flex;
+  justify-content: flex-start; /* Adjust this to match the alignment of data rows */
+}
+
+/* Individual header cells */
+.header-cell {
+    display: flex;
+    align-items: initial;
+    margin-right: 98px;
+}
+
+/* Sort buttons */
+.sort-btn {
+  border: none;
+  background: none;
+  font-size: 0.8rem;
+  cursor: pointer;
 }

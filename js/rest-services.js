@@ -1,5 +1,4 @@
-"use strict"
-
+import { showData } from "./script.js";
 import { prepareData } from "./helpers.js";
 
 const endpoint = "https://delfinen-724e2-default-rtdb.europe-west1.firebasedatabase.app/";
@@ -17,7 +16,7 @@ async function getResultatData() {
     const resultater = prepareData(resultatData);
     return resultater;
 }
-import { showData } from "./script.js";
+
 
 // Henter data fra JSON fil
 async function getData() {
@@ -26,7 +25,7 @@ async function getData() {
   const medlemmer = data.medlemmer;
 
   if (Array.isArray(medlemmer)) {
-    showData(medlemmer.slice(0, 24));
+    displayData(medlemmer.slice(0, 24));
   }
 }
 

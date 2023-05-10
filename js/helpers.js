@@ -6,12 +6,12 @@ function prepareData(dataObject) {
       dataArray.push(data);
     }
   
-
     return dataArray;
 }
 
 export {prepareData}
 import { showData } from "./script.js";
+
 
 // Opretter knapper til redigering og sletning
 function createButtonContainer(item) {
@@ -63,7 +63,7 @@ function searchData() {
           );
         });
 
-        showData(filtreredData.slice(0, 24));
+        showData(filtreretData.slice(0, 24));
       }
 });
 }
