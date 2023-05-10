@@ -1,4 +1,5 @@
 
+import { visData } from "./script.js";
 
 // Opretter knapper til redigering og sletning
 function opretKnapContainer(item) {
@@ -55,4 +56,4 @@ function søgData() {
 });
 }
 
-export {}
+export {søgData, opretKnapContainer}

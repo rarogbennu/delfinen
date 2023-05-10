@@ -1,11 +1,16 @@
-"use strict"
+
+import { søgData, opretKnapContainer } from "./helpers.js";
+import { hentData } from "./rest-services.js";
 
 window.addEventListener("load", initApp)
 
 function initApp() {
 console.log("loaded");    
+søgData();
+hentData();
 }
 
+const søgefelt = document.getElementById("searchField");
 
 // Viser data i HTML
 function visData(data) {
@@ -28,3 +33,5 @@ function visData(data) {
     dataVisning.appendChild(dataRække);
   });
 }
+
+export {visData}

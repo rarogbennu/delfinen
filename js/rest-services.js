@@ -1,3 +1,5 @@
+import { visData } from "./script.js";
+
 // Henter data fra JSON fil
 async function hentData() {
   const response = await fetch("data.json");
@@ -8,3 +10,5 @@ async function hentData() {
     visData(medlemmer.slice(0, 24));
   }
 }
+
+export {hentData}
