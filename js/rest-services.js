@@ -17,5 +17,17 @@ async function getResultatData() {
     const resultater = prepareData(resultatData);
     return resultater;
 }
+import { showData } from "./script.js";
 
-export {getMedlemData, getResultatData}
+// Henter data fra JSON fil
+async function getData() {
+  const response = await fetch("data.json");
+  const data = await response.json();
+  const medlemmer = data.medlemmer;
+
+  if (Array.isArray(medlemmer)) {
+    showData(medlemmer.slice(0, 24));
+  }
+}
+
+export {getData, getMedlemData, getResultatData}
