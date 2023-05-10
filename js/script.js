@@ -1,4 +1,6 @@
-"use strict"
+import {searchData, createButtonContainer} from "./helpers.js"
+import {getData} from "./rest-services.js"
+import {initViews} from "./views.js"
 
 window.addEventListener("load", initApp)
 
@@ -37,18 +39,17 @@ function sortData(sortBy, sortOrder) {
           }
         });
 
-        displayData(medlemmer.slice(0, 24));
+        showData(medlemmer.slice(0, 24));
       } else {
         console.error("JSON data is not formatted as expected. Please ensure it is an array of objects.");
       }
     });
 }
 
-
 // Viser data i HTML
-function displayData(data) {
-  const dataVisning = document.getElementById("dataDisplay");
-  dataVisning.innerHTML = "";
+function showData(data) {
+  const dataView = document.getElementById("dataDisplay");
+  dataView.innerHTML = "";
 
   data.forEach((item) => {
     const dataRow = document.createElement("div");
@@ -63,7 +64,7 @@ function displayData(data) {
     });
 
     dataRow.appendChild(createButtonContainer(item));
-    displayData.appendChild(dataRow);
+    dataView.appendChild(dataRow);
   });
 }
 

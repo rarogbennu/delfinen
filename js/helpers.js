@@ -63,7 +63,7 @@ function searchData() {
           );
         });
 
-        showData(filtreretData.slice(0, 24));
+        showData(filtreredData.slice(0, 24));
       }
 });
 }

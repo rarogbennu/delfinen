@@ -25,7 +25,7 @@ async function getData() {
   const medlemmer = data.medlemmer;
 
   if (Array.isArray(medlemmer)) {
-    displayData(medlemmer.slice(0, 24));
+    showData(medlemmer.slice(0, 24));
   }
 }
 
