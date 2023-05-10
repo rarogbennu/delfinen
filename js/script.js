@@ -1,17 +1,17 @@
 
-import { søgData, opretKnapContainer } from "./helpers.js";
-import { hentData } from "./rest-services.js";
+import { searchData, createButtonContainer } from "./helpers.js";
+import { getData } from "./rest-services.js";
 
 window.addEventListener("load", initApp)
 
 function initApp() {
 console.log("loaded");    
-søgData();
-hentData();
+searchData();
+getData();
 }
 
 // Event listener for the keyup event on the search field
-document.getElementById("searchField").addEventListener("keyup", søgData);
+document.getElementById("searchField").addEventListener("keyup", searchData);
 
 // Event listener for sort buttons
 document.querySelectorAll(".sort-btn").forEach((button) => {
@@ -47,25 +47,53 @@ function sortData(sortBy, sortOrder) {
 
 
 // Viser data i HTML
+<<<<<<< HEAD
 function displayData(data) {
   const dataVisning = document.getElementById("dataDisplay");
   dataVisning.innerHTML = "";
+=======
+function showData(data) {
+  const displayData = document.getElementById("dataDisplay");
+  displayData.innerHTML = "";
+>>>>>>> 1b3497e72a07e3dde9dcb3502875d5b1a974ec6b
 
   data.forEach((item) => {
-    const dataRække = document.createElement("div");
-    dataRække.classList.add("data-row");
+    const dataRow = document.createElement("div");
+    dataRow.classList.add("data-row");
 
-    const relevanteNøgler = ["fornavn", "efternavn", "fødselsdato", "indmeldelsesdato"];
-    relevanteNøgler.forEach((nøgle) => {
-      const dataCelle = document.createElement("div");
-      dataCelle.classList.add("data-cell");
-      dataCelle.innerText = item[nøgle];
-      dataRække.appendChild(dataCelle);
+    const relevantKeys = ["fornavn", "efternavn", "fødselsdato", "indmeldelsesdato"];
+    relevantKeys.forEach((key) => {
+      const dataCell = document.createElement("div");
+      dataCell.classList.add("data-cell");
+      dataCell.innerText = item[key];
+      dataRow.appendChild(dataCell);
     });
 
-    dataRække.appendChild(opretKnapContainer(item));
-    dataVisning.appendChild(dataRække);
+    dataRow.appendChild(createButtonContainer(item));
+    displayData.appendChild(dataRow);
   });
 }
 
+<<<<<<< HEAD
 export {displayData}
+=======
+function updateMedlemClicked(event) {
+  const form = event.target;
+
+  const fornavn = form.fornavn.value;
+  const efternavn = form.efternavn.value;
+
+  const id = form.getAttribute("data-id");
+  updatePost(id, fornavn, efternavn);
+}
+
+function updateClicked(medlemObject) {
+  const updateForm = document.querySelector("#form-update-medlem");
+  updateForm.fornavn.value = medlemObject.fornavn;
+  updateForm.efternavn.value = medlemObject.efternavn;
+  updateForm.setAttribute("data-id", medlemObject.id);
+  document.querySelector("#dialog-update-medlem").showModal();
+}
+
+export {showData}
+>>>>>>> 1b3497e72a07e3dde9dcb3502875d5b1a974ec6b
