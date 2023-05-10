@@ -1,0 +1,257 @@
+{
+  "medlemmer": [
+    {
+      "fornavn": "Mikkel",
+      "efternavn": "Jensen",
+      "fødselsdato": "02/03/2005",
+      "indmeldelsesdato": "09/05/2023",
+      "adresse": "Ålborgvej 24, 9000 Aalborg",
+      "telefon": "+45 34 56 78 90",
+      "email": "mikkel.jensen@email.com",
+      "medlemstype": "konkurrence",
+      "aktivitetsstatus": "aktiv"
+    },
+    {
+      "fornavn": "Sofie",
+      "efternavn": "Nielsen",
+      "fødselsdato": "16/05/2006",
+      "indmeldelsesdato": "09/05/2023",
+      "adresse": "Nørrebrogade 19, 2200 København N",
+      "telefon": "+45 12 34 56 78",
+      "email": "sofie.nielsen@email.com",
+      "medlemstype": "fritid",
+      "aktivitetsstatus": "aktiv"
+    },
+    {
+      "fornavn": "Lars",
+      "efternavn": "Madsen",
+      "fødselsdato": "30/12/2004",
+      "indmeldelsesdato": "09/05/2023",
+      "adresse": "Vesterbrogade 23, 1620 København V",
+      "telefon": "+45 98 76 54 32",
+      "email": "lars.madsen@email.com",
+      "medlemstype": "konkurrence",
+      "aktivitetsstatus": "passiv"
+    },
+    {
+      "fornavn": "Camilla",
+      "efternavn": "Poulsen",
+      "fødselsdato": "11/11/2008",
+      "indmeldelsesdato": "09/05/2023",
+      "adresse": "Hovedgaden 4, 2970 Hørsholm",
+      "telefon": "+45 55 66 77 88",
+      "email": "camilla.poulsen@email.com",
+      "medlemstype": "fritid",
+      "aktivitetsstatus": "aktiv"
+    },
+    {
+      "fornavn": "Jakob",
+      "efternavn": "Hansen",
+      "fødselsdato": "22/06/2003",
+      "indmeldelsesdato": "09/05/2023",
+      "adresse": "Engvej 6, 2600 Glostrup",
+      "telefon": "+45 58 57 56 55",
+      "email": "jakob.hansen@email.com",
+      "medlemstype": "konkurrence",
+      "aktivitetsstatus": "aktiv"
+    },
+    {
+    "fornavn": "Anna",
+    "efternavn": "Sørensen",
+    "fødselsdato": "04/09/2007",
+    "indmeldelsesdato": "09/05/2023",
+    "adresse": "Birkevej 12, 3500 Værløse",
+    "telefon": "+45 67 68 69 70",
+    "email": "anna.sorensen@email.com",
+    "medlemstype": "fritid",
+    "aktivitetsstatus": "aktiv"
+    },
+    {
+      "fornavn": "Morten",
+      "efternavn": "Christensen",
+      "fødselsdato": "19/04/2005",
+      "indmeldelsesdato": "09/05/2023",
+      "adresse": "Skovbrynet 34, 2840 Holte",
+      "telefon": "+45 77 88 99 00",
+      "email": "morten.christensen@email.com",
+      "medlemstype": "konkurrence",
+      "aktivitetsstatus": "aktiv"
+    },
+    {
+      "fornavn": "Sara",
+      "efternavn": "Larsen",
+      "fødselsdato": "14/12/2006",
+      "indmeldelsesdato": "09/05/2023",
+      "adresse": "Toftegårds Alle 29, 2500 Valby",
+      "telefon": "+45 45 78 69 01",
+      "email": "sara.larsen@email.com",
+      "medlemstype": "fritid",
+      "aktivitetsstatus": "passiv"
+    },
+    {
+      "fornavn": "Frederik",
+      "efternavn": "Rasmussen",
+      "fødselsdato": "03/01/2009",
+      "indmeldelsesdato": "09/05/2023",
+      "adresse": "Strandvejen 58, 2100 København Ø",
+      "telefon": "+45 76 70 61 62",
+      "email": "frederik.rasmussen@email.com",
+      "medlemstype": "konkurrence",
+      "aktivitetsstatus": "aktiv"
+    },
+    {
+      "fornavn": "Kasper",
+      "efternavn": "Pedersen",
+      "fødselsdato": "10/02/2010",
+      "indmeldelsesdato": "09/05/2023",
+      "adresse": "Bredgade 17, 1260 København K",
+      "telefon": "+45 23 24 25 26",
+      "email": "kasper.pedersen@email.com",
+      "medlemstype": "fritid",
+      "aktivitetsstatus": "aktiv"
+    },
+    {
+      "fornavn": "Mette",
+      "efternavn": "Andersen",
+      "fødselsdato": "28/03/2003",
+      "indmeldelsesdato": "09/05/2023",
+      "adresse": "Østerbrogade 95, 2100 København Ø",
+      "telefon": "+45 29 28 27 26",
+      "email": "mette.andersen@email.com",
+      "medlemstype": "konkurrence",
+      "aktivitetsstatus": "passiv"
+    },
+    {
+      "fornavn": "Jonas",
+      "efternavn": "Schmidt",
+      "fødselsdato": "17/07/2007",
+      "indmeldelsesdato": "09/05/2023",
+      "adresse": "Rosenborggade 5, 1130 København K",
+      "telefon": "+45 72 71 55 44",
+      "email": "jonas.schmidt@email.com",
+      "medlemstype": "fritid",
+      "aktivitetsstatus": "aktiv"
+    },
+    {
+      "fornavn": "Emma",
+      "efternavn": "Thomsen",
+      "fødselsdato": "23/08/2002",
+      "indmeldelsesdato": "09/05/2023",
+      "adresse": "Frederiksberg Alle 12, 1820 Frederiksberg",
+      "telefon": "+45 47 46 45 44",
+      "email": "emma.thomsen@email.com",
+      "medlemstype": "konkurrence",
+      "aktivitetsstatus": "aktiv"
+    },
+    {
+      "fornavn": "Mathias",
+      "efternavn": "Knudsen",
+      "fødselsdato": "19/10/2009",
+      "indmeldelsesdato": "09/05/2023",
+      "adresse": "Kongensgade 3, 4000 Roskilde",
+      "telefon": "+45 31 30 29 28",
+      "email": "mathias.knudsen@email.com",
+      "medlemstype": "fritid",
+      "aktivitetsstatus": "passiv"
+    },
+    {
+      "fornavn": "Laura",
+      "efternavn": "Møller",
+      "fødselsdato": "27/11/2006",
+      "indmeldelsesdato": "09/05/2023",
+      "adresse": "Lyngbyvej 14, 2100 København Ø",
+      "telefon": "+45 53 52 51 50",
+      "email": "laura.moller@email.com",
+      "medlemstype": "konkurrence",
+      "aktivitetsstatus": "aktiv"
+    },
+    {
+      "fornavn": "Christian",
+      "efternavn": "Simonsen",
+      "fødselsdato": "07/02/2011",
+      "indmeldelsesdato": "09/05/2023",
+      "adresse": "Jagtvej 27, 2200 København N",
+      "telefon": "+45 37 36 35 34",
+      "email": "christian.simonsen@email.com",
+      "medlemstype": "fritid",
+      "aktivitetsstatus": "aktiv"
+    },
+    {
+      "fornavn": "Ida",
+      "efternavn": "Petersen",
+      "fødselsdato": "01/05/2004",
+      "indmeldelsesdato": "09/05/2023",
+      "adresse": "Svanemøllevej 56, 2900 Hellerup",
+      "telefon": "+45 41 40 39 38",
+      "email": "ida.petersen@email.com",
+      "medlemstype": "konkurrence",
+      "aktivitetsstatus": "passiv"
+    },
+    {
+      "fornavn": "Daniel",
+      "efternavn": "Jørgensen",
+      "fødselsdato": "24/12/2008",
+      "indmeldelsesdato": "09/05/2023",
+      "adresse": "Amager Strandvej 7, 2300 København S",
+      "telefon": "+45 21 20 19 18",
+      "email": "daniel.jorgensen@email.com",
+      "medlemstype": "fritid",
+      "aktivitetsstatus": "aktiv"
+    },
+    {
+      "fornavn": "Maria",
+      "efternavn": "Ibsen",
+      "fødselsdato": "08/06/2003",
+      "indmeldelsesdato": "09/05/2023",
+      "adresse": "Tuborgvej 10, 2400 København NV",
+      "telefon": "+45 75 74 73 72",
+      "email": "maria.ibsen@email.com",
+      "medlemstype": "konkurrence",
+      "aktivitetsstatus": "aktiv"
+    },
+    {
+      "fornavn": "Oliver",
+      "efternavn": "Carlsen",
+      "fødselsdato": "21/03/2010",
+      "indmeldelsesdato": "09/05/2023",
+      "adresse": "Smedegade 2, 3000 Helsingør",
+      "telefon": "+45 63 62 61 60",
+      "email": "oliver.carlsen@email.com",
+      "medlemstype": "fritid",
+      "aktivitetsstatus": "passiv"
+    },
+    {
+      "fornavn": "Louise",
+      "efternavn": "Villadsen",
+      "fødselsdato": "31/10/2005",
+      "indmeldelsesdato": "09/05/2023",
+      "adresse": "Nordre Frihavnsgade 40, 2100 København Ø",
+      "telefon": "+45 65 64 63 62",
+      "email": "louise.villadsen@email.com",
+      "medlemstype": "konkurrence",
+      "aktivitetsstatus": "aktiv"
+    },
+    {
+      "fornavn": "Rasmus",
+      "efternavn": "Svendsen",
+      "fødselsdato": "17/07/2011",
+      "indmeldelsesdato": "09/05/2023",
+      "adresse": "Egegårdsvej 12, 2610 Rødovre",
+      "telefon": "+45 89 88 87 86",
+      "email": "rasmus.svendsen@email.com",
+      "medlemstype": "fritid",
+      "aktivitetsstatus": "aktiv"
+    },
+    {
+      "fornavn": "Signe",
+      "efternavn": "Sloth",
+      "fødselsdato": "12/11/2004",
+      "indmeldelsesdato": "09/05/2023",
+      "adresse": "Mosegårdsvej 5, 2820 Gentofte",
+      "telefon": "+45 95 94 93 92",
+      "email": "signe.sloth@email.com",
+      "medlemstype": "konkurrence",
+      "aktivitetsstatus": "passiv"
+    }
+]
+}
