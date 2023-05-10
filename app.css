@@ -1,5 +1,49 @@
+
 body {
-    font-family: sans-serif;
-    color:black;
-    background-color: rgb(237, 237, 237);   
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+input#searchField {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+.data-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding: 8px 0;
+}
+
+.data-cell {
+  flex: 1;
+  text-align: center;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex: 1;
+}
+
+button.edit, button.delete {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  outline: none;
+}
+
+button.delete {
+  margin-left: 8px;
 }
