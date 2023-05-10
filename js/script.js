@@ -10,7 +10,8 @@ søgData();
 hentData();
 }
 
-const søgefelt = document.getElementById("searchField");
+// Event listener for the keyup event on the search field
+document.getElementById("searchField").addEventListener("keyup", søgData);
 
 // Viser data i HTML
 function visData(data) {
