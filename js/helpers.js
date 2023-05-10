@@ -1,3 +1,5 @@
+import { showData } from "./script.js";
+
 function prepareData(dataObject) {
     const dataArray = [];
     for (const key in dataObject) {
@@ -8,10 +10,6 @@ function prepareData(dataObject) {
   
     return dataArray;
 }
-
-export {prepareData}
-import { showData } from "./script.js";
-
 
 // Opretter knapper til redigering og sletning
 function createButtonContainer(item) {
@@ -24,11 +22,11 @@ function createButtonContainer(item) {
   editButton.addEventListener("click", () => editData(item));
   buttonContainer.appendChild(editButton);
 
-  const deletebutton = document.createElement("button");
-  deletebutton.classList.add("delete");
-  deletebutton.innerHTML = "&#128465;";
-  deletebutton.addEventListener("click", () => deleteData(item));
-  buttonContainer.appendChild(deletebutton);
+  const deleteButton = document.createElement("button");
+  deleteButton.classList.add("delete");
+  deleteButton.innerHTML = "&#128465;";
+  deleteButton.addEventListener("click", () => deleteData(item));
+  buttonContainer.appendChild(deleteButton);
 
   return buttonContainer;
 }
@@ -54,7 +52,7 @@ function searchData() {
       const medlemmer = data.medlemmer;
 
       if (Array.isArray(medlemmer)) {
-        const filtreredData = medlemmer.filter((item) => {
+        const filteredData = medlemmer.filter((item) => {
           return (
             item.fornavn.toLowerCase().includes(request) ||
             item.efternavn.toLowerCase().includes(request) ||
@@ -63,9 +61,9 @@ function searchData() {
           );
         });
 
-        showData(filtreredData.slice(0, 24));
+        showData(filteredData.slice(0, 24));
       }
 });
 }
 
-export {searchData, createButtonContainer}
+export {searchData, createButtonContainer, prepareData}
