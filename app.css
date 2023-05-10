@@ -1,5 +1,74 @@
+/* root variables */
+
+
+/* body */
+
 body {
     font-family: sans-serif;
     color:black;
-    background-color: rgb(237, 237, 237);   
+    background-color: aqua;
+    /* height: 100%; */
+}
+
+
+
+
+/* NAVIGATION */
+
+/* styling of nav-bar */
+nav {
+    display: grid;
+    background-color: aquamarine;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+/* columns for nav-bar */
+@media (min-width: 700px) {
+    nav {
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    }
+}
+
+/* styling of links nav-bar */
+nav a {
+    display: inline-block;
+    color: blue;
+    padding: 20px 5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1.5px solid black
+}
+
+/* color when hovering nav-bar */
+nav a:hover {
+    background-color: deepskyblue;
+    color: cyan;
+}
+
+/* color of active link */
+nav a.active {
+    background-color: darkblue;
+    color: coral;
+}
+
+/* show content class */
+.show-content {
+    display: none;
+    padding: 286px 2em;
+}
+
+/* how the show-content class is shown */
+@media (min-width: 700px) {
+    .show-content {
+        padding: 65px 1em;
+    }
+}
+
+/* shows the content active link */
+.show-content.active {
+    display: block;
 }

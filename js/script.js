@@ -1,7 +1,8 @@
-"use strict"
+import {initViews} from "./views.js";
 
 window.addEventListener("load", initApp)
 
 function initApp() {
-console.log("loaded");    
+    console.log("initApp");
+    initViews();
 }
