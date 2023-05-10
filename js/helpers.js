@@ -1,8 +1,8 @@
 
-import { visData } from "./script.js";
+import { showData } from "./script.js";
 
 // Opretter knapper til redigering og sletning
-function opretKnapContainer(item) {
+function createButtonContainer(item) {
   const knapContainer = document.createElement("div");
   knapContainer.classList.add("button-container");
 
@@ -32,9 +32,9 @@ function sletData(item) {
 }
 
 // Funktion til at søge i data
-function søgData() {
-  const søgefelt = document.getElementById("searchField");
-  const forespørgsel = søgefelt.value.toLowerCase();
+function searchData() {
+  const searchField = document.getElementById("searchField");
+  const forespørgsel = searchField.value.toLowerCase();
 
   fetch("data.json")
     .then((response) => response.json())
@@ -51,9 +51,9 @@ function søgData() {
           );
         });
 
-        visData(filtreretData.slice(0, 24));
+        showData(filtreretData.slice(0, 24));
       }
 });
 }
 
-export {søgData, opretKnapContainer}
+export {searchData, createButtonContainer}
