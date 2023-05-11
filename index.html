@@ -48,6 +48,8 @@
           </div>
         </div>
             <div id="dataDisplay"></div>
+
+            <!-- dialog update medlem-->
             <dialog id="dialog-update-medlem">
               <h2>Opdater medlem</h2>
               <form id="form-update-medlem" method="dialog">
@@ -84,10 +86,19 @@
                 <label for="indmeldelsesdato-update">Indmeldelsesdato:</label>
                 <input type="date" id="indmeldelsesdato-update" name="indmeldelsesdato" placeholder="">
               
-                <button>Update Medlem</button>
-              </form>
-              
-          </dialog>
+                <button>Opdater medlem</button>
+              </form>  
+            </dialog>
+
+            <!-- dialog delete post -->
+            <dialog id="dialog-delete-medlem">
+                <h2>Vil du slette dette medlem?</h2>
+                <p id="dialog-delete-medlem-navn">Vil du slette: </p>
+                <form id="form-delete-medlem" method="dialog">
+                    <button type="button" class="btn-cancel">Nej</button>
+                    <button>Ja</button>
+                </form>
+            </dialog>
         </section>
 
         <section id="opret-medlem" class="show-content">
