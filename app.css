@@ -5,26 +5,21 @@
 /* body */
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Flama medium",sans-serif;
     color:black;
-    background-color: aqua;
+    background-color: rgb(166, 213, 243);
+    border: 10px;
     /* height: 100%; */
 }
-
-
-
 
 /* NAVIGATION */
 
 /* styling of nav-bar */
 nav {
     display: grid;
-    background-color: aquamarine;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    position: center;
     text-align: center;
+    border-radius: 25px;
 }
 
 /* columns for nav-bar */
@@ -37,23 +32,26 @@ nav {
 /* styling of links nav-bar */
 nav a {
     display: inline-block;
-    color: blue;
-    padding: 20px 5px;
+    color: rgb(0, 0, 0);
+    padding: 15px 5px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    border: 1.5px solid black
+    border-radius: 25px;
+    text-decoration: none;
 }
 
 /* color when hovering nav-bar */
 nav a:hover {
-    background-color: deepskyblue;
-    color: cyan;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    border-radius: 25px;
 }
 
 /* color of active link */
 nav a.active {
-    background-color: darkblue;
-    color: coral;
+    background-color: rgb(0, 0, 0);
+    color: rgb(241, 241, 241);
+    border-radius: 25px;
 }
 
 /* show content class */
