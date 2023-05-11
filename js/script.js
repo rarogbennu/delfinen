@@ -1,5 +1,5 @@
 import {searchData, createButtonContainer} from "./helpers.js"
-import {getData} from "./rest-services.js"
+import {getData, updateMedlem} from "./rest-services.js"
 import {initViews} from "./views.js"
 
 window.addEventListener("load", initApp)
@@ -9,6 +9,9 @@ function initApp() {
     initViews();
     searchData();
     getData();
+
+// event listeners til CRUD functions
+document.querySelector("#form-update-medlem").addEventListener("submit", updateMedlemClicked);
 }
 
 // Event listener for the keyup event on the search field
@@ -68,22 +71,43 @@ function showData(data) {
   });
 }
 
+// events
+
 function updateMedlemClicked(event) {
   const form = event.target;
 
   const fornavn = form.fornavn.value;
   const efternavn = form.efternavn.value;
+  const fødselsdato = form.fødselsdato.value;
+  const adresse = form.adresse.value;
+  const telefon = form.telefon.value;
+  const email = form.email.value;
+  const medlemstype = form.medlemstype.value;
+  const aktivitetsstatus = form.aktivitetsstatus.value;
+  const indmeldelsesdato = form.indmeldelsesdato.value;
 
   const id = form.getAttribute("data-id");
-  updatePost(id, fornavn, efternavn);
+  updateMedlem(id, fornavn, efternavn, fødselsdato, adresse, telefon, email, medlemstype, aktivitetsstatus, indmeldelsesdato);
 }
 
-function updateClicked(medlemObject) {
+
+// Dialogs for update and delete medlem 
+
+function updateClicked(item) {
+  console.log(item)
   const updateForm = document.querySelector("#form-update-medlem");
-  updateForm.fornavn.value = medlemObject.fornavn;
-  updateForm.efternavn.value = medlemObject.efternavn;
-  updateForm.setAttribute("data-id", medlemObject.id);
+  updateForm.fornavn.value = item.fornavn;
+  updateForm.efternavn.value = item.efternavn;
+  updateForm.fødselsdato.value = item.fødselsdato;
+  updateForm.adresse.value = item.adresse;
+  updateForm.telefon.value = item.telefon;
+  updateForm.email.value = item.email;
+  updateForm.medlemstype.value = item.medlemstype;
+  updateForm.aktivitetsstatus.value = item.aktivitetsstatus;
+  updateForm.indmeldelsesdato.value = item.indmeldelsesdato;
+  updateForm.setAttribute("data-id", item.id);
   document.querySelector("#dialog-update-medlem").showModal();
 }
 
-export {showData}
+
+export {showData, updateClicked}

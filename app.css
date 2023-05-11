@@ -140,3 +140,12 @@ button.delete {
   font-size: 0.8rem;
   cursor: pointer;
 }
+
+/* dialogs */
+
+#form-update-medlem {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+  padding: 2em;
+}

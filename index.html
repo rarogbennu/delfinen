@@ -24,30 +24,70 @@
         <section id="medlemmer" class="show-content">
             <h2>Medlemmer</h2>
 
-    <div class="container">
-  
-    <input type="text" id="searchField" placeholder="Søg her..." />
-    <div id="headerRow" class="header-row">
-      <div class="header-cell">
-        <span>Fornavn</span>
-        <button class="sort-btn" data-sort="fornavn" data-order="asc">▲</button>
-        <button class="sort-btn" data-sort="fornavn" data-order="desc">▼</button>
-      </div>
-      <div class="header-cell">
-        <span>Efternavn</span>
-        <button class="sort-btn" data-sort="efternavn" data-order="asc">▲</button>
-        <button class="sort-btn" data-sort="efternavn" data-order="desc">▼</button>
-      </div>
-      <div class="header-cell">
-        <span>Fødselsdag</span>
-        <button class="sort-btn" data-sort="fødselsdato" data-order="asc">▲</button>
-        <button class="sort-btn" data-sort="fødselsdato" data-order="desc">▼</button>
-      </div>
-      <!-- Add more header cells for other columns if needed -->
-    </div>
-  </div>
-    </div>
+        <div class="container">
+        
+          <input type="text" id="searchField" placeholder="Søg her..." />
+            <div id="headerRow" class="header-row">
+              <div class="header-cell">
+                <span>Fornavn</span>
+                <button class="sort-btn" data-sort="fornavn" data-order="asc">▲</button>
+                <button class="sort-btn" data-sort="fornavn" data-order="desc">▼</button>
+              </div>
+              <div class="header-cell">
+                <span>Efternavn</span>
+                <button class="sort-btn" data-sort="efternavn" data-order="asc">▲</button>
+                <button class="sort-btn" data-sort="efternavn" data-order="desc">▼</button>
+              </div>
+              <div class="header-cell">
+                <span>Fødselsdag</span>
+                <button class="sort-btn" data-sort="fødselsdato" data-order="asc">▲</button>
+                <button class="sort-btn" data-sort="fødselsdato" data-order="desc">▼</button>
+              </div>
+              <!-- Add more header cells for other columns if needed -->
+            </div>
+          </div>
+        </div>
             <div id="dataDisplay"></div>
+            <dialog id="dialog-update-medlem">
+              <h2>Opdater medlem</h2>
+              <form id="form-update-medlem" method="dialog">
+                <label for="fornavn-update">Fornavn:</label>
+                <input type="text" id="fornavn-update" name="fornavn" placeholder="">
+              
+                <label for="efternavn-update">Efternavn:</label>
+                <input type="text" id="efternavn-update" name="efternavn" placeholder="">
+              
+                <label for="fødselsdato-update">Fødselsdato:</label>
+                <input type="date" id="fødselsdato-update" name="fødselsdato" placeholder="">
+              
+                <label for="adresse-update">Adresse:</label>
+                <input type="text" id="adresse-update" name="adresse" placeholder="">
+              
+                <label for="telefon-update">Telefon:</label>
+                <input type="tel" id="telefon-update" name="telefon" placeholder="">
+              
+                <label for="email-update">Email:</label>
+                <input type="email" id="email-update" name="email" placeholder="">
+              
+                <label for="medlemstype-update">Medlemstype:</label>
+                <select id="medlemstype-update" name="medlemstype">
+                  <option value="konkurrence">Konkurrence</option>
+                  <option value="motionist">Motionist</option>
+                </select>
+              
+                <label for="aktivitetsstatus-update">Aktivitetsstatus:</label>
+                <select id="aktivitetsstatus-update" name="aktivitetsstatus">
+                  <option value="aktiv">Aktiv</option>
+                  <option value="passiv">Passiv</option>
+                </select>
+              
+                <label for="indmeldelsesdato-update">Indmeldelsesdato:</label>
+                <input type="date" id="indmeldelsesdato-update" name="indmeldelsesdato" placeholder="">
+              
+                <button>Update Medlem</button>
+              </form>
+              
+          </dialog>
         </section>
 
         <section id="opret-medlem" class="show-content">

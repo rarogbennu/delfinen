@@ -1,3 +1,5 @@
+import {showData, updateClicked} from "./script.js"
+
 function prepareData(dataObject) {
     const dataArray = [];
     for (const key in dataObject) {
@@ -9,10 +11,6 @@ function prepareData(dataObject) {
     return dataArray;
 }
 
-export {prepareData}
-import { showData } from "./script.js";
-
-
 // Opretter knapper til redigering og sletning
 function createButtonContainer(item) {
   const buttonContainer = document.createElement("div");
@@ -21,22 +19,18 @@ function createButtonContainer(item) {
   const editButton = document.createElement("button");
   editButton.classList.add("edit");
   editButton.innerHTML = "&#9998;";
-  editButton.addEventListener("click", () => redigerData(item));
+  editButton.addEventListener("click", () => updateClicked(item));
   buttonContainer.appendChild(editButton);
 
   const deletebutton = document.createElement("button");
   deletebutton.classList.add("delete");
   deletebutton.innerHTML = "&#128465;";
-  deletebutton.addEventListener("click", () => sletData(item));
+  deletebutton.addEventListener("click", () => deleteData(item));
   buttonContainer.appendChild(deletebutton);
 
   return buttonContainer;
 }
 
-// Funktion til at redigere data
-function editData(item) {
-  console.log("Rediger data:", item);
-}
 
 // Funktion til at slette data
 function deleteData(item) {
@@ -68,4 +62,4 @@ function searchData() {
 });
 }
 
-export {searchData, createButtonContainer}
+export {searchData, createButtonContainer, prepareData}
