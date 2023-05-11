@@ -1,4 +1,4 @@
-import {showData, updateClicked} from "./script.js"
+import {showData, updateClicked, deleteClicked} from "./script.js"
 
 
 
@@ -27,16 +27,10 @@ function createButtonContainer(item) {
   const deleteButton = document.createElement("button");
   deleteButton.classList.add("delete");
   deleteButton.innerHTML = "&#128465;";
-  deleteButton.addEventListener("click", () => deleteData(item));
+  deleteButton.addEventListener("click", () => deleteClicked(item));
   buttonContainer.appendChild(deleteButton);
 
   return buttonContainer;
-}
-
-
-// Funktion til at slette data
-function deleteData(item) {
-  console.log("Slet data:", item);
 }
 
 // Funktion til at søge i data
