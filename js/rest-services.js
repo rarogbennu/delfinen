@@ -49,7 +49,19 @@ async function updateMedlem(id, fornavn, efternavn, fødselsdato, adresse, telef
 
   if (response.ok) {
       console.log("Medlem succesfully updated in Firebase 🔥");
+      // updateMedlemmerList();
   }
 }
 
-export {getData, getMedlemData, updateMedlem}
+async function deleteMedlem(id){
+    const response = await fetch(`${endpoint}/medlemmer/${id}.json`, {
+      method: "DELETE"
+  });
+  if (response.ok) {
+      console.log("Medlem succesfully deleted from Firebase 🔥");
+      // updateMedlemmerList();
+  }
+}
+
+
+export {getData, getMedlemData, updateMedlem, deleteMedlem}

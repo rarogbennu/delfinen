@@ -1,4 +1,4 @@
-import {showData, updateClicked, nextPage, previousPage} from "./script.js"
+import {showData, updateClicked, deleteClicked, nextPage, previousPage} from "./script.js"
 import { currentPage } from './state.js';
 
 
@@ -42,16 +42,10 @@ function createButtonContainer(item) {
   const deleteButton = document.createElement("button");
   deleteButton.classList.add("delete");
   deleteButton.innerHTML = "&#128465;";
-  deleteButton.addEventListener("click", () => deleteData(item));
+  deleteButton.addEventListener("click", () => deleteClicked(item));
   buttonContainer.appendChild(deleteButton);
 
   return buttonContainer;
-}
-
-
-// Funktion til at slette data
-function deleteData(item) {
-  console.log("Slet data:", item);
 }
 
 function createPageButtons(data) {
