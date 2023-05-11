@@ -1,5 +1,5 @@
 import {searchData, createButtonContainer} from "./helpers.js"
-import {getData, updateMedlem} from "./rest-services.js"
+import {getData, updateMedlem, deleteMedlem} from "./rest-services.js"
 import {initViews} from "./views.js"
 
 window.addEventListener("load", initApp)
@@ -12,6 +12,8 @@ function initApp() {
 
 // event listeners til CRUD functions
 document.querySelector("#form-update-medlem").addEventListener("submit", updateMedlemClicked);
+document.querySelector("#form-delete-medlem").addEventListener("submit", deleteMedlemClicked);
+document.querySelector("#form-delete-medlem .btn-cancel").addEventListener("click", deleteCancelClicked);
 }
 
 // Event listener for the keyup event on the search field
@@ -107,6 +109,15 @@ function updateMedlemClicked(event) {
   updateMedlem(id, fornavn, efternavn, fødselsdato, adresse, telefon, email, medlemstype, aktivitetsstatus, indmeldelsesdato);
 }
 
+function deleteMedlemClicked(event) {
+  const id = event.target.getAttribute("data-id"); // event.target is the delete form
+  deleteMedlem(id); // call deletePost with id
+}
+
+function deleteCancelClicked() {
+  document.querySelector("#dialog-delete-medlem").close(); // close dialog
+}
+
 
 // Dialogs for update and delete medlem 
 
@@ -126,5 +137,10 @@ function updateClicked(item) {
   document.querySelector("#dialog-update-medlem").showModal();
 }
 
+function deleteClicked(item) {
+  document.querySelector("#dialog-delete-medlem-navn").textContent = item.fornavn + " " + item.efternavn;
+  document.querySelector("#form-delete-medlem").setAttribute("data-id", item.id);
+  document.querySelector("#dialog-delete-medlem").showModal();
+}
 
-export {showData, updateClicked}
+export {showData, updateClicked, deleteClicked}
