@@ -39,7 +39,7 @@ async function getData() {
 // Create, update, delete
 
 async function updateMedlem(id, fornavn, efternavn, fødselsdato, adresse, telefon, email, medlemstype, aktivitetsstatus, indmeldelsesdato ) {
-  const medlemToUpdate = { id, fornavn, efternavn, fødselsdato, adresse, telefon, email, medlemstype, aktivitetsstatus, indmeldelsesdato }; // post update to update
+  const medlemToUpdate = { fornavn, efternavn, fødselsdato, adresse, telefon, email, medlemstype, aktivitetsstatus, indmeldelsesdato }; // post update to update
   const json = JSON.stringify(medlemToUpdate);
 
   const response = await fetch(`${endpoint}/medlemmer/${id}.json`, {
