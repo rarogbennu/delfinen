@@ -5,16 +5,36 @@ function initViews() {
 }
 
 function changeView() {
-    let hashLink = "#home";
+  let hashLink = "#home";
 
-    if (location.hash) {
-        hashLink = location.hash;
-    }
+  if (location.hash) {
+    hashLink = location.hash;
+  }
 
-    hideViews();
+  hideViews();
+  hidePaginationButtons();
 
-    document.querySelector(hashLink).classList.add("active");
-    setActiveLink(hashLink);
+  document.querySelector(hashLink).classList.add("active");
+  setActiveLink(hashLink);
+
+  if (hashLink === "#medlemmer") {
+    showPaginationButtons();
+  }
+}
+
+
+function hidePaginationButtons() {
+    const paginationButtons = document.querySelectorAll(".page-buttons");
+    paginationButtons.forEach(button => {
+        button.style.display = "none";
+    });
+}
+
+function showPaginationButtons() {
+    const paginationButtons = document.querySelectorAll(".page-buttons");
+    paginationButtons.forEach(button => {
+        button.style.display = "block";
+    });
 }
 
 function setActiveLink(view) {
@@ -28,5 +48,8 @@ function hideViews() {
     document.querySelectorAll(".show-content").forEach(link => link.classList.remove("active"));
     document.querySelectorAll(".show-link").forEach(link => link.classList.remove("active"));
 }
+
+
+
 
 export {initViews};

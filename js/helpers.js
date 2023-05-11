@@ -16,8 +16,20 @@ function prepareData(dataObject) {
     return dataArray;
 }
 
+function showPaginationButtons() {
+  const pageButtonContainer = document.getElementById("page-buttons");
+  pageButtonContainer.style.display = "block";
+}
+
+function hidePaginationButtons() {
+  const pageButtonContainer = document.getElementById("page-buttons");
+  pageButtonContainer.style.display = "none";
+}
+
+
 // Opretter knapper til redigering og sletning
 function createButtonContainer(item) {
+  
   const buttonContainer = document.createElement("div");
   buttonContainer.classList.add("button-container");
 
@@ -45,7 +57,7 @@ function deleteData(item) {
 function createPageButtons(data) {
   const totalPages = Math.ceil(data.length / pageSize);
 
- // Create a div to contain the page buttons
+  // Create a div to contain the page buttons
   const pageButtonContainer = document.createElement('div');
   pageButtonContainer.id = 'page-buttons';
 
@@ -55,12 +67,13 @@ function createPageButtons(data) {
     pageButton.addEventListener('click', () => {
       window.currentPage = i;
       showData(data, window.currentPage);
-     });
+    });
     pageButtonContainer.appendChild(pageButton);  // append the button to the container
   }
 
-  document.body.appendChild(pageButtonContainer);  // append the container to the body
+  document.getElementById('medlemmer').appendChild(pageButtonContainer);  // append the container to the medlemmer section
 }
+
 
 // Funktion til at søge i data
 function searchData() {
