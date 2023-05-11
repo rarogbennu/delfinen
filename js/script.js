@@ -1,6 +1,12 @@
 import {searchData, createButtonContainer} from "./helpers.js"
 import {getData, updateMedlem} from "./rest-services.js"
 import {initViews} from "./views.js"
+import { currentPage } from './state.js';
+
+
+// Global variables for page size and current page
+const pageSize = 15;
+window.currentPage = 1;
 
 window.addEventListener("load", initApp)
 
@@ -51,10 +57,7 @@ function sortData(sortBy, sortOrder) {
           }
         });
 
-        showData(medlemmer.slice(0, 24));
-      } else {
-        console.error("JSON data is not formatted as expected. Please ensure it is an array of objects.");
-      }
+       showData(medlemmer, currentPage);}
     });
 }
 
@@ -67,11 +70,17 @@ function transformDateFormat(dateString) {
 }
 
 // Viser data i HTML
-function showData(data) {
+function showData(data, page = 1) {
+  // Calculate start and end indices based on page number
+  const start = (page - 1) * pageSize;
+  const end = start + pageSize;
+  
+  // Slice data array to get items for current page
+  const pageData = data.slice(start, end);
   const dataView = document.getElementById("dataDisplay");
   dataView.innerHTML = "";
 
-  data.forEach((item) => {
+  pageData.forEach((item) => {
     const dataRow = document.createElement("div");
     dataRow.classList.add("data-row");
 
@@ -86,6 +95,18 @@ function showData(data) {
     dataRow.appendChild(createButtonContainer(item));
     dataView.appendChild(dataRow);
   });
+}
+// Create function to render previous page
+function previousPage(data) {
+  window.currentPage--;
+  if (window.currentPage < 1) window.currentPage = 1;  // Prevent going below page 1
+  showData(data, window.currentPage);
+}
+
+// Create function to render next page
+function nextPage(data) {
+ window.currentPage++;
+  showData(data, window.currentPage);
 }
 
 // events
@@ -127,4 +148,4 @@ function updateClicked(item) {
 }
 
 
-export {showData, updateClicked}
+export {showData, updateClicked, nextPage, previousPage}

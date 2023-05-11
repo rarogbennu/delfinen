@@ -3,7 +3,7 @@
     {
       "fornavn": "Mikkel",
       "efternavn": "Jensen",
-      "fødselsdato": "02/03/2005",
+      "fødselsdato": "02/03/1995",
       "indmeldelsesdato": "09/05/2023",
       "adresse": "Ålborgvej 24, 9000 Aalborg",
       "telefon": "+45 34 56 78 90",
@@ -25,7 +25,7 @@
     {
       "fornavn": "Lars",
       "efternavn": "Madsen",
-      "fødselsdato": "30/12/2004",
+      "fødselsdato": "30/12/1994",
       "indmeldelsesdato": "09/05/2023",
       "adresse": "Vesterbrogade 23, 1620 København V",
       "telefon": "+45 98 76 54 32",
@@ -146,7 +146,7 @@
     {
       "fornavn": "Mathias",
       "efternavn": "Knudsen",
-      "fødselsdato": "19/10/2009",
+      "fødselsdato": "19/10/2000",
       "indmeldelsesdato": "09/05/2023",
       "adresse": "Kongensgade 3, 4000 Roskilde",
       "telefon": "+45 31 30 29 28",
@@ -234,7 +234,7 @@
     {
       "fornavn": "Rasmus",
       "efternavn": "Svendsen",
-      "fødselsdato": "17/07/2011",
+      "fødselsdato": "17/07/1991",
       "indmeldelsesdato": "09/05/2023",
       "adresse": "Egegårdsvej 12, 2610 Rødovre",
       "telefon": "+45 89 88 87 86",
@@ -252,6 +252,160 @@
       "email": "signe.sloth@email.com",
       "medlemstype": "konkurrence",
       "aktivitetsstatus": "passiv"
-    }
-]
+    },
+     {
+      "fornavn": "Line",
+      "efternavn": "Hansen",
+      "fødselsdato": "15/04/1996",
+      "indmeldelsesdato": "09/05/2023",
+      "adresse": "Kastanievej 6, 9000 Aalborg",
+      "telefon": "+45 33 55 77 99",
+      "email": "line.hansen@email.com",
+      "medlemstype": "konkurrence",
+      "aktivitetsstatus": "aktiv"
+    },
+    {
+      "fornavn": "Martin",
+      "efternavn": "Petersen",
+      "fødselsdato": "23/08/1996",
+      "indmeldelsesdato": "09/05/2023",
+      "adresse": "Birketrævej 8, 2610 Rødovre",
+      "telefon": "+45 89 80 81 82",
+      "email": "martin.petersen@email.com",
+      "medlemstype": "fritid",
+      "aktivitetsstatus": "aktiv"
+    },
+    {
+      "fornavn": "Louise",
+      "efternavn": "Madsen",
+      "fødselsdato": "19/01/1999",
+      "indmeldelsesdato": "09/05/2023",
+      "adresse": "Egebækvej 9, 2820 Gentofte",
+      "telefon": "+45 95 96 97 98",
+      "email": "louise.madsen@email.com",
+      "medlemstype": "konkurrence",
+      "aktivitetsstatus": "passiv"
+    },
+    {
+      "fornavn": "Jacob",
+      "efternavn": "Larsen",
+      "fødselsdato": "27/09/1998",
+      "indmeldelsesdato": "09/05/2023",
+      "adresse": "Birkebakken 12, 9000 Aalborg",
+      "telefon": "+45 34 35 36 37",
+      "email": "jacob.larsen@email.com",
+      "medlemstype": "konkurrence",
+      "aktivitetsstatus": "aktiv"
+    },
+    {
+      "fornavn": "Anne",
+      "efternavn": "Nielsen",
+      "fødselsdato": "14/05/1989",
+      "indmeldelsesdato": "09/05/2023",
+      "adresse": "Egevænget 13, 2610 Rødovre",
+      "telefon": "+45 89 81 82 83",
+      "email": "anne.nielsen@email.com",
+      "medlemstype": "fritid",
+      "aktivitetsstatus": "aktiv"
+    },
+    {
+  "fornavn": "Lars",
+  "efternavn": "Christensen",
+  "fødselsdato": "02/02/1952",
+  "indmeldelsesdato": "09/05/2023",
+  "adresse": "Mosevænget 10, 2820 Gentofte",
+  "telefon": "+45 94 93 92 91",
+  "email": "lars.christensen@email.com",
+  "medlemstype": "konkurrence",
+  "aktivitetsstatus": "passiv"
+},
+{
+  "fornavn": "Helle",
+  "efternavn": "Johansen",
+  "fødselsdato": "10/06/1970",
+  "indmeldelsesdato": "09/05/2023",
+  "adresse": "Birkebakken 14, 9000 Aalborg",
+  "telefon": "+45 31 32 33 34",
+  "email": "helle.johansen@email.com",
+  "medlemstype": "konkurrence",
+  "aktivitetsstatus": "aktiv"
+},
+{
+  "fornavn": "Peter",
+  "efternavn": "Andersen",
+  "fødselsdato": "22/09/1965",
+  "indmeldelsesdato": "09/05/2023",
+  "adresse": "Egevænget 15, 2610 Rødovre",
+  "telefon": "+45 85 86 87 88",
+  "email": "peter.andersen@email.com",
+  "medlemstype": "fritid",
+  "aktivitetsstatus": "aktiv"
+},
+{
+  "fornavn": "Mette",
+  "efternavn": "Thomsen",
+  "fødselsdato": "04/04/1974",
+  "indmeldelsesdato": "09/05/2023",
+  "adresse": "Mosevænget 12, 2820 Gentofte",
+  "telefon": "+45 90 91 92 93",
+  "email": "mette.thomsen@email.com",
+  "medlemstype": "konkurrence",
+  "aktivitetsstatus": "passiv"
+},
+{
+  "fornavn": "Astrid",
+  "efternavn": "Nielsen",
+  "fødselsdato": "20/05/2006",
+  "indmeldelsesdato": "09/05/2023",
+  "adresse": "Birkelunden 20, 9000 Aalborg",
+  "telefon": "+45 33 44 55 66",
+  "email": "astrid.nielsen@email.com",
+  "medlemstype": "konkurrence",
+  "aktivitetsstatus": "aktiv"
+},
+{
+  "fornavn": "Jesper",
+  "efternavn": "Pedersen",
+  "fødselsdato": "18/08/2008",
+  "indmeldelsesdato": "09/05/2023",
+  "adresse": "Egetoften 18, 2610 Rødovre",
+  "telefon": "+45 77 88 99 00",
+  "email": "jesper.pedersen@email.com",
+  "medlemstype": "fritid",
+  "aktivitetsstatus": "aktiv"
+},
+{
+  "fornavn": "Lotte",
+  "efternavn": "Frederiksen",
+  "fødselsdato": "16/06/2006",
+  "indmeldelsesdato": "09/05/2023",
+  "adresse": "Mosebuen 16, 2820 Gentofte",
+  "telefon": "+45 60 61 62 63",
+  "email": "lotte.frederiksen@email.com",
+  "medlemstype": "konkurrence",
+  "aktivitetsstatus": "passiv"
+},
+{
+  "fornavn": "Flemming",
+  "efternavn": "Madsen",
+  "fødselsdato": "14/04/2004",
+  "indmeldelsesdato": "09/05/2023",
+  "adresse": "Birketoften 14, 9000 Aalborg",
+  "telefon": "+45 50 51 52 53",
+  "email": "flemming.madsen@email.com",
+  "medlemstype": "konkurrence",
+  "aktivitetsstatus": "aktiv"
+},
+{
+  "fornavn": "Karen",
+  "efternavn": "Poulsen",
+  "fødselsdato": "12/02/2002",
+  "indmeldelsesdato": "09/05/2023",
+  "adresse": "Egegården 12, 2610 Rødovre",
+  "telefon": "+45 40 41 42 43",
+  "email": "karen.poulsen@email.com",
+  "medlemstype": "fritid",
+  "aktivitetsstatus": "aktiv"
+}
+  ]
 }
