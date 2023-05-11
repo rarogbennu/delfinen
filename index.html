@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="app.css">
     <link rel="shortcut icon" href="#" type="image/x-icon">
+    <link href="https://fonts.cdnfonts.com/css/flama-medium" rel="stylesheet">
     <title>Delfinen</title>
 </head>
 <body>
@@ -27,6 +28,8 @@
         <div class="container">
         
           <input type="text" id="searchField" placeholder="Søg her..." />
+              <!-- Add more header cells for other columns if needed -->
+            </div>
             <div id="headerRow" class="header-row">
               <div class="header-cell">
                 <span>Fornavn</span>
@@ -38,13 +41,21 @@
                 <button class="sort-btn" data-sort="efternavn" data-order="asc">▲</button>
                 <button class="sort-btn" data-sort="efternavn" data-order="desc">▼</button>
               </div>
-              <div class="header-cell">
+              <div class="Fødselsdag">
                 <span>Fødselsdag</span>
                 <button class="sort-btn" data-sort="fødselsdato" data-order="asc">▲</button>
                 <button class="sort-btn" data-sort="fødselsdato" data-order="desc">▼</button>
               </div>
-              <!-- Add more header cells for other columns if needed -->
-            </div>
+               <div class="Fødselsdag">
+                <span></span>
+                <button class="sort-btn" data-sort="fødselsdato" data-order="asc"></button>
+                <button class="sort-btn" data-sort="fødselsdato" data-order="desc"></button>
+              </div>
+               <div class="Fødselsdag">
+                <span></span>
+                <button class="sort-btn" data-sort="fødselsdato" data-order="asc"></button>
+                <button class="sort-btn" data-sort="fødselsdato" data-order="desc"></button>
+              </div>
           </div>
         </div>
             <div id="dataDisplay"></div>
