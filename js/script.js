@@ -1,5 +1,5 @@
 import {searchData, createButtonContainer} from "./helpers.js"
-import {getData, updateMedlem, deleteMedlem} from "./rest-services.js"
+import {getData, createMedlem, updateMedlem, deleteMedlem} from "./rest-services.js"
 import {initViews} from "./views.js"
 import { currentPage } from './state.js';
 
@@ -17,6 +17,8 @@ function initApp() {
     getData();
 
 // event listeners til CRUD functions
+document.querySelector("#btn-create-medlem").addEventListener("click", showCreateMedlemDialog); //html section #opretmedlem
+document.querySelector("#form-create-medlem").addEventListener("submit", createMedlemClicked);
 document.querySelector("#form-update-medlem").addEventListener("submit", updateMedlemClicked);
 document.querySelector("#form-delete-medlem").addEventListener("submit", deleteMedlemClicked);
 document.querySelector("#form-delete-medlem .btn-cancel").addEventListener("click", deleteCancelClicked);
@@ -114,6 +116,27 @@ function nextPage(data) {
 
 // Dialogs for update and delete medlem 
 
+function showCreateMedlemDialog() {
+  document.querySelector("#dialog-create-medlem").showModal();
+}
+
+function createMedlemClicked(event) {
+  const form = event.target;
+
+  const fornavn = form.fornavn.value;
+  const efternavn = form.efternavn.value;
+  const fødselsdato = form.fødselsdato.value;
+  const adresse = form.adresse.value;
+  const telefon = form.telefon.value;
+  const email = form.email.value;
+  const medlemstype = form.medlemstype.value;
+  const aktivitetsstatus = form.aktivitetsstatus.value;
+  const indmeldelsesdato = form.indmeldelsesdato.value;
+
+  createMedlem(fornavn, efternavn, fødselsdato, adresse, telefon, email, medlemstype, aktivitetsstatus, indmeldelsesdato);
+      form.reset();
+}
+
 function updateClicked(item) {
   console.log(item)
   const updateForm = document.querySelector("#form-update-medlem");
@@ -165,4 +188,4 @@ function deleteCancelClicked() {
   document.querySelector("#dialog-delete-medlem").close(); // close dialog
 }
 
-export {showData, updateClicked, deleteClicked, nextPage, previousPage}
+export {showData, updateClicked, deleteClicked, createMedlemClicked, nextPage, previousPage}

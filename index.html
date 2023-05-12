@@ -119,6 +119,47 @@
 <!--#opretmedlem section-->
         <section id="opret-medlem" class="show-content">
             <h2>Opret medlem</h2>
+            <button id="btn-create-medlem">Opret medlem</button>
+                  <!-- dialog - create new post -->
+                    <dialog id="dialog-create-medlem">
+                      <h2>Opret nyt medlem</h2>
+                      <form id="form-create-medlem" method="dialog">
+                        <label for="fornavn-create">Fornavn:</label>
+                        <input type="text" id="fornavn-create" name="fornavn" placeholder="">
+                      
+                        <label for="efternavn-create">Efternavn:</label>
+                        <input type="text" id="efternavn-create" name="efternavn" placeholder="">
+                      
+                        <label for="fødselsdato-create">Fødselsdato:</label>
+                        <input type="date" id="fødselsdato-create" name="fødselsdato" placeholder="">
+                      
+                        <label for="adresse-create">Adresse:</label>
+                        <input type="text" id="adresse-create" name="adresse" placeholder="">
+                      
+                        <label for="telefon-create">Telefon:</label>
+                        <input type="tel" id="telefon-create" name="telefon" placeholder="">
+                      
+                        <label for="email-create">Email:</label>
+                        <input type="email" id="email-create" name="email" placeholder="">
+                      
+                        <label for="medlemstype-create">Medlemstype:</label>
+                        <select id="medlemstype-create" name="medlemstype">
+                          <option value="konkurrence">Konkurrence</option>
+                          <option value="motionist">Motionist</option>
+                        </select>
+                      
+                        <label for="aktivitetsstatus-create">Aktivitetsstatus:</label>
+                        <select id="aktivitetsstatus-create" name="aktivitetsstatus">
+                          <option value="aktiv">Aktiv</option>
+                          <option value="passiv">Passiv</option>
+                        </select>
+                      
+                        <label for="indmeldelsesdato-create">Indmeldelsesdato:</label>
+                        <input type="date" id="indmeldelsesdato-create" name="indmeldelsesdato" placeholder="">
+                      
+                        <button>Opdater medlem</button>
+                      </form>  
+                    </dialog>
         </section>
 
 

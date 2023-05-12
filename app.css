@@ -167,3 +167,20 @@ button.delete {
 #page-buttons button {
   margin: 0.5em;
 }
+
+#form-create-medlem {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+  padding: 2em;
+}
+
+#page-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#page-buttons button {
+  margin: 0.5em;
+}

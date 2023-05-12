@@ -20,6 +20,20 @@ async function getData() {
 
 // Create, update, delete
 
+async function createMedlem(fornavn, efternavn, fødselsdato, adresse, telefon, email, medlemstype, aktivitetsstatus, indmeldelsesdato) {
+  const medlemToCreate = { fornavn, efternavn, fødselsdato, adresse, telefon, email, medlemstype, aktivitetsstatus, indmeldelsesdato }; // create new post object
+  const json = JSON.stringify(medlemToCreate);
+
+  const response = await fetch(`${endpoint}/medlemmer.json`, {
+      method: "POST",
+      body: json
+  });
+  if (response.ok) {
+      console.log("New medlem succesfully added to Firebase 🔥");
+      // updateMedlemTable();
+  }
+}
+
 async function updateMedlem(id, fornavn, efternavn, fødselsdato, adresse, telefon, email, medlemstype, aktivitetsstatus, indmeldelsesdato ) {
   const medlemToUpdate = { fornavn, efternavn, fødselsdato, adresse, telefon, email, medlemstype, aktivitetsstatus, indmeldelsesdato }; // post update to update
   const json = JSON.stringify(medlemToUpdate);
@@ -31,6 +45,7 @@ async function updateMedlem(id, fornavn, efternavn, fødselsdato, adresse, telef
 
   if (response.ok) {
       console.log("Medlem succesfully updated in Firebase 🔥");
+      // updateMedlemTable();
   }
 }
 
@@ -40,11 +55,12 @@ async function deleteMedlem(id){
   });
   if (response.ok) {
       console.log("Medlem succesfully deleted from Firebase 🔥");
+      // updateMedlemTable();
   }
 }
 
 
-export {getData, updateMedlem, deleteMedlem}
+export {getData, updateMedlem, deleteMedlem, createMedlem}
 
 
 // original getDatas: hvis noget går galt, aktiver getMedlemData og eksporter
