@@ -1,4 +1,3 @@
-
 import {getData, createMedlem, updateMedlem, deleteMedlem, endpoint} from "./rest-services.js"
 import {searchData, createButtonContainer, prepareData, transformDateFormat} from "./helpers.js"
 import {initViews} from "./views.js"
