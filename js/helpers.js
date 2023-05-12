@@ -1,17 +1,18 @@
+// Importer funktioner og variabler fra andre moduler
 import {showData, updateClicked, deleteClicked, nextPage, previousPage} from "./script.js"
 import { endpoint } from "./rest-services.js";
 import { currentPage } from './state.js';
 
-
-// Globale variabler for side størrelse og nuværende side
+// Definér en global variabel for sidestørrelse
 const pageSize = 15;
 
+// Funktion til at forberede data - konverterer et objekt til et array
 function prepareData(dataObject) {
     const dataArray = [];
     for (const key in dataObject) {
         if (dataObject.hasOwnProperty(key)) {
             const data = dataObject[key];
-            // Skip if data is null
+            // Spring over, hvis data er null
             if (data !== null) {
                 data.id = key;
                 dataArray.push(data);
@@ -21,7 +22,7 @@ function prepareData(dataObject) {
     return dataArray;
 }
 
-
+// Funktioner til at vise og skjule sidens knapper
 function showPaginationButtons() {
   const pageButtonContainer = document.getElementById("page-buttons");
   pageButtonContainer.style.display = "block";
@@ -32,8 +33,7 @@ function hidePaginationButtons() {
   pageButtonContainer.style.display = "none";
 }
 
-
-// Opretter knapper til redigering og sletning
+// Funktion til at oprette en beholder med redigerings- og sletningsknapper
 function createButtonContainer(item) {
   
   const buttonContainer = document.createElement("div");
@@ -54,12 +54,21 @@ function createButtonContainer(item) {
   return buttonContainer;
 }
 
+// Funktion til at oprette sidens knapper
 function createPageButtons(data) {
   const totalPages = Math.ceil(data.length / pageSize);
 
-  // Opret en div til at indeholde sideknapperne
-  const pageButtonContainer = document.createElement('div');
-  pageButtonContainer.id = 'page-buttons';
+  // Få den eksisterende pageButtonContainer, hvis den findes
+  let pageButtonContainer = document.getElementById('page-buttons');
+
+  // Hvis pageButtonContainer ikke findes, opret den
+  if (!pageButtonContainer) {
+    pageButtonContainer = document.createElement('div');
+    pageButtonContainer.id = 'page-buttons';
+  } else {
+    // Hvis den findes, fjern dens indhold
+    pageButtonContainer.innerHTML = '';
+  }
 
   for (let i = 1; i <= totalPages; i++) {
     const pageButton = document.createElement('button');
@@ -71,9 +80,9 @@ function createPageButtons(data) {
     pageButtonContainer.appendChild(pageButton);  // Tilføj knappen til beholderen
   }
 
-  document.getElementById('medlemmer').appendChild(pageButtonContainer);  // Tilføj beholderen til medlemmer-sektionen
+  // Tilføj beholderen til medlemmer-sektionen
+  document.getElementById('medlemmer').appendChild(pageButtonContainer);  
 }
-
 
 function searchData() {
   // Nulstil nuværende side
