@@ -1,20 +1,26 @@
 import {showData, updateClicked, deleteClicked, nextPage, previousPage} from "./script.js"
+import { endpoint } from "./rest-services.js";
 import { currentPage } from './state.js';
 
 
-// Global variables for page size and current page
+// Globale variabler for side størrelse og nuværende side
 const pageSize = 15;
 
 function prepareData(dataObject) {
     const dataArray = [];
     for (const key in dataObject) {
-      const data = dataObject[key];
-      data.id = key;
-      dataArray.push(data);
+        if (dataObject.hasOwnProperty(key)) {
+            const data = dataObject[key];
+            // Skip if data is null
+            if (data !== null) {
+                data.id = key;
+                dataArray.push(data);
+            }
+        }
     }
-  
     return dataArray;
 }
+
 
 function showPaginationButtons() {
   const pageButtonContainer = document.getElementById("page-buttons");
@@ -51,7 +57,7 @@ function createButtonContainer(item) {
 function createPageButtons(data) {
   const totalPages = Math.ceil(data.length / pageSize);
 
-  // Create a div to contain the page buttons
+  // Opret en div til at indeholde sideknapperne
   const pageButtonContainer = document.createElement('div');
   pageButtonContainer.id = 'page-buttons';
 
@@ -62,42 +68,44 @@ function createPageButtons(data) {
       window.currentPage = i;
       showData(data, window.currentPage);
     });
-    pageButtonContainer.appendChild(pageButton);  // append the button to the container
+    pageButtonContainer.appendChild(pageButton);  // Tilføj knappen til beholderen
   }
 
-  document.getElementById('medlemmer').appendChild(pageButtonContainer);  // append the container to the medlemmer section
+  document.getElementById('medlemmer').appendChild(pageButtonContainer);  // Tilføj beholderen til medlemmer-sektionen
 }
 
 
-// Funktion til at søge i data
 function searchData() {
-   // Reset current page
- window.currentPage = 1;
+  // Nulstil nuværende side
+  window.currentPage = 1;
   const searchField = document.getElementById("searchField");
   const request = searchField.value.toLowerCase();
 
-fetch("data.json")
-    .then((response) => response.json())
-    .then((data) => {
-      const medlemmer = data.medlemmer;
+  fetch(`${endpoint}/medlemmer.json`)
+  .then((response) => response.json())
+  .then((data) => {
+    console.log("Data:", data);  // Konsollog data
+    if (data) {
+      const medlemmer = prepareData(data);  // Konverter dataen til et array ved hjælp af prepareData
 
-      if (Array.isArray(medlemmer)) {
-        const filteredData = medlemmer.filter((item) => {
-          return (
-            item.fornavn.toLowerCase().includes(request) ||
-            item.efternavn.toLowerCase().includes(request) ||
-            item.fødselsdato.toLowerCase().includes(request) ||
-            item.indmeldelsesdato.toLowerCase().includes(request)
-          );
-        });
+      const filteredData = medlemmer.filter((item) => {
+        return (
+          item.fornavn.toLowerCase().includes(request) ||
+          item.efternavn.toLowerCase().includes(request) ||
+          item.fødselsdato.toLowerCase().includes(request) ||
+          item.indmeldelsesdato.toLowerCase().includes(request)
+        );
+      });
 
-        // Vis første side efter fetching og filtering af data
-        showData(filteredData, window.currentPage);
+      // Vis første side efter fetching og filtering af data
+      showData(filteredData, window.currentPage);
 
-        // Create page number buttons
-        createPageButtons(filteredData);
-      }
+      // Lav side nummer knapper
+      createPageButtons(filteredData);
+    }
   });
 }
+
+
 
 export {searchData, createButtonContainer, prepareData}

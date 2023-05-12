@@ -1,10 +1,11 @@
-import {searchData, createButtonContainer} from "./helpers.js"
-import {getData, createMedlem, updateMedlem, deleteMedlem} from "./rest-services.js"
+
+import {getData, createMedlem, updateMedlem, deleteMedlem, endpoint} from "./rest-services.js"
+import {searchData, createButtonContainer, prepareData} from "./helpers.js"
 import {initViews} from "./views.js"
 import { currentPage } from './state.js';
 
 
-// Global variables for page size and current page
+// Globale variabler for side størrelse og nuværende side
 const pageSize = 15;
 window.currentPage = 1;
 
@@ -24,10 +25,10 @@ document.querySelector("#form-delete-medlem").addEventListener("submit", deleteM
 document.querySelector("#form-delete-medlem .btn-cancel").addEventListener("click", deleteCancelClicked);
 }
 
-// Event listener for the keyup event on the search field
+// Event listener for keyup-eventet på søgefeltet
 document.getElementById("searchField").addEventListener("keyup", searchData);
 
-// Event listener for sort buttons
+// Event listener for sorterings knappen
 document.querySelectorAll(".sort-btn").forEach((button) => {
   button.addEventListener("click", () => {
     const sortBy = button.dataset.sort;
@@ -36,12 +37,12 @@ document.querySelectorAll(".sort-btn").forEach((button) => {
   });
 });
 
-// Sort data and refresh the display
+// Sorter data og opdater visningen
 function sortData(sortBy, sortOrder) {
-  fetch("data.json")
+ fetch(`${endpoint}/medlemmer.json`)
     .then((response) => response.json())
     .then((data) => {
-      const medlemmer = data.medlemmer;
+      let medlemmer = prepareData(data); // Brug prepareData-funktionen til at konvertere data til et array
 
       if (Array.isArray(medlemmer)) {
         medlemmer.sort((a, b) => {
@@ -75,11 +76,11 @@ function transformDateFormat(dateString) {
 
 // Viser data i HTML
 function showData(data, page = 1) {
-  // Calculate start and end indices based on page number
+  // Beregn start- og slutindekser baseret på sidenummer
   const start = (page - 1) * pageSize;
   const end = start + pageSize;
   
-  // Slice data array to get items for current page
+  // Skær data-arrayet for at få elementer til den aktuelle side
   const pageData = data.slice(start, end);
   const dataView = document.getElementById("dataDisplay");
   dataView.innerHTML = "";
@@ -100,21 +101,20 @@ function showData(data, page = 1) {
     dataView.appendChild(dataRow);
   });
 }
-
-// Create function to render previous page
+// Opret funktion til at vise forrige side
 function previousPage(data) {
   window.currentPage--;
   if (window.currentPage < 1) window.currentPage = 1;  // Prevent going below page 1
   showData(data, window.currentPage);
 }
 
-// Create function to render next page
+// Opret funktion til at vise næste side
 function nextPage(data) {
  window.currentPage++;
   showData(data, window.currentPage);
 }
 
-// Dialogs for update and delete medlem 
+// Dialoger til opdatering og sletning af medlem
 
 function showCreateMedlemDialog() {
   document.querySelector("#dialog-create-medlem").showModal();

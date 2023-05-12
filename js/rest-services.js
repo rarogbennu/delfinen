@@ -1,24 +1,39 @@
 import { showData } from "./script.js";
 import { prepareData } from "./helpers.js";
 
-const endpoint = "https://delfinen-724e2-default-rtdb.europe-west1.firebasedatabase.app/";
+const endpoint = "https://delfinen-724e2-default-rtdb.europe-west1.firebasedatabase.app";
 
-// Henter data fra JSON fil og kalder prepareData
+// Hent og forbered data (tilføj ID til hver post, vigtigt!)
+async function getMedlemData() {
+    const response = await fetch (`${endpoint}/medlemmer.json`);
+    const medlemData = await response.json();
+    const medlemmer = prepareData(medlemData);
+    return medlemmer;
+}
+
+// Hent resultatdata, når vi når dertil (husk at eksportere)
+// async function getResultatData() {
+//     const response = await fetch (`${endpoint}/resultater.json`);
+//     const resultatData = await response.json();
+//     const resultater = prepareData(resultatData);
+//     return resultater;
+// }
+
+// Henter data fra JSON-fil (igen??)
 async function getData() {
-  const response = await fetch("data.json");
+  const response = await fetch (`${endpoint}/medlemmer.json`);
+  console.log("Svar:", response); 
   const data = await response.json();
-  const medlemmer = data.medlemmer;
-  const item = prepareData(medlemmer)
-  
+  console.log("Analyseret JSON:", data);
+  const medlemmer = prepareData(data); // ændret fra data.medlemmer til data
 
   if (Array.isArray(medlemmer)) {
     showData(medlemmer.slice(0, 24));
+    return medlemmer; // returner medlemmer-data i stedet for udefineret element
   }
-
-  return item;
 }
 
-// Create, update, delete
+// Opret, opdater, slet
 
 async function createMedlem(fornavn, efternavn, fødselsdato, adresse, telefon, email, medlemstype, aktivitetsstatus, indmeldelsesdato) {
   const medlemToCreate = { fornavn, efternavn, fødselsdato, adresse, telefon, email, medlemstype, aktivitetsstatus, indmeldelsesdato }; // create new post object
@@ -46,6 +61,7 @@ async function updateMedlem(id, fornavn, efternavn, fødselsdato, adresse, telef
   if (response.ok) {
       console.log("Medlem succesfully updated in Firebase 🔥");
       // updateMedlemTable();
+
   }
 }
 
@@ -56,11 +72,11 @@ async function deleteMedlem(id){
   if (response.ok) {
       console.log("Medlem succesfully deleted from Firebase 🔥");
       // updateMedlemTable();
+
   }
 }
 
 
-export {getData, updateMedlem, deleteMedlem, createMedlem}
 
 
 // original getDatas: hvis noget går galt, aktiver getMedlemData og eksporter
@@ -82,3 +98,6 @@ export {getData, updateMedlem, deleteMedlem, createMedlem}
 //     const resultater = prepareData(resultatData);
 //     return resultater;
 // }
+
+export {getData, createMedlem, updateMedlem, deleteMedlem, endpoint}
+
