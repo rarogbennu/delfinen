@@ -1,4 +1,4 @@
-import {showData, updateClicked, deleteClicked, nextPage, previousPage} from "./script.js"
+import {showData, updateClicked, deleteClicked} from "./script.js"
 import { currentPage } from './state.js';
 
 

@@ -23,7 +23,8 @@ async function getMedlemData() {
 
 // Henter data fra JSON fil (igen??)
 async function getData() {
-  const response = await fetch("data.json");
+ const response = await fetch(`${endpoint}/medlemmer/${id}.json`);
+
   const data = await response.json();
   const medlemmer = data.medlemmer;
   const item = prepareData(medlemmer)
