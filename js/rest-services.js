@@ -3,23 +3,7 @@ import { prepareData } from "./helpers.js";
 
 const endpoint = "https://delfinen-724e2-default-rtdb.europe-west1.firebasedatabase.app";
 
-// Hent og forbered data (tilføj ID til hver post, vigtigt!)
-async function getMedlemData() {
-    const response = await fetch (`${endpoint}/medlemmer.json`);
-    const medlemData = await response.json();
-    const medlemmer = prepareData(medlemData);
-    return medlemmer;
-}
-
-// Hent resultatdata, når vi når dertil (husk at eksportere)
-// async function getResultatData() {
-//     const response = await fetch (`${endpoint}/resultater.json`);
-//     const resultatData = await response.json();
-//     const resultater = prepareData(resultatData);
-//     return resultater;
-// }
-
-// Henter data fra JSON-fil (igen??)
+// Henter data fra JSON-fil
 async function getData() {
   const response = await fetch (`${endpoint}/medlemmer.json`);
   console.log("Svar:", response); 
