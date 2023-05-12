@@ -115,6 +115,13 @@ function searchData() {
   });
 }
 
+function transformDateFormat(dateString) {
+  const parts = dateString.split("/");
+  const day = parts[0].padStart(2, "0");
+  const month = parts[1].padStart(2, "0");
+  const year = parts[2];
+  return `${year}-${month}-${day}`;
+}
 
 
-export {searchData, createButtonContainer, prepareData}
+export {searchData, createButtonContainer, prepareData,transformDateFormat}

@@ -1,6 +1,6 @@
 
 import {getData, createMedlem, updateMedlem, deleteMedlem, endpoint} from "./rest-services.js"
-import {searchData, createButtonContainer, prepareData} from "./helpers.js"
+import {searchData, createButtonContainer, prepareData, transformDateFormat} from "./helpers.js"
 import {initViews} from "./views.js"
 import { currentPage } from './state.js';
 
@@ -65,17 +65,6 @@ function sortData(sortBy, sortOrder) {
 
        showData(medlemmer, currentPage);}
     });
-}
-
-
-
-
-function transformDateFormat(dateString) {
-  const parts = dateString.split("/");
-  const day = parts[0].padStart(2, "0");
-  const month = parts[1].padStart(2, "0");
-  const year = parts[2];
-  return `${year}-${month}-${day}`;
 }
 
 async function updateMedlemTable(data) {
