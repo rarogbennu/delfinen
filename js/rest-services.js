@@ -3,25 +3,7 @@ import { prepareData } from "./helpers.js";
 
 const endpoint = "https://delfinen-724e2-default-rtdb.europe-west1.firebasedatabase.app/";
 
-// Get and prepare data (tilføj ID til hver post, vigtigt!)
-
-async function getMedlemData() {
-    const response = await fetch (`${endpoint}/medlemmer.json`);
-    const medlemData = await response.json();
-    const medlemmer = prepareData(medlemData);
-    return medlemmer;
-}
-
-// Get resultat data når vi når dertil (husk at eksporter)
-
-// async function getResultatData() {
-//     const response = await fetch (`${endpoint}/resultater.json`);
-//     const resultatData = await response.json();
-//     const resultater = prepareData(resultatData);
-//     return resultater;
-// }
-
-// Henter data fra JSON fil (igen??)
+// Henter data fra JSON fil og kalder prepareData
 async function getData() {
  const response = await fetch(`${endpoint}/medlemmer/${id}.json`);
 
@@ -50,7 +32,6 @@ async function updateMedlem(id, fornavn, efternavn, fødselsdato, adresse, telef
 
   if (response.ok) {
       console.log("Medlem succesfully updated in Firebase 🔥");
-      // updateMedlemmerList();
   }
 }
 
@@ -60,9 +41,29 @@ async function deleteMedlem(id){
   });
   if (response.ok) {
       console.log("Medlem succesfully deleted from Firebase 🔥");
-      // updateMedlemmerList();
   }
 }
 
 
-export {getData, getMedlemData, updateMedlem, deleteMedlem}
+export {getData, updateMedlem, deleteMedlem}
+
+
+// original getDatas: hvis noget går galt, aktiver getMedlemData og eksporter
+
+// Get and prepare data (tilføj ID til hver post, vigtigt!)
+
+// async function getMedlemData() {
+//     const response = await fetch (`${endpoint}/medlemmer.json`);
+//     const medlemData = await response.json();
+//     const medlemmer = prepareData(medlemData);
+//     return medlemmer;
+// }
+
+// Get resultat data når vi når dertil (husk at eksporter)
+
+// async function getResultatData() {
+//     const response = await fetch (`${endpoint}/resultater.json`);
+//     const resultatData = await response.json();
+//     const resultater = prepareData(resultatData);
+//     return resultater;
+// }
