@@ -14,8 +14,9 @@ window.addEventListener("load", initApp)
 function initApp() {
     console.log("initApp");
     initViews();
+    updateMedlemTable();
     searchData();
-    getData();
+    
 
 // event listeners til CRUD functions
 document.querySelector("#btn-create-medlem").addEventListener("click", showCreateMedlemDialog); //html section #opretmedlem
@@ -66,12 +67,20 @@ function sortData(sortBy, sortOrder) {
     });
 }
 
+
+
+
 function transformDateFormat(dateString) {
   const parts = dateString.split("/");
   const day = parts[0].padStart(2, "0");
   const month = parts[1].padStart(2, "0");
   const year = parts[2];
   return `${year}-${month}-${day}`;
+}
+
+async function updateMedlemTable(data) {
+  data = await getData(); // get posts from rest endpoint and save in variable
+  showData(data); // show all posts (append to the DOM) with posts as argument
 }
 
 // Viser data i HTML
@@ -188,4 +197,4 @@ function deleteCancelClicked() {
   document.querySelector("#dialog-delete-medlem").close(); // close dialog
 }
 
-export {showData, updateClicked, deleteClicked, createMedlemClicked, nextPage, previousPage}
+export {updateMedlemTable, showData, updateClicked, deleteClicked, createMedlemClicked, nextPage, previousPage}
