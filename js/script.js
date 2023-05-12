@@ -47,19 +47,10 @@ function sortData(sortBy, sortOrder) {
 
       if (Array.isArray(medlemmer)) {
         medlemmer.sort((a, b) => {
-        let valueA;
-        let valueB;
-
-        if (sortBy === 'fødselsdato') {
-          valueA = transformDateFormat(a[sortBy]);
-          valueB = transformDateFormat(b[sortBy]);
-        } else {
-          valueA = a[sortBy];
-          valueB = b[sortBy];
-        } if (sortOrder === "asc") {
-            return valueA.localeCompare(valueB, undefined, { numeric: true });
+          if (sortOrder === "asc") {
+            return a[sortBy].localeCompare(b[sortBy], undefined, { numeric: true });
           } else {
-            return valueB.localeCompare(valueA, undefined, { numeric: true });
+            return b[sortBy].localeCompare(a[sortBy], undefined, { numeric: true });
           }
         });
 

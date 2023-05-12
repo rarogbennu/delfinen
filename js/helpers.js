@@ -116,11 +116,11 @@ function searchData() {
 }
 
 function transformDateFormat(dateString) {
-  const parts = dateString.split("/");
-  const day = parts[0].padStart(2, "0");
+  const parts = dateString.split("-");
+  const day = parts[2].padStart(2, "0");
   const month = parts[1].padStart(2, "0");
-  const year = parts[2];
-  return `${year}-${month}-${day}`;
+  const year = parts[0];
+  return `${day}/${month}/${day}`;
 }
 
 
