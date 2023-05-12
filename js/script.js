@@ -98,6 +98,7 @@ function showData(data, page = 1) {
     dataView.appendChild(dataRow);
   });
 }
+
 // Create function to render previous page
 function previousPage(data) {
   window.currentPage--;
@@ -110,6 +111,31 @@ function nextPage(data) {
  window.currentPage++;
   showData(data, window.currentPage);
 }
+
+// Dialogs for update and delete medlem 
+
+function updateClicked(item) {
+  console.log(item)
+  const updateForm = document.querySelector("#form-update-medlem");
+  updateForm.fornavn.value = item.fornavn;
+  updateForm.efternavn.value = item.efternavn;
+  updateForm.fødselsdato.value = item.fødselsdato;
+  updateForm.adresse.value = item.adresse;
+  updateForm.telefon.value = item.telefon;
+  updateForm.email.value = item.email;
+  updateForm.medlemstype.value = item.medlemstype;
+  updateForm.aktivitetsstatus.value = item.aktivitetsstatus;
+  updateForm.indmeldelsesdato.value = item.indmeldelsesdato;
+  updateForm.setAttribute("data-id", item.id);
+  document.querySelector("#dialog-update-medlem").showModal();
+}
+
+function deleteClicked(item) {
+  document.querySelector("#dialog-delete-medlem-navn").textContent = item.fornavn + " " + item.efternavn;
+  document.querySelector("#form-delete-medlem").setAttribute("data-id", item.id);
+  document.querySelector("#dialog-delete-medlem").showModal();
+}
+
 
 // events
 
@@ -137,31 +163,6 @@ function deleteMedlemClicked(event) {
 
 function deleteCancelClicked() {
   document.querySelector("#dialog-delete-medlem").close(); // close dialog
-}
-
-
-// Dialogs for update and delete medlem 
-
-function updateClicked(item) {
-  console.log(item)
-  const updateForm = document.querySelector("#form-update-medlem");
-  updateForm.fornavn.value = item.fornavn;
-  updateForm.efternavn.value = item.efternavn;
-  updateForm.fødselsdato.value = item.fødselsdato;
-  updateForm.adresse.value = item.adresse;
-  updateForm.telefon.value = item.telefon;
-  updateForm.email.value = item.email;
-  updateForm.medlemstype.value = item.medlemstype;
-  updateForm.aktivitetsstatus.value = item.aktivitetsstatus;
-  updateForm.indmeldelsesdato.value = item.indmeldelsesdato;
-  updateForm.setAttribute("data-id", item.id);
-  document.querySelector("#dialog-update-medlem").showModal();
-}
-
-function deleteClicked(item) {
-  document.querySelector("#dialog-delete-medlem-navn").textContent = item.fornavn + " " + item.efternavn;
-  document.querySelector("#form-delete-medlem").setAttribute("data-id", item.id);
-  document.querySelector("#dialog-delete-medlem").showModal();
 }
 
 export {showData, updateClicked, deleteClicked, nextPage, previousPage}
