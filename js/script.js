@@ -34,7 +34,6 @@ document.querySelectorAll(".sort-btn").forEach((button) => {
   });
 });
 
-
 // Funktion til at vise dialogboksen for oprettelse af medlem
 function showCreateMedlemDialog() {
   document.querySelector("#dialog-create-medlem").showModal();

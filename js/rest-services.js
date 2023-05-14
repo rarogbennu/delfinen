@@ -6,14 +6,16 @@ const endpoint = "https://delfinen-724e2-default-rtdb.europe-west1.firebasedatab
 // Henter data fra JSON-fil
 async function getData() {
   const response = await fetch (`${endpoint}/medlemmer.json`);
+  console.log("Svar:", response); 
   const data = await response.json();
+  console.log("Analyseret JSON:", data);
   const medlemmer = prepareData(data); // ændret fra data.medlemmer til data
 
-  // if (Array.isArray(medlemmer)) {
-  //   showData(medlemmer.slice(0, 24));
+  if (Array.isArray(medlemmer)) {
+    showData(medlemmer.slice(0, 24));
     return medlemmer; // returner medlemmer-data i stedet for udefineret element
   }
-// }
+}
 
 // Opret, opdater, slet
 
@@ -27,7 +29,7 @@ async function createMedlem(fornavn, efternavn, fødselsdato, adresse, telefon, 
   });
   if (response.ok) {
       console.log("New medlem succesfully added to Firebase 🔥");
-      updateMedlemTable();
+      // updateMedlemTable();
   }
 }
 
@@ -42,7 +44,7 @@ async function updateMedlem(id, fornavn, efternavn, fødselsdato, adresse, telef
 
   if (response.ok) {
       console.log("Medlem succesfully updated in Firebase 🔥");
-      updateMedlemTable();
+      // updateMedlemTable();
 
   }
 }
@@ -53,7 +55,7 @@ async function deleteMedlem(id){
   });
   if (response.ok) {
       console.log("Medlem succesfully deleted from Firebase 🔥");
-      updateMedlemTable();
+      // updateMedlemTable();
 
   }
 }
@@ -82,4 +84,3 @@ async function deleteMedlem(id){
 // }
 
 export {getData, createMedlem, updateMedlem, deleteMedlem, endpoint}
-

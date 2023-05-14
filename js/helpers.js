@@ -82,45 +82,45 @@ function createPageButtons(data) {
   // Tilføj beholderen til medlemmer-sektionen
   document.getElementById('medlemmer').appendChild(pageButtonContainer);
 }
-
-// Funktion til at søge i data
 function searchData() {
-  // Nulstil nuværende side
+  // Reset current page
   window.currentPage = 1;
   const searchField = document.getElementById("searchField");
-  const request = searchField.value.toLowerCase();
+  const searchTerm = searchField.value.toLowerCase();
 
   fetch(`${endpoint}/medlemmer.json`)
-  .then((response) => response.json())
-  .then((data) => {
-    console.log("Data:", data);  // Konsollog data
-    if (data) {
-      const medlemmer = prepareData(data);  // Konverter dataen til et array ved hjælp af prepareData
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Data:", data); // Console log data
+      if (data) {
+        const medlemmer = prepareData(data); // Convert data to an array using prepareData
 
-      const filteredData = medlemmer.filter((item) => {
-        return (
-          item.fornavn.toLowerCase().includes(request) ||
-          item.efternavn.toLowerCase().includes(request) ||
-          item.fødselsdato.toLowerCase().includes(request) ||
-          item.indmeldelsesdato.toLowerCase().includes(request)
-        );
-      });
+        // Filter the data based on the search term
+        const filteredData = medlemmer.filter((item) => {
+          return (
+            item.fornavn.toLowerCase().includes(searchTerm) ||
+            item.efternavn.toLowerCase().includes(searchTerm) ||
+            item.fødselsdato.toLowerCase().includes(searchTerm) ||
+            item.indmeldelsesdato.toLowerCase().includes(searchTerm)
+          );
+        });
 
-      // Vis første side efter fetching og filtering af data
-      showData(filteredData, window.currentPage);
+        window.allData = filteredData; // Store the filtered data
 
-      // Lav side nummer knapper
-      createPageButtons(filteredData);
-    }
-  });
+        // Create page number buttons
+        createPageButtons(window.allData);
+
+        // Show the first page after fetching and filtering the data
+        showData(window.allData, window.currentPage);
+
+        // If there's a sorting order and sorting field, sort the data
+        if (window.currentSortBy && window.currentSortOrder) {
+          sortData(window.currentSortBy, window.currentSortOrder);
+        }
+      }
+    });
 }
 
-function transformDateFormat(dateString) {
-  const parts = dateString.split("-");
-  const day = parts[2].padStart(2, "0");
-  const month = parts[1].padStart(2, "0");
-  const year = parts[0];
-  return `${day}/${month}/${day}`;
-}
+
 
 export { searchData, createButtonContainer, prepareData };
