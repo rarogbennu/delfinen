@@ -1,25 +1,25 @@
 // Importer funktioner og variabler fra andre moduler
-import {showData, updateClicked, deleteClicked, nextPage, previousPage} from "./script.js"
+import { updateClicked, deleteClicked } from "./script.js";
+import { sortData, showData} from "./data-handling.js";
 import { endpoint } from "./rest-services.js";
-import { currentPage } from './state.js';
 
 // Definér en global variabel for sidestørrelse
 const pageSize = 15;
 
 // Funktion til at forberede data - konverterer et objekt til et array
 function prepareData(dataObject) {
-    const dataArray = [];
-    for (const key in dataObject) {
-        if (dataObject.hasOwnProperty(key)) {
-            const data = dataObject[key];
-            // Spring over, hvis data er null
-            if (data !== null) {
-                data.id = key;
-                dataArray.push(data);
-            }
-        }
+  const dataArray = [];
+  for (const key in dataObject) {
+    if (dataObject.hasOwnProperty(key)) {
+      const data = dataObject[key];
+      // Spring over, hvis data er null
+      if (data !== null) {
+        data.id = key;
+        dataArray.push(data);
+      }
     }
-    return dataArray;
+  }
+  return dataArray;
 }
 
 // Funktioner til at vise og skjule sidens knapper
@@ -35,7 +35,6 @@ function hidePaginationButtons() {
 
 // Funktion til at oprette en beholder med redigerings- og sletningsknapper
 function createButtonContainer(item) {
-  
   const buttonContainer = document.createElement("div");
   buttonContainer.classList.add("button-container");
 
@@ -81,40 +80,36 @@ function createPageButtons(data) {
   }
 
   // Tilføj beholderen til medlemmer-sektionen
-  document.getElementById('medlemmer').appendChild(pageButtonContainer);  
+  document.getElementById('medlemmer').appendChild(pageButtonContainer);
 }
-
 function searchData() {
-  // Nulstil nuværende side
+  // Reset current page
   window.currentPage = 1;
   const searchField = document.getElementById("searchField");
   const request = searchField.value.toLowerCase();
 
   fetch(`${endpoint}/medlemmer.json`)
-  .then((response) => response.json())
-  .then((data) => {
-    console.log("Data:", data);  // Konsollog data
-    if (data) {
-      const medlemmer = prepareData(data);  // Konverter dataen til et array ved hjælp af prepareData
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Data:", data); // Console log data
+      if (data) {
+        const medlemmer = prepareData(data); // Convert data to an array using prepareData
 
-      const filteredData = medlemmer.filter((item) => {
-        return (
-          item.fornavn.toLowerCase().includes(request) ||
-          item.efternavn.toLowerCase().includes(request) ||
-          item.fødselsdato.toLowerCase().includes(request) ||
-          item.indmeldelsesdato.toLowerCase().includes(request)
-        );
-      });
+        window.allData = medlemmer;  // Store all data
 
-      // Vis første side efter fetching og filtering af data
-      showData(filteredData, window.currentPage);
+        // Create page number buttons
+        createPageButtons(window.allData);
 
-      // Lav side nummer knapper
-      createPageButtons(filteredData);
-    }
-  });
+        // Show first page after fetching and filtering of data
+        showData(window.allData, window.currentPage);
+
+        // If there's a sorting order and sorting field, sort the data
+        if(window.currentSortBy && window.currentSortOrder) {
+          sortData(window.currentSortBy, window.currentSortOrder);
+        }
+      }
+    });
 }
 
 
-
-export {searchData, createButtonContainer, prepareData}
+export { searchData, createButtonContainer, prepareData };

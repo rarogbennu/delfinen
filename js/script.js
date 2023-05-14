@@ -1,34 +1,31 @@
-
-import {getData, createMedlem, updateMedlem, deleteMedlem, endpoint} from "./rest-services.js"
-import {searchData, createButtonContainer, prepareData} from "./helpers.js"
+import {getData, createMedlem, deleteMedlem, updateMedlem} from "./rest-services.js"
+import {searchData} from "./helpers.js"
 import {initViews} from "./views.js"
-import { currentPage } from './state.js';
+import { sortData, showData, previousPage, nextPage} from "./data-handling.js";
 
-
-// Globale variabler for side størrelse og nuværende side
 const pageSize = 15;
 window.currentPage = 1;
+window.currentSortBy = '';
+window.currentSortOrder = '';
 
 window.addEventListener("load", initApp)
 
+// Funktion til at initialisere applikationen
 function initApp() {
     console.log("initApp");
     initViews();
     searchData();
     getData();
 
-// event listeners til CRUD functions
-document.querySelector("#btn-create-medlem").addEventListener("click", showCreateMedlemDialog); //html section #opretmedlem
-document.querySelector("#form-create-medlem").addEventListener("submit", createMedlemClicked);
-document.querySelector("#form-update-medlem").addEventListener("submit", updateMedlemClicked);
-document.querySelector("#form-delete-medlem").addEventListener("submit", deleteMedlemClicked);
-document.querySelector("#form-delete-medlem .btn-cancel").addEventListener("click", deleteCancelClicked);
+    document.querySelector("#btn-create-medlem").addEventListener("click", showCreateMedlemDialog);
+    document.querySelector("#form-create-medlem").addEventListener("submit", createMedlemClicked);
+    document.querySelector("#form-update-medlem").addEventListener("submit", updateMedlemClicked);
+    document.querySelector("#form-delete-medlem").addEventListener("submit", deleteMedlemClicked);
+    document.querySelector("#form-delete-medlem .btn-cancel").addEventListener("click", deleteCancelClicked);
 }
 
-// Event listener for keyup-eventet på søgefeltet
 document.getElementById("searchField").addEventListener("keyup", searchData);
 
-// Event listener for sorterings knappen
 document.querySelectorAll(".sort-btn").forEach((button) => {
   button.addEventListener("click", () => {
     const sortBy = button.dataset.sort;
@@ -37,89 +34,12 @@ document.querySelectorAll(".sort-btn").forEach((button) => {
   });
 });
 
-// Sorter data og opdater visningen
-function sortData(sortBy, sortOrder) {
- fetch(`${endpoint}/medlemmer.json`)
-    .then((response) => response.json())
-    .then((data) => {
-      let medlemmer = prepareData(data); // Brug prepareData-funktionen til at konvertere data til et array
-
-      if (Array.isArray(medlemmer)) {
-        medlemmer.sort((a, b) => {
-        let valueA;
-        let valueB;
-
-        if (sortBy === 'fødselsdato') {
-          valueA = transformDateFormat(a[sortBy]);
-          valueB = transformDateFormat(b[sortBy]);
-        } else {
-          valueA = a[sortBy];
-          valueB = b[sortBy];
-        } if (sortOrder === "asc") {
-            return valueA.localeCompare(valueB, undefined, { numeric: true });
-          } else {
-            return valueB.localeCompare(valueA, undefined, { numeric: true });
-          }
-        });
-
-       showData(medlemmer, currentPage);}
-    });
-}
-
-function transformDateFormat(dateString) {
-  const parts = dateString.split("/");
-  const day = parts[0].padStart(2, "0");
-  const month = parts[1].padStart(2, "0");
-  const year = parts[2];
-  return `${year}-${month}-${day}`;
-}
-
-// Viser data i HTML
-function showData(data, page = 1) {
-  // Beregn start- og slutindekser baseret på sidenummer
-  const start = (page - 1) * pageSize;
-  const end = start + pageSize;
-  
-  // Skær data-arrayet for at få elementer til den aktuelle side
-  const pageData = data.slice(start, end);
-  const dataView = document.getElementById("dataDisplay");
-  dataView.innerHTML = "";
-
-  pageData.forEach((item) => {
-    const dataRow = document.createElement("div");
-    dataRow.classList.add("data-row");
-
-    const relevantKeys = ["fornavn", "efternavn", "fødselsdato", "indmeldelsesdato"];
-    relevantKeys.forEach((key) => {
-      const dataCell = document.createElement("div");
-      dataCell.classList.add("data-cell");
-      dataCell.innerText = item[key];
-      dataRow.appendChild(dataCell);
-    });
-
-    dataRow.appendChild(createButtonContainer(item));
-    dataView.appendChild(dataRow);
-  });
-}
-// Opret funktion til at vise forrige side
-function previousPage(data) {
-  window.currentPage--;
-  if (window.currentPage < 1) window.currentPage = 1;  // Prevent going below page 1
-  showData(data, window.currentPage);
-}
-
-// Opret funktion til at vise næste side
-function nextPage(data) {
- window.currentPage++;
-  showData(data, window.currentPage);
-}
-
-// Dialoger til opdatering og sletning af medlem
-
+// Funktion til at vise dialogboksen for oprettelse af medlem
 function showCreateMedlemDialog() {
   document.querySelector("#dialog-create-medlem").showModal();
 }
 
+// Funktion der kaldes, når der klikkes på knappen til at oprette et medlem
 function createMedlemClicked(event) {
   const form = event.target;
 
@@ -134,9 +54,10 @@ function createMedlemClicked(event) {
   const indmeldelsesdato = form.indmeldelsesdato.value;
 
   createMedlem(fornavn, efternavn, fødselsdato, adresse, telefon, email, medlemstype, aktivitetsstatus, indmeldelsesdato);
-      form.reset();
+  form.reset();
 }
 
+// Funktion der kaldes, når der klikkes på knappen til at opdatere et medlem
 function updateClicked(item) {
   console.log(item)
   const updateForm = document.querySelector("#form-update-medlem");
@@ -160,7 +81,11 @@ function deleteClicked(item) {
 }
 
 
-// events
+// Funktion der kaldes, når der klikkes på knappen til at slette et medlem
+function deleteMedlemClicked(event) {
+  const id = event.target.getAttribute("data-id"); // event.target is the delete form
+  deleteMedlem(id); // call deletePost with id
+}
 
 function updateMedlemClicked(event) {
   const form = event.target;
@@ -179,13 +104,19 @@ function updateMedlemClicked(event) {
   updateMedlem(id, fornavn, efternavn, fødselsdato, adresse, telefon, email, medlemstype, aktivitetsstatus, indmeldelsesdato);
 }
 
-function deleteMedlemClicked(event) {
-  const id = event.target.getAttribute("data-id"); // event.target is the delete form
-  deleteMedlem(id); // call deletePost with id
-}
-
+// Funktion til at annullere sletning af medlem
 function deleteCancelClicked() {
-  document.querySelector("#dialog-delete-medlem").close(); // close dialog
+  document.querySelector("#dialog-delete-medlem").close(); // luk dialogboksen
 }
 
-export {showData, updateClicked, deleteClicked, createMedlemClicked, nextPage, previousPage}
+export {
+  showData,
+  updateClicked,
+  createMedlemClicked,
+  updateMedlemClicked,
+  nextPage,
+  previousPage,
+  deleteClicked,
+  sortData,
+  pageSize
+};
