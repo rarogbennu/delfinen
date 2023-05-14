@@ -57,25 +57,25 @@ function transformDateFormat(dateString) {
 }
 
 
-// Funktion til at vise data i visningen
+// Viser data i HTML
 function showData(data, page = 1) {
+  // Beregn start- og slutindekser baseret på sidenummer
   const start = (page - 1) * pageSize;
   const end = start + pageSize;
-
-  // Her filtrerer vi data for den aktuelle side
+  
+  // Skær data-arrayet for at få elementer til den aktuelle side
   const pageData = data.slice(start, end);
-
-  const dataView = document.getElementById('dataDisplay');
-  dataView.innerHTML = '';
+  const dataView = document.getElementById("dataDisplay");
+  dataView.innerHTML = "";
 
   pageData.forEach((item) => {
-    const dataRow = document.createElement('div');
-    dataRow.classList.add('data-row');
+    const dataRow = document.createElement("div");
+    dataRow.classList.add("data-row");
 
-    const relevantKeys = ['fornavn', 'efternavn', 'fødselsdato', 'indmeldelsesdato'];
+    const relevantKeys = ["fornavn", "efternavn", "fødselsdato", "indmeldelsesdato"];
     relevantKeys.forEach((key) => {
-      const dataCell = document.createElement('div');
-      dataCell.classList.add('data-cell');
+      const dataCell = document.createElement("div");
+      dataCell.classList.add("data-cell");
       dataCell.innerText = item[key];
       dataRow.appendChild(dataCell);
     });
@@ -84,7 +84,6 @@ function showData(data, page = 1) {
     dataView.appendChild(dataRow);
   });
 }
-
 
 // Funktion til at vise data for den foregående side
 function previousPage(data) {

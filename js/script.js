@@ -14,7 +14,6 @@ window.addEventListener("load", initApp)
 function initApp() {
     console.log("initApp");
     initViews();
-    updateMedlemTable();
     searchData();
     getData();
 
@@ -34,6 +33,7 @@ document.querySelectorAll(".sort-btn").forEach((button) => {
     sortData(sortBy, sortOrder);
   });
 });
+
 
 // Funktion til at vise dialogboksen for oprettelse af medlem
 function showCreateMedlemDialog() {

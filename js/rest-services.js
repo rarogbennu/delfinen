@@ -1,4 +1,4 @@
-import { showData, updateMedlemTable } from "./script.js";
+import { showData } from "./script.js";
 import { prepareData } from "./helpers.js";
 
 const endpoint = "https://delfinen-724e2-default-rtdb.europe-west1.firebasedatabase.app";

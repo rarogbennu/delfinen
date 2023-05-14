@@ -82,33 +82,37 @@ function createPageButtons(data) {
   // Tilføj beholderen til medlemmer-sektionen
   document.getElementById('medlemmer').appendChild(pageButtonContainer);
 }
+
+// Funktion til at søge i data
 function searchData() {
-  // Reset current page
+  // Nulstil nuværende side
   window.currentPage = 1;
   const searchField = document.getElementById("searchField");
   const request = searchField.value.toLowerCase();
 
   fetch(`${endpoint}/medlemmer.json`)
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("Data:", data); // Console log data
-      if (data) {
-        const medlemmer = prepareData(data); // Convert data to an array using prepareData
+  .then((response) => response.json())
+  .then((data) => {
+    console.log("Data:", data);  // Konsollog data
+    if (data) {
+      const medlemmer = prepareData(data);  // Konverter dataen til et array ved hjælp af prepareData
 
-        window.allData = medlemmer;  // Store all data
+      const filteredData = medlemmer.filter((item) => {
+        return (
+          item.fornavn.toLowerCase().includes(request) ||
+          item.efternavn.toLowerCase().includes(request) ||
+          item.fødselsdato.toLowerCase().includes(request) ||
+          item.indmeldelsesdato.toLowerCase().includes(request)
+        );
+      });
 
-        // Create page number buttons
-        createPageButtons(window.allData);
+      // Vis første side efter fetching og filtering af data
+      showData(filteredData, window.currentPage);
 
-        // Show first page after fetching and filtering of data
-        showData(window.allData, window.currentPage);
-
-        // If there's a sorting order and sorting field, sort the data
-        if(window.currentSortBy && window.currentSortOrder) {
-          sortData(window.currentSortBy, window.currentSortOrder);
-        }
-      }
-    });
+      // Lav side nummer knapper
+      createPageButtons(filteredData);
+    }
+  });
 }
 
 function transformDateFormat(dateString) {
