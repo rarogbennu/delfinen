@@ -104,6 +104,11 @@ function updateMedlemClicked(event) {
   updateMedlem(id, fornavn, efternavn, fødselsdato, adresse, telefon, email, medlemstype, aktivitetsstatus, indmeldelsesdato);
 }
 
+async function updateMedlemTable(data) {
+  data = await getData(); // get posts from rest endpoint and save in variable
+  showData(data); // show all posts (append to the DOM) with posts as argument
+}
+
 // Funktion til at annullere sletning af medlem
 function deleteCancelClicked() {
   document.querySelector("#dialog-delete-medlem").close(); // luk dialogboksen
@@ -114,6 +119,7 @@ export {
   updateClicked,
   createMedlemClicked,
   updateMedlemClicked,
+  updateMedlemTable,
   nextPage,
   previousPage,
   deleteClicked,
