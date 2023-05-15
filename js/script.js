@@ -1,5 +1,5 @@
 import {getData, createMedlem, deleteMedlem, updateMedlem} from "./rest-services.js"
-import {searchData} from "./helpers.js"
+import {searchData, capitalizeFirstLetter} from "./helpers.js"
 import {initViews} from "./views.js"
 import { sortData, showData, previousPage, nextPage} from "./data-handling.js";
 
@@ -44,12 +44,12 @@ function showCreateMedlemDialog() {
 async function createMedlemClicked(event) {
   const form = event.target;
 
-  const fornavn = form.fornavn.value;
-  const efternavn = form.efternavn.value;
+  const fornavn = capitalizeFirstLetter(form.fornavn.value.trim());
+  const efternavn = capitalizeFirstLetter(form.efternavn.value.trim());
   const fødselsdato = form.fødselsdato.value;
-  const adresse = form.adresse.value;
-  const telefon = form.telefon.value;
-  const email = form.email.value;
+  const adresse = form.adresse.value.trim();
+  const telefon = form.telefon.value.trim();
+  const email = form.email.value.trim();
   const medlemstype = form.medlemstype.value;
   const aktivitetsstatus = form.aktivitetsstatus.value;
   const indmeldelsesdato = form.indmeldelsesdato.value;
@@ -119,12 +119,12 @@ function deleteMedlemClicked(event) {
 function updateMedlemClicked(event) {
   const form = event.target;
 
-  const fornavn = form.fornavn.value;
-  const efternavn = form.efternavn.value;
+  const fornavn = capitalizeFirstLetter(form.fornavn.value.trim());
+  const efternavn = capitalizeFirstLetter(form.efternavn.value.trim());
   const fødselsdato = form.fødselsdato.value;
-  const adresse = form.adresse.value;
-  const telefon = form.telefon.value;
-  const email = form.email.value;
+  const adresse = form.adresse.value.trim();
+  const telefon = form.telefon.value.trim();
+  const email = form.email.value.trim();
   const medlemstype = form.medlemstype.value;
   const aktivitetsstatus = form.aktivitetsstatus.value;
   const indmeldelsesdato = form.indmeldelsesdato.value;

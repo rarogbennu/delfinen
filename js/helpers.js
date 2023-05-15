@@ -122,5 +122,9 @@ function searchData() {
 }
 
 
+  function capitalizeFirstLetter(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  }
 
-export { searchData, createButtonContainer, prepareData };
+
+export { searchData, createButtonContainer, prepareData, capitalizeFirstLetter };
