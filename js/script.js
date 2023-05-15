@@ -19,6 +19,7 @@ function initApp() {
 
     document.querySelector("#btn-create-medlem").addEventListener("click", showCreateMedlemDialog);
     document.querySelector("#form-create-medlem").addEventListener("submit", createMedlemClicked);
+    document.querySelector("#button-create-medlem").addEventListener("click", showMedlemCreated);
     document.querySelector("#form-update-medlem").addEventListener("submit", updateMedlemClicked);
     document.querySelector("#form-delete-medlem").addEventListener("submit", deleteMedlemClicked);
     document.querySelector("#form-delete-medlem .btn-cancel").addEventListener("click", deleteCancelClicked);
@@ -40,7 +41,7 @@ function showCreateMedlemDialog() {
 }
 
 // Funktion der kaldes, når der klikkes på knappen til at oprette et medlem
-function createMedlemClicked(event) {
+async function createMedlemClicked(event) {
   const form = event.target;
 
   const fornavn = form.fornavn.value;
@@ -53,8 +54,36 @@ function createMedlemClicked(event) {
   const aktivitetsstatus = form.aktivitetsstatus.value;
   const indmeldelsesdato = form.indmeldelsesdato.value;
 
-  createMedlem(fornavn, efternavn, fødselsdato, adresse, telefon, email, medlemstype, aktivitetsstatus, indmeldelsesdato);
+  const medlem = await createMedlem(fornavn, efternavn, fødselsdato, adresse, telefon, email, medlemstype, aktivitetsstatus, indmeldelsesdato);
   form.reset();
+
+  showMedlemCreated(medlem)
+}
+
+function showMedlemCreated(item) {
+
+console.log(item)
+console.log("show medlem")
+
+const html = /*html*/ `
+    <p>Fornavn: ${item.fornavn}</p>
+    <p>Efternavn: ${item.efternavn}</p>
+    <p>Fødselsdato: ${item.fødselsdato}</p>
+    <p>Adresse: ${item.adresse}</p>
+    <p>Telefon: ${item.telefon}</p>
+    <p>Email: ${item.email}</p>
+    <p>Medlemstype: ${item.medlemstype}</p>
+    <p>Aktivitetsstatus: ${item.aktivitetsstatus}</p>
+    <p>Indmeldelsesdato: ${item.indmeldelsesdato}</p>
+`;
+
+document.querySelector("#show-medlem-created").innerHTML = ""
+
+document.querySelector("#show-medlem-created").insertAdjacentHTML("beforeend", html);
+
+
+
+
 }
 
 // Funktion der kaldes, når der klikkes på knappen til at opdatere et medlem

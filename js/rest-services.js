@@ -28,8 +28,17 @@ async function createMedlem(fornavn, efternavn, fødselsdato, adresse, telefon, 
       body: json
   });
   if (response.ok) {
+      const jsonResult = await response.json();
+      const medlemId = jsonResult.name;
       console.log("New medlem succesfully added to Firebase 🔥");
       updateMedlemTable();
+
+      console.log("Nyt id: " + medlemId);
+
+      const lastCreatedMedlemEndpoint = await fetch (`${endpoint}/medlemmer/${medlemId}.json`);
+      const lastCreatedMedlem = await lastCreatedMedlemEndpoint.json();
+      console.log(lastCreatedMedlem)
+      return lastCreatedMedlem;
   }
 }
 
@@ -60,7 +69,7 @@ async function deleteMedlem(id){
   }
 }
 
-
+export {getData, createMedlem, updateMedlem, deleteMedlem, endpoint}
 
 
 // original getDatas: hvis noget går galt, aktiver getMedlemData og eksporter
@@ -82,5 +91,3 @@ async function deleteMedlem(id){
 //     const resultater = prepareData(resultatData);
 //     return resultater;
 // }
-
-export {getData, createMedlem, updateMedlem, deleteMedlem, endpoint}
