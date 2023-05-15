@@ -44,7 +44,6 @@ function showData(data, page = 1) {
       const dataCell = document.createElement('div');
       dataCell.classList.add('data-cell');
       
-      console.log(item[key]);
       if (key === 'fødselsdato' || key === 'indmeldelsesdato') {
         dataCell.innerText = transformDateFormat(item[key]);
       } else {
