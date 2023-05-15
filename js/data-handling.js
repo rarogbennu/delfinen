@@ -12,20 +12,6 @@ function sortData(sortBy, sortOrder) {
       let valueA = a[window.currentSortBy];
       let valueB = b[window.currentSortBy];
 
-      if (window.currentSortBy === "fødselsdato") {
-        valueA = transformDateFormat(a[window.currentSortBy]);
-        valueB = transformDateFormat(b[window.currentSortBy]);
-      }
-
-      if (valueA === undefined || valueB === undefined) {
-        return 0; // Værdier er ikke defineret, behandles som ens
-      }
-
-      if (window.currentSortBy === "fornavn") {
-        valueA = valueA.toString().toLowerCase();
-        valueB = valueB.toString().toLowerCase();
-      }
-
       if (window.currentSortOrder === "asc") {
         return valueA.localeCompare(valueB, "en", { numeric: true }) || 0;
       } else {
@@ -37,25 +23,6 @@ function sortData(sortBy, sortOrder) {
     showData(window.allData, window.currentPage);
   }
 }
-
-// Funktion til at udfylde et tal med et foranstillet nul, hvis det er mindre end 10
-function padNumber(number) {
-  return number < 10 ? "0" + number : number;
-}
-
-// Funktion til at omdanne datoformatet fra "MM/DD/ÅÅÅÅ" til "ÅÅÅÅ/MM/DD"
-function transformDateFormat(dateString) {
-  if (!dateString) {
-    return '';
-  }
-
-  const parts = dateString.split("/");
-  const year = parts[2];
-  const month = padNumber(parseInt(parts[0], 10));
-  const day = padNumber(parseInt(parts[1], 10));
-  return `${year}/${month}/${day}`;
-}
-
 
 // Funktion til at vise data i visningen
 function showData(data, page = 1) {
@@ -76,7 +43,14 @@ function showData(data, page = 1) {
     relevantKeys.forEach((key) => {
       const dataCell = document.createElement('div');
       dataCell.classList.add('data-cell');
-      dataCell.innerText = item[key];
+      
+      console.log(item[key]);
+      if (key === 'fødselsdato' || key === 'indmeldelsesdato') {
+        dataCell.innerText = transformDateFormat(item[key]);
+      } else {
+        dataCell.innerText = item[key];
+      }
+      
       dataRow.appendChild(dataCell);
     });
 
@@ -85,6 +59,13 @@ function showData(data, page = 1) {
   });
 }
 
+function transformDateFormat(dateString) {
+  const parts = dateString.split("-");
+  const day = parts[2];
+  const month = parts[1];
+  const year = parts[0];
+  return `${day}/${month}/${year}`;
+}
 
 // Funktion til at vise data for den foregående side
 function previousPage(data) {
@@ -99,4 +80,4 @@ function nextPage(data) {
   showData(data, window.currentPage);
 }
 
-export {sortData, padNumber, transformDateFormat, showData, previousPage, nextPage};
+export {sortData, showData, previousPage, nextPage};
