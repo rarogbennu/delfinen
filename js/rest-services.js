@@ -29,16 +29,17 @@ async function createMedlem(fornavn, efternavn, fødselsdato, adresse, telefon, 
   });
   if (response.ok) {
       const jsonResult = await response.json();
-      const medlemId = jsonResult.name;
+      const id = jsonResult.name;
       console.log("New medlem succesfully added to Firebase 🔥");
-      updateMedlemTable();
 
-      console.log("Nyt id: " + medlemId);
+      console.log("Nyt id: " + id);
 
-      const lastCreatedMedlemEndpoint = await fetch (`${endpoint}/medlemmer/${medlemId}.json`);
+      const lastCreatedMedlemEndpoint = await fetch (`${endpoint}/medlemmer/${id}.json`);
       const lastCreatedMedlem = await lastCreatedMedlemEndpoint.json();
+      updateMedlemTable();
       console.log(lastCreatedMedlem)
       return lastCreatedMedlem;
+      
   }
 }
 
