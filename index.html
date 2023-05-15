@@ -124,39 +124,45 @@
                       <h2>Opret nyt medlem</h2>
                       <form id="form-create-medlem" method="dialog">
                         <label for="fornavn-create">Fornavn:</label>
-                        <input type="text" id="fornavn-create" name="fornavn" placeholder="">
+                        <input type="text" id="fornavn-create" name="fornavn" placeholder="" required>
                       
                         <label for="efternavn-create">Efternavn:</label>
-                        <input type="text" id="efternavn-create" name="efternavn" placeholder="">
+                        <input type="text" id="efternavn-create" name="efternavn" placeholder="" required>
                       
                         <label for="fødselsdato-create">Fødselsdato:</label>
-                        <input type="date" id="fødselsdato-create" name="fødselsdato" placeholder="">
+                        <input type="date" id="fødselsdato-create" name="fødselsdato" placeholder="" required  min="1920-01-01">
                       
                         <label for="adresse-create">Adresse:</label>
-                        <input type="text" id="adresse-create" name="adresse" placeholder="">
+                        <input type="text" id="adresse-create" name="adresse" placeholder="" required>
                       
                         <label for="telefon-create">Telefon:</label>
-                        <input type="tel" id="telefon-create" name="telefon" placeholder="">
+                        <input type="tel" id="telefon-create" name="telefon" placeholder="" required pattern="[0-9]{8}>
                       
                         <label for="email-create">Email:</label>
-                        <input type="email" id="email-create" name="email" placeholder="">
+                        <input type="email" id="email-create" name="email" placeholder="" required>
                       
                         <label for="medlemstype-create">Medlemstype:</label>
-                        <select id="medlemstype-create" name="medlemstype">
+                        <select id="medlemstype-create" name="medlemstype" required>
+                          <option disabled selected value> -- vælg medlemstype -- </option>
                           <option value="konkurrence">Konkurrence</option>
                           <option value="motionist">Motionist</option>
                         </select>
                       
                         <label for="aktivitetsstatus-create">Aktivitetsstatus:</label>
-                        <select id="aktivitetsstatus-create" name="aktivitetsstatus">
+                        <select id="aktivitetsstatus-create" name="aktivitetsstatus" required>
+                          <option disabled selected value> -- vælg aktivitetsstatus -- </option>
                           <option value="aktiv">Aktiv</option>
                           <option value="passiv">Passiv</option>
                         </select>
                       
                         <label for="indmeldelsesdato-create">Indmeldelsesdato:</label>
-                        <input type="date" id="indmeldelsesdato-create" name="indmeldelsesdato" placeholder="">
+                        <input type="date" id="indmeldelsesdato-create" name="indmeldelsesdato" placeholder="" required min="2012-01-01">
                       
+<<<<<<< Updated upstream
                         <button id="button-create-medlem">Opret medlem</button>
+=======
+                        <button>Opret medlem</button>
+>>>>>>> Stashed changes
                       </form>  
                     </dialog>
                     <article id="show-medlem-created"></article>
