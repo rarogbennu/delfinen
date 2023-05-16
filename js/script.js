@@ -1,8 +1,8 @@
 import {getData, getResultatData, createMedlem, deleteMedlem, updateMedlem} from "./rest-services.js"
 import {searchData, capitalizeFirstLetter} from "./helpers.js"
 import {initViews} from "./views.js"
-import { sortData, showData, previousPage, nextPage} from "./data-handling.js";
 import {medlemOptions, enableStævneInput} from "./resultater.js";
+import { sortData, showData, previousPage, nextPage, calcKontingent, calcAge, calcAldersgruppe} from "./data-handling.js";
 
 const pageSize = 1500;
 window.currentPage = 1;
@@ -57,8 +57,10 @@ async function createMedlemClicked(event) {
   const medlemstype = form.medlemstype.value;
   const aktivitetsstatus = form.aktivitetsstatus.value;
   const indmeldelsesdato = form.indmeldelsesdato.value;
+  const aldersgruppe = calcAldersgruppe(fødselsdato)
+  const kontingent = calcKontingent(fødselsdato, aktivitetsstatus);
 
-  const medlem = await createMedlem(fornavn, efternavn, fødselsdato, adresse, telefon, email, medlemstype, aktivitetsstatus, indmeldelsesdato);
+  const medlem = await createMedlem(fornavn, efternavn, fødselsdato, adresse, telefon, email, medlemstype, aktivitetsstatus, indmeldelsesdato, kontingent, aldersgruppe);
   form.reset();
 
   showMedlemCreated(medlem)
@@ -79,6 +81,8 @@ const html = /*html*/ `
     <p>Medlemstype: ${item.medlemstype}</p>
     <p>Aktivitetsstatus: ${item.aktivitetsstatus}</p>
     <p>Indmeldelsesdato: ${item.indmeldelsesdato}</p>
+    <p>Kontingent: ${item.kontingent}</p>
+    <p>Aldersgruppe: ${item.aldersgruppe}</p>
 `;
 
 document.querySelector("#show-medlem-created").innerHTML = ""
@@ -129,9 +133,11 @@ function updateMedlemClicked(event) {
   const medlemstype = form.medlemstype.value;
   const aktivitetsstatus = form.aktivitetsstatus.value;
   const indmeldelsesdato = form.indmeldelsesdato.value;
+  const aldersgruppe = calcAldersgruppe(fødselsdato)
+  const kontingent = calcKontingent(fødselsdato, aktivitetsstatus);
 
   const id = form.getAttribute("data-id");
-  updateMedlem(id, fornavn, efternavn, fødselsdato, adresse, telefon, email, medlemstype, aktivitetsstatus, indmeldelsesdato);
+  updateMedlem(id, fornavn, efternavn, fødselsdato, adresse, telefon, email, medlemstype, aktivitetsstatus, indmeldelsesdato, kontingent, aldersgruppe);
 }
 
 async function updateMedlemTable(medlemmer) {
