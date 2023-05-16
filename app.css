@@ -55,6 +55,8 @@ nav a.active {
 .show-content {
     display: none;
     padding: 286px 2em;
+    height: 0;
+    overflow: hidden;
 }
 
 /* how the show-content class is shown */
@@ -67,6 +69,7 @@ nav a.active {
 /* shows the content active link */
 .show-content.active {
     display: block;
+    height: auto;
 }
 
 .container {
@@ -180,4 +183,33 @@ button.delete {
 
 #page-buttons button {
   margin: 0.5em;
+}
+
+/* styles.css */
+
+#home {
+  justify-content: center;
+  align-items: center;
+  height: 100vh;  /* Adjust this as needed */
+  z-index: -1;
+}
+
+.logo {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -0%);
+  width: 750px; /* Adjust as needed */
+  height: 750px; /* Adjust as needed */
+  z-index: -21;
+}
+
+.home-content {
+  text-align: center;
+  position: relative;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.484); /* semi-transparent white, adjust as needed */
+  color: #c33b3b;
+  z-index: -1;
+  border-radius: 15px; /* rounded corners */
 }
