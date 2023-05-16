@@ -4,7 +4,7 @@ import { sortData, showData} from "./data-handling.js";
 import { endpoint } from "./rest-services.js";
 
 // Definér en global variabel for sidestørrelse
-const pageSize = 15;
+const pageSize = 105;
 
 // Funktion til at forberede data - konverterer et objekt til et array
 function prepareData(dataObject) {

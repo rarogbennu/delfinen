@@ -44,14 +44,14 @@
                 <button class="sort-btn" data-sort="efternavn" data-order="desc">▼</button>
               </div>
               <div class="Fødselsdag">
-                <span>Fødselsdag</span>
+                <span>Fødselsdato</span>
                 <button class="sort-btn" data-sort="fødselsdato" data-order="asc">▲</button>
                 <button class="sort-btn" data-sort="fødselsdato" data-order="desc">▼</button>
               </div>
                <div class="Fødselsdag">
-                <span></span>
-                <button class="sort-btn" data-sort="fødselsdato" data-order="asc"></button>
-                <button class="sort-btn" data-sort="fødselsdato" data-order="desc"></button>
+                <span>Indmeldelsesdato</span>
+                <button class="sort-btn" data-sort="fødselsdato" data-order="asc">▲</button>
+                <button class="sort-btn" data-sort="fødselsdato" data-order="desc">▼</button>
               </div>
                <div class="Fødselsdag">
                 <span></span>
@@ -170,6 +170,34 @@
 <!--#resultater section-->
         <section id="resultater" class="show-content">
             <h2>Resultater</h2>
+            <section id="resultat-container">
+              <div id="resultat-form">
+                <form id="form-create-resultat">
+                  <label for="hold-create">Hold:</label>
+                        <select id="hold-create" name="hold" required>
+                          <option disabled selected value> -- vælg hold -- </option>
+                          <option value="junior">Junior</option>
+                          <option value="senior">Senior</option>
+                        </select>
+                  <label for="disciplin-create">Disciplin:</label>
+                        <select id="disciplin-create" name="disciplin" required>
+                          <option disabled selected value> -- vælg disciplin -- </option>
+                          <option value="butterfly">Butterfly</option>
+                          <option value="crawl">Crawl</option>
+                          <option value="rygcrawl">Rygcrawl</option>
+                          <option value="brystsvømning">Brystsvømning</option>
+                        </select>
+                  <label for="medlem-assign-resultat">Svømmer:</label>
+                        <select id="medlem-assign-resultat" name="medlem-assign-resultat" required>
+                          <option disabled selected value> -- vælg svømmer -- </option>
+                          <option value=""></option>
+                        </select>
+                </form>
+              </div>
+              <div id="resultat-display">
+                Display
+              </div>
+            </section>
         </section>
 
 
@@ -179,6 +207,7 @@
         </section>
     </main>
     <script type="module" src="./js/script.js"></script>
+    <script type="module" src="./js/home.js"></script>
 
 </body>
 </html>

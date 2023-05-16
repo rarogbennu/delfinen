@@ -1,4 +1,4 @@
-import {getData, createMedlem, deleteMedlem, updateMedlem} from "./rest-services.js"
+import {getData, getResultatData, createMedlem, deleteMedlem, updateMedlem} from "./rest-services.js"
 import {searchData, capitalizeFirstLetter} from "./helpers.js"
 import {initViews} from "./views.js"
 import { sortData, showData, previousPage, nextPage, calcKontingent, calcAge, calcAldersgruppe} from "./data-handling.js";
@@ -16,6 +16,7 @@ function initApp() {
     initViews();
     searchData();
     getData();
+    getResultatData();
 
     document.querySelector("#btn-create-medlem").addEventListener("click", showCreateMedlemDialog);
     document.querySelector("#form-create-medlem").addEventListener("submit", createMedlemClicked);
@@ -85,9 +86,6 @@ document.querySelector("#show-medlem-created").innerHTML = ""
 
 document.querySelector("#show-medlem-created").insertAdjacentHTML("beforeend", html);
 
-
-
-
 }
 
 // Funktion der kaldes, når der klikkes på knappen til at opdatere et medlem
@@ -139,9 +137,9 @@ function updateMedlemClicked(event) {
   updateMedlem(id, fornavn, efternavn, fødselsdato, adresse, telefon, email, medlemstype, aktivitetsstatus, indmeldelsesdato, kontingent, aldersgruppe);
 }
 
-async function updateMedlemTable(data) {
-  data = await getData(); // get posts from rest endpoint and save in variable
-  showData(data); // show all posts (append to the DOM) with posts as argument
+async function updateMedlemTable(medlemmer) {
+  medlemmer = await getData(); // get posts from rest endpoint and save in variable
+  showData(medlemmer); // show all posts (append to the DOM) with posts as argument
 }
 
 // Funktion til at annullere sletning af medlem

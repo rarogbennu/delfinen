@@ -55,6 +55,8 @@ nav a.active {
 .show-content {
     display: none;
     padding: 286px 2em;
+    height: 0;
+    overflow: hidden;
 }
 
 /* how the show-content class is shown */
@@ -67,6 +69,7 @@ nav a.active {
 /* shows the content active link */
 .show-content.active {
     display: block;
+    height: auto;
 }
 
 .container {
@@ -117,10 +120,15 @@ button.delete {
 
 /* Container for the header row */
 .header-row {
-    display: flex;
+  display: flex;
     justify-content: space-around;
     align-items: center;
     padding: 8px 0;
+    padding-top: 15px;
+    padding-right: 0px;
+    padding-bottom: 15px;
+    padding-left: 44px;
+    flex-direction: row;
 }
 
 /* Individual header cells */
@@ -172,6 +180,13 @@ button.delete {
   padding: 2em;
 }
 
+#form-create-resultat {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+  padding: 2em;
+}
+
 #page-buttons {
   display: flex;
   justify-content: center;
@@ -180,4 +195,40 @@ button.delete {
 
 #page-buttons button {
   margin: 0.5em;
+}
+
+/* styles.css */
+
+#home {
+  justify-content: center;
+  align-items: center;
+  height: 100vh;  /* Adjust this as needed */
+  z-index: -1;
+}
+
+.logo {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -0%);
+  width: 750px; /* Adjust as needed */
+  height: 750px; /* Adjust as needed */
+  z-index: -21;
+}
+
+.home-content {
+  text-align: center;
+  position: relative;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.484); /* semi-transparent white, adjust as needed */
+  color: #c33b3b;
+  z-index: -1;
+  border-radius: 15px; /* rounded corners */
+}
+
+/* resultater */
+
+#resultat-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
