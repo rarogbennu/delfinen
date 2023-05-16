@@ -8,15 +8,23 @@ async function getData() {
   const response = await fetch (`${endpoint}/medlemmer.json`);
   console.log("Svar:", response); 
   const data = await response.json();
-  console.log("Analyseret JSON:", data);
+  console.log("Analyseret JSON medlemmer:", data);
   const medlemmer = prepareData(data); // ændret fra data.medlemmer til data
 
-  // if (Array.isArray(medlemmer)) {
-  //   showData(medlemmer.slice(0, 24));
   return medlemmer; // returner medlemmer-data i stedet for udefineret element
-  }
+}
 
-// Opret, opdater, slet
+// Henter resultat data fra JSON-fil
+async function getResultatData() {
+  const response = await fetch(`${endpoint}/resultater.json`);
+  const resultatData = await response.json();
+  const resultater = prepareData(resultatData);
+  console.log("Analyseret JSON resultater:", resultatData);
+  return resultater;
+}
+
+
+// Opret, opdater, slet medlemmer
 
 async function createMedlem(fornavn, efternavn, fødselsdato, adresse, telefon, email, medlemstype, aktivitetsstatus, indmeldelsesdato) {
   const medlemToCreate = { fornavn, efternavn, fødselsdato, adresse, telefon, email, medlemstype, aktivitetsstatus, indmeldelsesdato }; // create new post object
@@ -69,7 +77,9 @@ async function deleteMedlem(id){
   }
 }
 
-export {getData, createMedlem, updateMedlem, deleteMedlem, endpoint}
+// Opret, opdater, slet medlemmer
+
+export {getData, getResultatData, createMedlem, updateMedlem, deleteMedlem, endpoint}
 
 
 // original getDatas: hvis noget går galt, aktiver getMedlemData og eksporter
@@ -81,13 +91,4 @@ export {getData, createMedlem, updateMedlem, deleteMedlem, endpoint}
 //     const medlemData = await response.json();
 //     const medlemmer = prepareData(medlemData);
 //     return medlemmer;
-// }
-
-// Get resultat data når vi når dertil (husk at eksporter)
-
-// async function getResultatData() {
-//     const response = await fetch (`${endpoint}/resultater.json`);
-//     const resultatData = await response.json();
-//     const resultater = prepareData(resultatData);
-//     return resultater;
 // }

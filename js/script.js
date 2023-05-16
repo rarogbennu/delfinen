@@ -1,4 +1,4 @@
-import {getData, createMedlem, deleteMedlem, updateMedlem} from "./rest-services.js"
+import {getData, getResultatData, createMedlem, deleteMedlem, updateMedlem} from "./rest-services.js"
 import {searchData, capitalizeFirstLetter} from "./helpers.js"
 import {initViews} from "./views.js"
 import { sortData, showData, previousPage, nextPage} from "./data-handling.js";
@@ -16,6 +16,7 @@ function initApp() {
     initViews();
     searchData();
     getData();
+    getResultatData();
 
     document.querySelector("#btn-create-medlem").addEventListener("click", showCreateMedlemDialog);
     document.querySelector("#form-create-medlem").addEventListener("submit", createMedlemClicked);
