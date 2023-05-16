@@ -1,8 +1,9 @@
 import {getData, getResultatData, createMedlem, deleteMedlem, updateMedlem} from "./rest-services.js"
 import {searchData, capitalizeFirstLetter} from "./helpers.js"
 import {initViews} from "./views.js"
-import { sortData, showData, previousPage, nextPage} from "./data-handling.js";
+import { sortData, showData, previousPage, nextPage, calcKontingent, calcAge, calcAldersgruppe} from "./data-handling.js";
 import { generateKontingentTable } from "./kontingent.js";
+import {medlemOptions, enableStævneInput} from "./resultater.js";
 
 const pageSize = 1500;
 window.currentPage = 1;
@@ -19,6 +20,8 @@ function initApp() {
     getData();
     getResultatData();
     generateKontingentTable();
+    medlemOptions();
+    enableStævneInput();
 
     document.querySelector("#btn-create-medlem").addEventListener("click", showCreateMedlemDialog);
     document.querySelector("#form-create-medlem").addEventListener("submit", createMedlemClicked);
