@@ -215,11 +215,30 @@
 
 <!--#kontingent section-->
         <section id="kontingent" class="show-content">
-            <h2>Kontingent</h2>
-        </section>
+    <h2>Kontingent</h2>
+    <div>
+        <label for="filter-aldersgruppe">Aldersgruppe:</label>
+        <select id="filter-aldersgruppe">
+            <option value="">Alle</option>
+            <option value="børn">Børn</option>
+            <option value="ungdom">Ungdom</option>
+            <option value="voksen">Voksen</option>
+        </select>
+    </div>
+    <div>
+        <label for="filter-aktivitetsstatus">Aktivitetsstatus:</label>
+        <select id="filter-aktivitetsstatus">
+            <option value="">Alle</option>
+            <option value="aktiv">Aktiv</option>
+            <option value="passiv">Passiv</option>
+        </select>
+    </div>
+    <div id="kontingentTableContainer"></div>
+</section>
     </main>
     <script type="module" src="./js/script.js"></script>
     <script type="module" src="./js/home.js"></script>
+    <script type="module" src="./js/kontingent.js"></script>
 
 </body>
 </html>

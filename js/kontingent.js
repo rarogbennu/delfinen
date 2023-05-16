@@ -45,4 +45,39 @@ export async function generateKontingentTable() {
 
   console.log("Table generated", tableHTML); // 5
   return tableHTML;
+
+    // Add this code at the end of the function
+  const tableContainer = document.getElementById('kontingentTableContainer');
+  tableContainer.innerHTML = tableHTML;
+
+  const filterAldersgruppe = document.getElementById('filter-aldersgruppe');
+  filterAldersgruppe.addEventListener('change', async () => {
+    await applyFilters();
+  });
+
+  const filterAktivitetsstatus = document.getElementById('filter-aktivitetsstatus');
+  filterAktivitetsstatus.addEventListener('change', async () => {
+    await applyFilters();
+  });
+}
+async function applyFilters() {
+  const medlemmerData = await getData();
+  const filterAldersgruppeValue = document.getElementById('filter-aldersgruppe').value;
+  const filterAktivitetsstatusValue = document.getElementById('filter-aktivitetsstatus').value;
+
+  const filteredData = Object.values(medlemmerData).filter((medlem) => {
+    const aldersgruppeMatch = !filterAldersgruppeValue || medlem.aldersgruppe === filterAldersgruppeValue;
+    const aktivitetsstatusMatch = !filterAktivitetsstatusValue || medlem.aktivitetsstatus === filterAktivitetsstatusValue;
+
+    return aldersgruppeMatch && aktivitetsstatusMatch;
+  });
+
+  const filteredDataAsObject = filteredData.reduce((acc, medlem) => {
+    acc[medlem.id] = medlem;
+    return acc;
+  }, {});
+
+  const tableHTML = await generateTable(filteredDataAsObject);
+  const tableContainer = document.getElementById('kontingentTableContainer');
+  tableContainer.innerHTML = tableHTML;
 }

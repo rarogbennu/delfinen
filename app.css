@@ -232,3 +232,20 @@ button.delete {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+
+/* kontingent */
+
+table {
+    width: 100%; /* Gør tabellen fuld bredde */
+    border-collapse: collapse; /* Fjern standard cell spacing */
+}
+
+th, td {
+    padding: 10px; /* Tilføj lidt plads omkring teksten i cellerne */
+    text-align: center; /* Centrer teksten horisontalt */
+    border: 1px solid #000; /* Tilføj en grænse omkring cellerne */
+}
+
+tfoot {
+    font-weight: bold; /* Gør total-beløbet fedt */
+}
