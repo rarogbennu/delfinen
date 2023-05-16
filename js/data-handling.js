@@ -79,4 +79,57 @@ function nextPage(data) {
   showData(data, window.currentPage);
 }
 
-export {sortData, showData, previousPage, nextPage};
+function calcAldersgruppe(fødselsdatoinput) {
+  const today = new Date();
+  const fødselsdato = new Date(fødselsdatoinput)
+
+  let age = today.getFullYear() - fødselsdato.getFullYear();
+  const months = today.getMonth() - fødselsdato.getMonth();
+  const days = today.getDate() - fødselsdato.getDate();
+
+  if (months < 0 || (months === 0 && days < 0)) {
+    age--;
+  }
+
+  let category;
+  if (age < 18) {
+    return "junior";
+  } else {
+    return "senior";
+  }
+}
+
+function calcAge(fødselsdatoinput) {
+  const today = new Date();
+  const fødselsdato = new Date(fødselsdatoinput)
+
+  let age = today.getFullYear() - fødselsdato.getFullYear();
+  const months = today.getMonth() - fødselsdato.getMonth();
+  const days = today.getDate() - fødselsdato.getDate();
+
+  if (months < 0 || (months === 0 && days < 0)) {
+    age--;
+  }
+
+  return {age};
+}
+
+function calcKontingent(fødselsdato, aktivitetsstatus) {
+
+const ageObject = calcAge(fødselsdato);
+const age = ageObject.age;
+
+  if (aktivitetsstatus === "passiv") {
+    return 500  
+  } else if (aktivitetsstatus === "aktiv" && age < 18) {
+    return 1000
+  } else if (aktivitetsstatus === "aktiv" && age >= 60) {
+    return 1200
+  } else { 
+    return 1600
+  }
+
+}
+
+
+export {sortData, showData, previousPage, nextPage, calcAge, calcAldersgruppe, calcKontingent};
