@@ -6,9 +6,9 @@ const endpoint = "https://delfinen-724e2-default-rtdb.europe-west1.firebasedatab
 // Henter data fra JSON-fil
 async function getData() {
   const response = await fetch (`${endpoint}/medlemmer.json`);
-  console.log("Svar:", response); 
+  // console.log("Svar:", response); 
   const data = await response.json();
-  console.log("Analyseret JSON:", data);
+  // console.log("Analyseret JSON:", data);
   const medlemmer = prepareData(data); // ændret fra data.medlemmer til data
 
   if (Array.isArray(medlemmer)) {
@@ -19,8 +19,8 @@ async function getData() {
 
 // Opret, opdater, slet
 
-async function createMedlem(fornavn, efternavn, fødselsdato, adresse, telefon, email, medlemstype, aktivitetsstatus, indmeldelsesdato) {
-  const medlemToCreate = { fornavn, efternavn, fødselsdato, adresse, telefon, email, medlemstype, aktivitetsstatus, indmeldelsesdato }; // create new post object
+async function createMedlem(fornavn, efternavn, fødselsdato, adresse, telefon, email, medlemstype, aktivitetsstatus, indmeldelsesdato, kontingent, aldersgruppe) {
+  const medlemToCreate = {fornavn, efternavn, fødselsdato, adresse, telefon, email, medlemstype, aktivitetsstatus, indmeldelsesdato, kontingent, aldersgruppe}; // create new post object
   const json = JSON.stringify(medlemToCreate);
 
   const response = await fetch(`${endpoint}/medlemmer.json`, {
@@ -43,8 +43,8 @@ async function createMedlem(fornavn, efternavn, fødselsdato, adresse, telefon, 
   }
 }
 
-async function updateMedlem(id, fornavn, efternavn, fødselsdato, adresse, telefon, email, medlemstype, aktivitetsstatus, indmeldelsesdato ) {
-  const medlemToUpdate = { fornavn, efternavn, fødselsdato, adresse, telefon, email, medlemstype, aktivitetsstatus, indmeldelsesdato }; // post update to update
+async function updateMedlem(id, fornavn, efternavn, fødselsdato, adresse, telefon, email, medlemstype, aktivitetsstatus, indmeldelsesdato, kontingent, aldersgruppe) {
+  const medlemToUpdate = {fornavn, efternavn, fødselsdato, adresse, telefon, email, medlemstype, aktivitetsstatus, indmeldelsesdato, kontingent, aldersgruppe}; // post update to update
   const json = JSON.stringify(medlemToUpdate);
 
   const response = await fetch(`${endpoint}/medlemmer/${id}.json`, {
