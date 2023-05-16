@@ -17,9 +17,10 @@ function changeView() {
   document.querySelector(hashLink).classList.add("active");
   setActiveLink(hashLink);
 
+// set if/else op til at kalde side specifikke funktioner, så de ikke alle sammen bliver kaldt fra initApp!
   if (hashLink === "#medlemmer") {
     showPaginationButtons();
-  }
+  } 
 }
 
 

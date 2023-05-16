@@ -2,8 +2,9 @@ import {getData, getResultatData, createMedlem, deleteMedlem, updateMedlem} from
 import {searchData, capitalizeFirstLetter} from "./helpers.js"
 import {initViews} from "./views.js"
 import { sortData, showData, previousPage, nextPage} from "./data-handling.js";
+import {medlemOptions, enableStævneInput} from "./resultater.js";
 
-const pageSize = 15;
+const pageSize = 1500;
 window.currentPage = 1;
 window.currentSortBy = '';
 window.currentSortOrder = '';
@@ -17,6 +18,8 @@ function initApp() {
     searchData();
     getData();
     getResultatData();
+    medlemOptions();
+    enableStævneInput();
 
     document.querySelector("#btn-create-medlem").addEventListener("click", showCreateMedlemDialog);
     document.querySelector("#form-create-medlem").addEventListener("submit", createMedlemClicked);
@@ -139,6 +142,31 @@ async function updateMedlemTable(medlemmer) {
 // Funktion til at annullere sletning af medlem
 function deleteCancelClicked() {
   document.querySelector("#dialog-delete-medlem").close(); // luk dialogboksen
+}
+
+async function medlemInputOptions () {
+
+  const medlemmer = await getData();
+
+  // Get the select element
+  const selectElement = document.querySelector('#medlem-assign-resultat');
+
+  // Create the default option
+  const defaultOption = document.createElement('option');
+  defaultOption.disabled = true;
+  defaultOption.selected = true;
+  defaultOption.textContent = '-- vælg svømmer --';
+  selectElement.appendChild(defaultOption);
+
+  // Iterate over each member document and create options
+  medlemmer.forEach(function(medlem) {
+  var option = document.createElement('option');
+  option.value = medlem.id;
+  option.textContent = medlem.fornavn + ' ' + medlem.efternavn;
+  selectElement.appendChild(option);
+  });
+  console.log("medlemmer options")
+
 }
 
 export {

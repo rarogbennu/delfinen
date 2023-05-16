@@ -189,9 +189,21 @@
                         </select>
                   <label for="medlem-assign-resultat">Svømmer:</label>
                         <select id="medlem-assign-resultat" name="medlem-assign-resultat" required>
-                          <option disabled selected value> -- vælg svømmer -- </option>
-                          <option value=""></option>
                         </select>
+                  <label for="aktivitetstype-create">Aktivitetstype:</label>
+                        <select id="aktivitetstype-create" name="aktivitetstype" required>
+                          <option disabled selected value> -- vælg aktivitetstype -- </option>
+                          <option value="Konkurrence">Konkurrence</option>
+                          <option value="Træning">Træning</option>
+                        </select>
+                  <label for="Stævne">Stævne:</label>
+                        <input type="text" id="stævne-create" name="stævne-create" placeholder="" required  min="1920-01-01">
+                  <label for="dato-create">Dato:</label>
+                        <input type="date" id="dato-create" name="dato-create" placeholder="" required  min="1920-01-01">
+                  <label for="placering-create">Placering:</label>
+                        <input type="number" id="placering-create" name="placering-create" placeholder="" required>
+                  <label for="tid-create">Tid:</label>
+                        <input type="" id="tid-create" name="tid-create" placeholder="" required >
                 </form>
               </div>
               <div id="resultat-display">
