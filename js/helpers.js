@@ -22,7 +22,6 @@ function prepareData(dataObject) {
   return dataArray;
 }
 
-
 // Funktioner til at vise og skjule sidens knapper
 function showPaginationButtons() {
   const pageButtonContainer = document.getElementById("page-buttons");
