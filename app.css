@@ -175,6 +175,13 @@ button.delete {
   padding: 2em;
 }
 
+#form-create-resultat {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+  padding: 2em;
+}
+
 #page-buttons {
   display: flex;
   justify-content: center;
@@ -212,4 +219,11 @@ button.delete {
   color: #c33b3b;
   z-index: -1;
   border-radius: 15px; /* rounded corners */
+}
+
+/* resultater */
+
+#resultat-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }

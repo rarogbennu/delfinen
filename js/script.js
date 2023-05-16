@@ -82,9 +82,6 @@ document.querySelector("#show-medlem-created").innerHTML = ""
 
 document.querySelector("#show-medlem-created").insertAdjacentHTML("beforeend", html);
 
-
-
-
 }
 
 // Funktion der kaldes, når der klikkes på knappen til at opdatere et medlem
