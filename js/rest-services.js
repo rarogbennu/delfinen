@@ -11,11 +11,10 @@ async function getData() {
   console.log("Analyseret JSON:", data);
   const medlemmer = prepareData(data); // ændret fra data.medlemmer til data
 
-  if (Array.isArray(medlemmer)) {
-    showData(medlemmer.slice(0, 24));
-    return medlemmer; // returner medlemmer-data i stedet for udefineret element
+  // if (Array.isArray(medlemmer)) {
+  //   showData(medlemmer.slice(0, 24));
+  return medlemmer; // returner medlemmer-data i stedet for udefineret element
   }
-}
 
 // Opret, opdater, slet
 
@@ -28,6 +27,7 @@ async function createMedlem(fornavn, efternavn, fødselsdato, adresse, telefon, 
       body: json
   });
   if (response.ok) {
+      updateMedlemTable();
       const jsonResult = await response.json();
       const id = jsonResult.name;
       console.log("New medlem succesfully added to Firebase 🔥");
@@ -36,7 +36,6 @@ async function createMedlem(fornavn, efternavn, fødselsdato, adresse, telefon, 
 
       const lastCreatedMedlemEndpoint = await fetch (`${endpoint}/medlemmer/${id}.json`);
       const lastCreatedMedlem = await lastCreatedMedlemEndpoint.json();
-      updateMedlemTable();
       console.log(lastCreatedMedlem)
       return lastCreatedMedlem;
       

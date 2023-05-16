@@ -133,9 +133,9 @@ function updateMedlemClicked(event) {
   updateMedlem(id, fornavn, efternavn, fødselsdato, adresse, telefon, email, medlemstype, aktivitetsstatus, indmeldelsesdato);
 }
 
-async function updateMedlemTable(data) {
-  data = await getData(); // get posts from rest endpoint and save in variable
-  showData(data); // show all posts (append to the DOM) with posts as argument
+async function updateMedlemTable(medlemmer) {
+  medlemmer = await getData(); // get posts from rest endpoint and save in variable
+  showData(medlemmer); // show all posts (append to the DOM) with posts as argument
 }
 
 // Funktion til at annullere sletning af medlem
