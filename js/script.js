@@ -23,10 +23,8 @@ function initApp() {
     generateKontingentTable();
     medlemOptions();
     enableStævneInput();
-    initAuth();
-
-    document.querySelector("#form-signin").addEventListener("submit", signIn);
-    document.querySelector("#btn-sign-out").addEventListener("click", signOutUser);
+   
+    
     document.querySelector("#btn-create-medlem").addEventListener("click", showCreateMedlemDialog);
     document.querySelector("#form-create-medlem").addEventListener("submit", createMedlemClicked);
     document.querySelector("#button-create-medlem").addEventListener("click", showMedlemCreated);
@@ -34,7 +32,12 @@ function initApp() {
     document.querySelector("#form-delete-medlem").addEventListener("submit", deleteMedlemClicked);
     document.querySelector("#form-delete-medlem .btn-cancel").addEventListener("click", deleteCancelClicked);
     document.querySelector("#form-create-resultat").addEventListener("submit", createResultatClicked);
-}
+    
+    ////
+    initAuth();
+    document.querySelector("#form-signin").addEventListener("submit", signIn);
+    document.querySelector("#btn-sign-out").addEventListener("click", signOutUser);
+  }
 
 document.getElementById("searchField").addEventListener("keyup", searchData);
 
