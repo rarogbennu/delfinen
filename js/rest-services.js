@@ -96,15 +96,3 @@ async function createResultat(hold, disciplin, svømmerId, aktivitetstype, stæv
 
 
 export {getData, getResultatData, createMedlem, updateMedlem, deleteMedlem, createResultat, endpoint}
-
-
-// original getDatas: hvis noget går galt, aktiver getMedlemData og eksporter
-
-// Get and prepare data (tilføj ID til hver post, vigtigt!)
-
-// async function getMedlemData() {
-//     const response = await fetch (`${endpoint}/medlemmer.json`);
-//     const medlemData = await response.json();
-//     const medlemmer = prepareData(medlemData);
-//     return medlemmer;
-// }
