@@ -51,6 +51,10 @@ nav a.active {
     border-radius: 25px;
 }
 
+nav.hide {
+    display: none;
+}
+
 /* show content class */
 .show-content {
     display: none;
@@ -254,4 +258,14 @@ tfoot {
 padding: 7px;
 text-align: center;
 border: 1px solid #000;
+}
+
+/* ---------- login styling ---------- */
+#signin-message {
+    color: var(--text-color-danger);
+}
+
+#signin,
+#signup {
+    text-align: center;
 }

@@ -4,6 +4,7 @@ import {initViews} from "./views.js"
 import { sortData, showData, previousPage, nextPage, calcKontingent, calcAge, calcAldersgruppe} from "./data-handling.js";
 import { generateKontingentTable } from "./kontingent.js";
 import {medlemOptions, enableStævneInput} from "./resultater.js";
+import { initAuth, signIn, signOutUser } from "./simple-auth.js";
 
 const pageSize = 1500;
 window.currentPage = 1;
@@ -22,7 +23,10 @@ function initApp() {
     generateKontingentTable();
     medlemOptions();
     enableStævneInput();
+    initAuth();
 
+    document.querySelector("#form-signin").addEventListener("submit", signIn);
+    document.querySelector("#btn-sign-out").addEventListener("click", signOutUser);
     document.querySelector("#btn-create-medlem").addEventListener("click", showCreateMedlemDialog);
     document.querySelector("#form-create-medlem").addEventListener("submit", createMedlemClicked);
     document.querySelector("#button-create-medlem").addEventListener("click", showMedlemCreated);
