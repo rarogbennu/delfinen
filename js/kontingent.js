@@ -67,12 +67,29 @@ async function applyFilters() {
 // Initial table generation on page load
 generateKontingentTable();
 
-const filterAldersgruppe = document.getElementById('filter-aldersgruppe');
-filterAldersgruppe.addEventListener('change', async () => {
-  await applyFilters();
-});
 
-const filterAktivitetsstatus = document.getElementById('filter-aktivitetsstatus');
-filterAktivitetsstatus.addEventListener('change', async () => {
-  await applyFilters();
-});
+  const filterAldersgruppe = document.getElementById('filter-aldersgruppe');
+  filterAldersgruppe.addEventListener('change', async () => {
+    await applyFilters();
+  });
+
+  const filterAktivitetsstatus = document.getElementById('filter-aktivitetsstatus');
+  filterAktivitetsstatus.addEventListener('change', async () => {
+    await applyFilters();
+  });
+
+  // Add event listener for the Restance button
+  const restanceButton = document.getElementById('restance-button');
+  restanceButton.addEventListener('click', async () => {
+    const medlemmerData = await getData();
+    const filteredData = Object.values(medlemmerData).filter((medlem) => {
+      return medlem.kontingent < 0 || medlem.kontingent === undefined;
+    });
+
+    const filteredDataAsObject = filteredData.reduce((acc, medlem) => {
+      acc[medlem.id] = medlem;
+      return acc;
+    }, {});
+
+    await generateKontingentTable(filteredDataAsObject);
+  });
