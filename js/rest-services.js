@@ -27,7 +27,7 @@ async function getResultatData() {
 // Opret, opdater, slet medlemmer
 
 async function createMedlem(fornavn, efternavn, fødselsdato, adresse, telefon, email, medlemstype, aktivitetsstatus, indmeldelsesdato, kontingent, aldersgruppe) {
-  const medlemToCreate = {fornavn, efternavn, fødselsdato, adresse, telefon, email, medlemstype, aktivitetsstatus, indmeldelsesdato, kontingent, aldersgruppe}; // create new post object
+  const medlemToCreate = {fornavn, efternavn, fødselsdato, adresse, telefon, email, medlemstype, aktivitetsstatus, indmeldelsesdato, kontingent, aldersgruppe}; // create nyt medlem object
   const json = JSON.stringify(medlemToCreate);
 
   const response = await fetch(`${endpoint}/medlemmer.json`, {
@@ -77,9 +77,25 @@ async function deleteMedlem(id){
   }
 }
 
-// Opret, opdater, slet medlemmer
+// Opret, opdater, slet resultater
 
-export {getData, getResultatData, createMedlem, updateMedlem, deleteMedlem, endpoint}
+async function createResultat(hold, disciplin, svømmerId, aktivitetstype, stævne, dato, placering, tid){;
+  const resultatToCreate = {hold, disciplin, svømmerId, aktivitetstype, stævne, dato, placering, tid}
+  const json = JSON.stringify(resultatToCreate);
+
+  const response = await fetch(`${endpoint}/resultater.json`, {
+    method: "POST",
+    body: json
+  });
+
+  if (response.ok) {
+    console.log("Resultat succesfully added to Firebase 🔥");
+    // updateResultatTable();
+  }
+}
+
+
+export {getData, getResultatData, createMedlem, updateMedlem, deleteMedlem, createResultat, endpoint}
 
 
 // original getDatas: hvis noget går galt, aktiver getMedlemData og eksporter

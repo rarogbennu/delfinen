@@ -1,4 +1,4 @@
-import {getData, getResultatData, createMedlem, deleteMedlem, updateMedlem} from "./rest-services.js"
+import {getData, getResultatData, createMedlem, deleteMedlem, updateMedlem, createResultat} from "./rest-services.js"
 import {searchData, capitalizeFirstLetter} from "./helpers.js"
 import {initViews} from "./views.js"
 import { sortData, showData, previousPage, nextPage, calcKontingent, calcAge, calcAldersgruppe} from "./data-handling.js";
@@ -12,7 +12,7 @@ window.currentSortOrder = '';
 
 window.addEventListener("load", initApp)
 
-// Funktion til at initialisere applikationen
+// Funktion til at initialisere applikationen - alle kald der er knyttet til et bestemt view, kan rykkes over i views.js 
 function initApp() {
     console.log("initApp");
     initViews();
@@ -29,6 +29,7 @@ function initApp() {
     document.querySelector("#form-update-medlem").addEventListener("submit", updateMedlemClicked);
     document.querySelector("#form-delete-medlem").addEventListener("submit", deleteMedlemClicked);
     document.querySelector("#form-delete-medlem .btn-cancel").addEventListener("click", deleteCancelClicked);
+    document.querySelector("#form-create-resultat").addEventListener("submit", createResultatClicked);
 }
 
 document.getElementById("searchField").addEventListener("keyup", searchData);
@@ -40,6 +41,8 @@ document.querySelectorAll(".sort-btn").forEach((button) => {
     sortData(sortBy, sortOrder);
   });
 });
+
+//CRUD medlem helpers
 
 // Funktion til at vise dialogboksen for oprettelse af medlem
 function showCreateMedlemDialog() {
@@ -68,6 +71,7 @@ async function createMedlemClicked(event) {
   showMedlemCreated(medlem)
 }
 
+// viser nyeste created medlem på #opretmedlem
 function showMedlemCreated(item) {
 
 console.log(item)
@@ -143,38 +147,34 @@ function updateMedlemClicked(event) {
 }
 
 async function updateMedlemTable(medlemmer) {
-  medlemmer = await getData(); // get posts from rest endpoint and save in variable
-  showData(medlemmer); // show all posts (append to the DOM) with posts as argument
+  medlemmer = await getData();
+  showData(medlemmer); 
 }
 
 // Funktion til at annullere sletning af medlem
 function deleteCancelClicked() {
-  document.querySelector("#dialog-delete-medlem").close(); // luk dialogboksen
+  document.querySelector("#dialog-delete-medlem").close();
 }
 
-async function medlemInputOptions () {
+// CRUD resultat helpers
 
-  const medlemmer = await getData();
+async function createResultatClicked(event) {
+  const form = event.target;
 
-  // Get the select element
-  const selectElement = document.querySelector('#medlem-assign-resultat');
+  const hold = form.hold.value;
+  const disciplin = form.disciplin.value;
+  const svømmerOption = form.svømmer.options[form.svømmer.selectedIndex];
+  const svømmerId = svømmerOption.value;
+  const aktivitetstype = form.aktivitetstype.value;
+  const stævne = capitalizeFirstLetter(form.stævne.value.trim());
+  const dato = form.resultat-dato.value;
+  const placering = form.placering.value;
+  const tid = form.tid.value
 
-  // Create the default option
-  const defaultOption = document.createElement('option');
-  defaultOption.disabled = true;
-  defaultOption.selected = true;
-  defaultOption.textContent = '-- vælg svømmer --';
-  selectElement.appendChild(defaultOption);
+  const resultat = await createResultat(hold, disciplin, svømmerId, aktivitetstype, stævne, dato, placering, tid);
+  form.reset();
 
-  // Iterate over each member document and create options
-  medlemmer.forEach(function(medlem) {
-  var option = document.createElement('option');
-  option.value = medlem.id;
-  option.textContent = medlem.fornavn + ' ' + medlem.efternavn;
-  selectElement.appendChild(option);
-  });
-  console.log("medlemmer options")
-
+  // showResultCreated();
 }
 
 export {
@@ -183,6 +183,7 @@ export {
   createMedlemClicked,
   updateMedlemClicked,
   updateMedlemTable,
+  createResultatClicked,
   nextPage,
   previousPage,
   deleteClicked,
