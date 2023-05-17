@@ -1,9 +1,10 @@
 import { getData } from './rest-services.js';
 
-export async function generateKontingentTable() {
+export async function generateKontingentTable(filteredData = null) {
   console.log("generateKontingentTable called"); // 1
-  const medlemmerData = await getData();
+  const medlemmerData = filteredData || await getData();
   console.log("getData finished", medlemmerData); // 2
+
   let tableHTML = `<table>
         <thead>
             <tr>
@@ -19,18 +20,18 @@ export async function generateKontingentTable() {
   let totalKontingent = 0;
 
   for (let id in medlemmerData) {
-      let medlem = medlemmerData[id];
-      console.log("Processing member", medlem); // 3
-      tableHTML += `
-          <tr>
-              <td>${medlem.fornavn}</td>
-              <td>${medlem.efternavn}</td>
-              <td>${medlem.aldersgruppe}</td>
-              <td>${medlem.aktivitetsstatus}</td>
-              <td>${medlem.kontingent}</td>
-          </tr>
-      `;
-      totalKontingent += medlem.kontingent;
+    let medlem = medlemmerData[id];
+    console.log("Processing member", medlem); // 3
+    tableHTML += `
+        <tr>
+            <td>${medlem.fornavn}</td>
+            <td>${medlem.efternavn}</td>
+            <td>${medlem.aldersgruppe}</td>
+            <td>${medlem.aktivitetsstatus}</td>
+            <td>${medlem.kontingent}</td>
+        </tr>
+    `;
+    totalKontingent += medlem.kontingent;
   }
 
   console.log("All members processed"); // 4
@@ -44,22 +45,11 @@ export async function generateKontingentTable() {
   </table>`;
 
   console.log("Table generated", tableHTML); // 5
-  return tableHTML;
 
-    // Add this code at the end of the function
   const tableContainer = document.getElementById('kontingentTableContainer');
   tableContainer.innerHTML = tableHTML;
-
-  const filterAldersgruppe = document.getElementById('filter-aldersgruppe');
-  filterAldersgruppe.addEventListener('change', async () => {
-    await applyFilters();
-  });
-
-  const filterAktivitetsstatus = document.getElementById('filter-aktivitetsstatus');
-  filterAktivitetsstatus.addEventListener('change', async () => {
-    await applyFilters();
-  });
 }
+
 async function applyFilters() {
   const medlemmerData = await getData();
   const filterAldersgruppeValue = document.getElementById('filter-aldersgruppe').value;
@@ -77,7 +67,18 @@ async function applyFilters() {
     return acc;
   }, {});
 
-  const tableHTML = await generateTable(filteredDataAsObject);
-  const tableContainer = document.getElementById('kontingentTableContainer');
-  tableContainer.innerHTML = tableHTML;
+  await generateKontingentTable(filteredDataAsObject);
 }
+
+// Initial table generation on page load
+generateKontingentTable();
+
+const filterAldersgruppe = document.getElementById('filter-aldersgruppe');
+filterAldersgruppe.addEventListener('change', async () => {
+  await applyFilters();
+});
+
+const filterAktivitetsstatus = document.getElementById('filter-aktivitetsstatus');
+filterAktivitetsstatus.addEventListener('change', async () => {
+  await applyFilters();
+});
