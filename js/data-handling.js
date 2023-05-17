@@ -94,8 +94,10 @@ function calcAldersgruppe(fødselsdatoinput) {
   let category;
   if (age < 18) {
     return "ungdom";
+  } else if (age >= 60) {
+    return "over 60";
   } else {
-    return "senior";
+    return "senior"
   }
 }
 
