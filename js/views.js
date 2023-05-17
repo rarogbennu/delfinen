@@ -18,13 +18,14 @@ function changeView() {
   setActiveLink(hashLink);
 
   if (hashLink === "#medlemmer") {
+    console.log("#medlemmer")
     showPaginationButtons();
   }
   else if (hashLink === "#opret-medlem") {
     console.log("#opret-medlem")
   }
-  else if (hashLink === "#resultat") {
-    console.log("#resultat")
+  else if (hashLink === "#resultater") {
+    console.log("#resultater")
   }
   else if (hashLink === "#kontingent") {
     console.log("#kontingent")
