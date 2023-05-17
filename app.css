@@ -232,11 +232,6 @@ button.delete {
 
 /* resultater */
 
-#resultat-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-
 /* kontingent */
 
 table {

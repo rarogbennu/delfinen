@@ -31,12 +31,13 @@ function initApp() {
     document.querySelector("#form-update-medlem").addEventListener("submit", updateMedlemClicked);
     document.querySelector("#form-delete-medlem").addEventListener("submit", deleteMedlemClicked);
     document.querySelector("#form-delete-medlem .btn-cancel").addEventListener("click", deleteCancelClicked);
+    document.querySelector("#btn-create-resultat").addEventListener("click", showCreateResultatDialog);
     document.querySelector("#form-create-resultat").addEventListener("submit", createResultatClicked);
     
     ////
-    initAuth();
-    document.querySelector("#form-signin").addEventListener("submit", signIn);
-    document.querySelector("#btn-sign-out").addEventListener("click", signOutUser);
+    // initAuth();
+    // document.querySelector("#form-signin").addEventListener("submit", signIn);
+    // document.querySelector("#btn-sign-out").addEventListener("click", signOutUser);
   }
 
 document.getElementById("searchField").addEventListener("keyup", searchData);
@@ -165,6 +166,10 @@ function deleteCancelClicked() {
 
 // CRUD resultat helpers
 
+function showCreateResultatDialog() {
+  document.querySelector("#dialog-create-resultat").showModal();
+}
+
 async function createResultatClicked(event) {
   console.log("opret resultat clicked")
   event.preventDefault();
@@ -173,7 +178,7 @@ async function createResultatClicked(event) {
   const hold = form.hold.value;
   const disciplin = form.disciplin.value;
   const svømmerOption = form["medlem-assign-resultat"].value;
-  const svømmerId = svømmerOption.value;
+  const svømmerId = svømmerOption;
   const aktivitetstype = form.aktivitetstype.value;
   const stævne = capitalizeFirstLetter(form.stævne.value.trim());
   const dato = form["resultat-dato"].value;
