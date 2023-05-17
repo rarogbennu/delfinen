@@ -4,8 +4,6 @@ function initViews() {
     changeView();
 }
 
-import { generateKontingentTable } from './kontingent.js'; // Tilføj denne linje øverst i filen
-
 function changeView() {
   let hashLink = "#home";
 
@@ -19,20 +17,10 @@ function changeView() {
   document.querySelector(hashLink).classList.add("active");
   setActiveLink(hashLink);
 
-// set if/else op til at kalde side specifikke funktioner, så de ikke alle sammen bliver kaldt fra initApp!
   if (hashLink === "#medlemmer") {
     showPaginationButtons();
-  } 
+  }
 }
-
-  // Tilføj dette
-//   if (hashLink === "#kontingent") {
-//     generateKontingentTable().then(tableHTML => {
-//       const kontingentSection = document.querySelector('#kontingent'); // Erstat med den korrekte selector
-//       kontingentSection.innerHTML = tableHTML;
-//     }).catch(error => console.error("Failed to generate table", error));
-// }
-
 
 
 function hidePaginationButtons() {
