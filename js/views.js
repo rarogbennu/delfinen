@@ -20,6 +20,15 @@ function changeView() {
   if (hashLink === "#medlemmer") {
     showPaginationButtons();
   }
+  else if (hashLink === "#opret-medlem") {
+    console.log("#opret-medlem")
+  }
+  else if (hashLink === "#resultat") {
+    console.log("#resultat")
+  }
+  else if (hashLink === "#kontingent") {
+    console.log("#kontingent")
+  }
 }
 
 

@@ -1,9 +1,7 @@
 import { getData } from './rest-services.js';
 
 export async function generateKontingentTable(filteredData = null) {
-  console.log("generateKontingentTable called"); // 1
   const medlemmerData = filteredData || await getData();
-  console.log("getData finished", medlemmerData); // 2
 
   let tableHTML = `<table>
         <thead>
@@ -21,7 +19,6 @@ export async function generateKontingentTable(filteredData = null) {
 
   for (let id in medlemmerData) {
     let medlem = medlemmerData[id];
-    console.log("Processing member", medlem); // 3
     tableHTML += `
         <tr>
             <td>${medlem.fornavn}</td>
@@ -34,7 +31,6 @@ export async function generateKontingentTable(filteredData = null) {
     totalKontingent += medlem.kontingent;
   }
 
-  console.log("All members processed"); // 4
   tableHTML += `</tbody>
       <tfoot>
           <tr>
@@ -43,8 +39,6 @@ export async function generateKontingentTable(filteredData = null) {
           </tr>
       </tfoot>
   </table>`;
-
-  console.log("Table generated", tableHTML); // 5
 
   const tableContainer = document.getElementById('kontingentTableContainer');
   tableContainer.innerHTML = tableHTML;
