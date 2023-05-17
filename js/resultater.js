@@ -1,4 +1,4 @@
-import {getData} from "./rest-services.js";
+import {getData, getResultatData} from "./rest-services.js";
 
 
 // get medlemmer og tilføj til "svømmer" option 
@@ -30,4 +30,21 @@ function enableStævneInput() {
     })
 }
 
-export {medlemOptions, enableStævneInput}
+async function generateResultatTable() {
+    const resultatData = await getResultatData();
+    const medlemData = await getData();
+  
+    resultatData.forEach(resultat => {
+      const medlem = medlemData.find(medlem => medlem.id === resultat.svømmerId);
+  
+      if (medlem) {
+        console.log('Resultat:', resultat);
+        console.log('Corresponding Medlem:', medlem);
+  
+        // Perform DOM manipulation here to display the results
+      }
+    });
+  }
+
+export {medlemOptions, enableStævneInput, generateResultatTable}
+

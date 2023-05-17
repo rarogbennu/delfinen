@@ -3,7 +3,7 @@ import {searchData, capitalizeFirstLetter} from "./helpers.js"
 import {initViews} from "./views.js"
 import { sortData, showData, previousPage, nextPage, calcKontingent, calcAge, calcAldersgruppe} from "./data-handling.js";
 import { generateKontingentTable } from "./kontingent.js";
-import {medlemOptions, enableStævneInput} from "./resultater.js";
+import {medlemOptions, enableStævneInput, generateResultatTable} from "./resultater.js";
 import { initAuth, signIn, signOutUser } from "./simple-auth.js";
 
 const pageSize = 1500;
@@ -23,7 +23,7 @@ function initApp() {
     generateKontingentTable();
     medlemOptions();
     enableStævneInput();
-   
+    generateResultatTable();
     
     document.querySelector("#btn-create-medlem").addEventListener("click", showCreateMedlemDialog);
     document.querySelector("#form-create-medlem").addEventListener("submit", createMedlemClicked);
