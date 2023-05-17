@@ -159,15 +159,17 @@ function deleteCancelClicked() {
 // CRUD resultat helpers
 
 async function createResultatClicked(event) {
+  console.log("opret resultat clicked")
+  event.preventDefault();
   const form = event.target;
 
   const hold = form.hold.value;
   const disciplin = form.disciplin.value;
-  const svømmerOption = form.svømmer.options[form.svømmer.selectedIndex];
+  const svømmerOption = form["medlem-assign-resultat"].value;
   const svømmerId = svømmerOption.value;
   const aktivitetstype = form.aktivitetstype.value;
   const stævne = capitalizeFirstLetter(form.stævne.value.trim());
-  const dato = form.resultat-dato.value;
+  const dato = form["resultat-dato"].value;
   const placering = form.placering.value;
   const tid = form.tid.value
 

@@ -19,7 +19,6 @@ async function medlemOptions () {
     option.textContent = medlem.fornavn + " " + medlem.efternavn;
     selectElement.appendChild(option);
     });
-    console.log("medlemmer options")
 }
 
 function enableStævneInput() {
