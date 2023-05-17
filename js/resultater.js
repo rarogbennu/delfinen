@@ -34,16 +34,44 @@ async function generateResultatTable() {
     const resultatData = await getResultatData();
     const medlemData = await getData();
   
-    resultatData.forEach(resultat => {
-      const medlem = medlemData.find(medlem => medlem.id === resultat.svømmerId);
-  
-      if (medlem) {
-        console.log('Resultat:', resultat);
-        console.log('Corresponding Medlem:', medlem);
-  
-        // Perform DOM manipulation here to display the results
-      }
-    });
+    let tableHTML = `<table>
+        <thead>
+            <tr>
+                <th>Navn</th>
+                <th>Aktivitetstype</th>
+                <th>Dato</th>
+                <th>Disciplin</th>
+                <th>Hold</th>
+                <th>Placering</th>
+                <th>Stævne</th>
+                <th>Tid</th>
+            </tr>
+        </thead>
+        <tbody>`;
+
+  for (let id in resultatData) {
+    let result = resultatData[id];
+    const medlem = medlemData.find(medlem => medlem.id === result.svømmerId);
+
+    tableHTML += `
+        <tr>
+            <td>${medlem.fornavn} ${medlem.efternavn}</td>
+            <td>${result.aktivitetstype}</td>
+            <td>${result.dato}</td>
+            <td>${result.disciplin}</td>
+            <td>${result.hold}</td>
+            <td>${result.placering}</td>
+            <td>${result.stævne}</td>
+            <td>${result.tid}</td>
+        </tr>
+    `;
+  }
+
+  tableHTML += `</tbody>
+  </table>`;
+
+  const tableContainer = document.getElementById('resultsTableContainer');
+  tableContainer.innerHTML = tableHTML;
   }
 
 export {medlemOptions, enableStævneInput, generateResultatTable}
