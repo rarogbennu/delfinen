@@ -249,3 +249,9 @@ th, td {
 tfoot {
     font-weight: bold; /* Gør total-beløbet fedt */
 }
+
+#restance-button{
+padding: 7px;
+text-align: center;
+border: 1px solid #000;
+}
