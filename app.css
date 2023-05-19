@@ -264,3 +264,12 @@ border: 1px solid #000;
 #signup {
     text-align: center;
 }
+
+/* CSS */
+#btn-sign-out {
+    display: none;
+}
+
+#btn-sign-out.show {
+    display: block;
+}

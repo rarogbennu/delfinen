@@ -34,10 +34,10 @@ function initApp() {
     document.querySelector("#btn-create-resultat").addEventListener("click", showCreateResultatDialog);
     document.querySelector("#form-create-resultat").addEventListener("submit", createResultatClicked);
     
-    ////
-    // initAuth();
-    // document.querySelector("#form-signin").addEventListener("submit", signIn);
-    // document.querySelector("#btn-sign-out").addEventListener("click", signOutUser);
+ 
+     initAuth();
+    document.querySelector("#form-signin").addEventListener("submit", signIn);
+    document.querySelector("#btn-sign-out").addEventListener("click", signOutUser);
   }
 
 document.getElementById("searchField").addEventListener("keyup", searchData);
