@@ -61,14 +61,14 @@ function displayUserInfo() {
 
 let users = [
     {
-        mail: "formand@mail.dk", 
+        mail: "formand@mail.com", 
         password: "password1",
         role: "admin" // Kan gøre alt
     }, 
     {
         mail: "træner@mail.com", 
         password: "password2",
-        role: "editor" // Kan redigere nogle ting
+        role: "editor" // Kan redigere nogle ting. lige nu kan den også alt
     }, 
     {
         mail: "kasserer@mail.com", 

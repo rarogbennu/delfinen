@@ -273,3 +273,19 @@ border: 1px solid #000;
 #btn-sign-out.show {
     display: block;
 }
+
+#filter-placering {
+  height: 18px;
+  width: 35px;
+}
+
+#filter-stævne {
+  height: 18px;
+  width: 139px;
+}
+
+#filter-tid {
+  height: 18px;
+  width: 129px;
+}
+

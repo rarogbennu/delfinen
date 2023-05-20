@@ -30,8 +30,8 @@ function enableStævneInput() {
     })
 }
 
-async function generateResultatTable() {
-    const resultatData = await getResultatData();
+async function generateResultatTable(filteredData = null) {
+    const resultatData = filteredData || await getResultatData();
     const medlemData = await getData();
   
     let tableHTML = `<table>
@@ -73,6 +73,80 @@ async function generateResultatTable() {
   const tableContainer = document.getElementById('resultsTableContainer');
   tableContainer.innerHTML = tableHTML;
   }
+
+// Initial table generation on page load
+generateResultatTable();
+
+document.addEventListener('DOMContentLoaded', (event) => {
+  const filterAktivitetstype = document.getElementById('filter-aktivitetstype');
+  filterAktivitetstype.addEventListener('change', async () => {
+    await applyResultatFilters();
+  });
+
+  const filterDato = document.getElementById('filter-dato');
+  filterDato.addEventListener('change', async () => {
+    await applyResultatFilters();
+  });
+
+  const filterDisciplin = document.getElementById('filter-disciplin');
+  filterDisciplin.addEventListener('change', async () => {
+    await applyResultatFilters();
+  });
+
+  const filterHold = document.getElementById('filter-hold');
+  filterHold.addEventListener('change', async () => {
+    await applyResultatFilters();
+  });
+
+  const filterPlacering = document.getElementById('filter-placering');
+  filterPlacering.addEventListener('change', async () => {
+    await applyResultatFilters();
+  });
+
+  const filterStævne = document.getElementById('filter-stævne');
+  filterStævne.addEventListener('change', async () => {
+    await applyResultatFilters();
+  });
+
+  const filterTid = document.getElementById('filter-tid');
+  filterTid.addEventListener('change', async () => {
+    await applyResultatFilters();
+  });
+});
+
+async function applyResultatFilters() {
+  const resultatData = await getResultatData();
+
+  const filterAktivitetstypeValue = document.getElementById('filter-aktivitetstype').value;
+  const filterDatoValue = document.getElementById('filter-dato').value;
+  const filterDisciplinValue = document.getElementById('filter-disciplin').value;
+  const filterHoldValue = document.getElementById('filter-hold').value;
+  const filterPlaceringValue = document.getElementById('filter-placering').value;
+  const filterStævneValue = document.getElementById('filter-stævne').value;
+  const filterTidValue = document.getElementById('filter-tid').value;
+
+  const filteredData = Object.values(resultatData).filter((resultat) => {
+    const aktivitetstypeMatch = !filterAktivitetstypeValue || resultat.aktivitetstype === filterAktivitetstypeValue;
+    const datoMatch = !filterDatoValue || resultat.dato === filterDatoValue;
+    const disciplinMatch = !filterDisciplinValue || resultat.disciplin === filterDisciplinValue;
+    const holdMatch = !filterHoldValue || resultat.hold === filterHoldValue;
+    const placeringMatch = !filterPlaceringValue || resultat.placering === filterPlaceringValue;
+    const stævneMatch = !filterStævneValue || resultat.stævne === filterStævneValue;
+    const tidMatch = !filterTidValue || resultat.tid === filterTidValue;
+
+    return aktivitetstypeMatch && datoMatch && disciplinMatch && holdMatch && placeringMatch && stævneMatch && tidMatch;
+  });
+
+  const filteredDataAsObject = filteredData.reduce((acc, resultat) => {
+    acc[resultat.id] = resultat;
+    return acc;
+  }, {});
+
+  await generateResultatTable(filteredDataAsObject);
+}
+
+
+
 
 export {medlemOptions, enableStævneInput, generateResultatTable}
 
