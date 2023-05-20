@@ -1,5 +1,7 @@
 import {getData, getResultatData} from "./rest-services.js";
 
+let resultatData = {}; // Define a variable to store the result data globally
+let medlemData = [];
 
 // get medlemmer og tilføj til "svømmer" option 
 async function medlemOptions () {
@@ -31,87 +33,163 @@ function enableStævneInput() {
 }
 
 async function generateResultatTable(filteredData = null) {
-    const resultatData = filteredData || await getResultatData();
-    const medlemData = await getData();
-  
-    let tableHTML = `<table>
-        <thead>
-            <tr>
-                <th>Navn</th>
-                <th>Aktivitetstype</th>
-                <th>Dato</th>
-                <th>Disciplin</th>
-                <th>Hold</th>
-                <th>Placering</th>
-                <th>Stævne</th>
-                <th>Tid</th>
-            </tr>
-        </thead>
-        <tbody>`;
+  resultatData = filteredData || (await getResultatData());
+  const medlemData = await getData();
+
+  let tableHTML = `
+    <table>
+      <thead>
+        <tr>
+          <th>Navn
+            <button class="sort-btn" data-sort="navn" data-order="asc">&#9650;</button>
+            <button class="sort-btn" data-sort="navn" data-order="desc">&#9660;</button>
+          </th>
+          <th>Aktivitetstype
+            <button class="sort-btn" data-sort="aktivitetstype" data-order="asc">&#9650;</button>
+            <button class="sort-btn" data-sort="aktivitetstype" data-order="desc">&#9660;</button>
+          </th>
+          <th>Dato
+            <button class="sort-btn" data-sort="dato" data-order="asc">&#9650;</button>
+            <button class="sort-btn" data-sort="dato" data-order="desc">&#9660;</button>
+          </th>
+          <th>Disciplin
+            <button class="sort-btn" data-sort="disciplin" data-order="asc">&#9650;</button>
+            <button class="sort-btn" data-sort="disciplin" data-order="desc">&#9660;</button>
+          </th>
+          <th>Hold
+            <button class="sort-btn" data-sort="hold" data-order="asc">&#9650;</button>
+            <button class="sort-btn" data-sort="hold" data-order="desc">&#9660;</button>
+          </th>
+          <th>Placering
+            <button class="sort-btn" data-sort="placering" data-order="asc">&#9650;</button>
+            <button class="sort-btn" data-sort="placering" data-order="desc">&#9660;</button>
+          </th>
+          <th>Stævne
+            <button class="sort-btn" data-sort="stævne" data-order="asc">&#9650;</button>
+            <button class="sort-btn" data-sort="stævne" data-order="desc">&#9660;</button>
+          </th>
+          <th>Tid
+            <button class="sort-btn" data-sort="tid" data-order="asc">&#9650;</button>
+            <button class="sort-btn" data-sort="tid" data-order="desc">&#9660;</button>
+          </th>
+        </tr>
+      </thead>
+      <tbody>`;
 
   for (let id in resultatData) {
     let result = resultatData[id];
-    const medlem = medlemData.find(medlem => medlem.id === result.svømmerId);
+    const medlem = medlemData.find((medlem) => medlem.id === result.svømmerId);
 
     tableHTML += `
-        <tr>
-            <td>${medlem.fornavn} ${medlem.efternavn}</td>
-            <td>${result.aktivitetstype}</td>
-            <td>${result.dato}</td>
-            <td>${result.disciplin}</td>
-            <td>${result.hold}</td>
-            <td>${result.placering}</td>
-            <td>${result.stævne}</td>
-            <td>${result.tid}</td>
-        </tr>
+      <tr>
+        <td>${medlem.fornavn} ${medlem.efternavn}</td>
+        <td>${result.aktivitetstype}</td>
+        <td>${result.dato}</td>
+        <td>${result.disciplin}</td>
+        <td>${result.hold}</td>
+        <td>${result.placering}</td>
+        <td>${result.stævne}</td>
+        <td>${result.tid}</td>
+      </tr>
     `;
   }
 
   tableHTML += `</tbody>
-  </table>`;
+    </table>`;
 
   const tableContainer = document.getElementById('resultsTableContainer');
   tableContainer.innerHTML = tableHTML;
-  }
 
-// Initial table generation on page load
-generateResultatTable();
-
-document.addEventListener('DOMContentLoaded', (event) => {
-  const filterAktivitetstype = document.getElementById('filter-aktivitetstype');
-  filterAktivitetstype.addEventListener('change', async () => {
-    await applyResultatFilters();
+  const sortButtons = document.querySelectorAll('.sort-btn');
+  sortButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const sortAttribute = button.getAttribute('data-sort');
+      const sortOrder = button.getAttribute('data-order');
+      applyResultatSort(sortAttribute, sortOrder);
+    });
   });
+}
+
+function applyResultatSort(sortAttribute, sortOrder) {
+  const sortButtons = document.querySelectorAll('.sort-btn');
+  sortButtons.forEach((button) => {
+    button.classList.remove('active');
+  });
+
+  const sortButton = document.querySelector(`.sort-btn[data-sort="${sortAttribute}"][data-order="${sortOrder}"]`);
+  sortButton.classList.add('active');
+
+  const sortDirection = sortOrder === 'asc' ? 1 : -1;
+
+  const sortData = async () => {
+    medlemData = await getData(); // Fetch member data before sorting
+
+    const sortedData = Object.values(resultatData).sort((a, b) => {
+      let valueA, valueB;
+
+      if (sortAttribute === 'navn') {
+        const medlemA = medlemData.find((medlem) => medlem.id === a.svømmerId);
+        const medlemB = medlemData.find((medlem) => medlem.id === b.svømmerId);
+        valueA = `${medlemA.fornavn} ${medlemA.efternavn}`;
+        valueB = `${medlemB.fornavn} ${medlemB.efternavn}`;
+      } else if (sortAttribute === 'placering') {
+        valueA = parseInt(a[sortAttribute], 10);
+        valueB = parseInt(b[sortAttribute], 10);
+      } else {
+        valueA = a[sortAttribute];
+        valueB = b[sortAttribute];
+      }
+
+      if (valueA < valueB) {
+        return -1 * sortDirection;
+      } else if (valueA > valueB) {
+        return 1 * sortDirection;
+      } else {
+        return 0;
+      }
+    });
+
+    generateResultatTable(sortedData);
+  };
+
+  sortData();
+}
+
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const sortButtons = document.querySelectorAll('.sort-btn');
+  sortButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const sortAttribute = button.getAttribute('data-sort');
+      const sortOrder = button.getAttribute('data-order');
+      applyResultatSort(sortAttribute, sortOrder);
+    });
+  });
+
+  // Add event listeners to filter elements
+  const filterAktivitetstype = document.getElementById('filter-aktivitetstype');
+  filterAktivitetstype.addEventListener('change', applyResultatFilters);
 
   const filterDato = document.getElementById('filter-dato');
-  filterDato.addEventListener('change', async () => {
-    await applyResultatFilters();
-  });
+  filterDato.addEventListener('input', applyResultatFilters);
 
   const filterDisciplin = document.getElementById('filter-disciplin');
-  filterDisciplin.addEventListener('change', async () => {
-    await applyResultatFilters();
-  });
+  filterDisciplin.addEventListener('change', applyResultatFilters);
 
   const filterHold = document.getElementById('filter-hold');
-  filterHold.addEventListener('change', async () => {
-    await applyResultatFilters();
-  });
+  filterHold.addEventListener('change', applyResultatFilters);
 
   const filterPlacering = document.getElementById('filter-placering');
-  filterPlacering.addEventListener('change', async () => {
-    await applyResultatFilters();
-  });
+  filterPlacering.addEventListener('input', applyResultatFilters);
 
   const filterStævne = document.getElementById('filter-stævne');
-  filterStævne.addEventListener('change', async () => {
-    await applyResultatFilters();
-  });
+  filterStævne.addEventListener('input', applyResultatFilters);
 
   const filterTid = document.getElementById('filter-tid');
-  filterTid.addEventListener('change', async () => {
-    await applyResultatFilters();
-  });
+  filterTid.addEventListener('input', applyResultatFilters);
+
+  // Initial table generation on page load
+  await generateResultatTable();
 });
 
 async function applyResultatFilters() {
@@ -134,7 +212,15 @@ async function applyResultatFilters() {
     const stævneMatch = !filterStævneValue || resultat.stævne === filterStævneValue;
     const tidMatch = !filterTidValue || resultat.tid === filterTidValue;
 
-    return aktivitetstypeMatch && datoMatch && disciplinMatch && holdMatch && placeringMatch && stævneMatch && tidMatch;
+    return (
+      aktivitetstypeMatch &&
+      datoMatch &&
+      disciplinMatch &&
+      holdMatch &&
+      placeringMatch &&
+      stævneMatch &&
+      tidMatch
+    );
   });
 
   const filteredDataAsObject = filteredData.reduce((acc, resultat) => {
@@ -144,8 +230,6 @@ async function applyResultatFilters() {
 
   await generateResultatTable(filteredDataAsObject);
 }
-
-
 
 
 export {medlemOptions, enableStævneInput, generateResultatTable}
