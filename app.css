@@ -255,7 +255,7 @@ text-align: center;
 border: 1px solid #000;
 }
 
-/* ---------- login styling ---------- */
+/* ---------- login/ud styling ---------- */
 #signin-message {
     color: var(--text-color-danger);
 }
@@ -265,7 +265,7 @@ border: 1px solid #000;
     text-align: center;
 }
 
-/* CSS */
+
 #btn-sign-out {
     display: none;
 }
@@ -274,6 +274,8 @@ border: 1px solid #000;
     display: block;
 }
 
+/* Filtrering */
+
 #filter-placering {
   height: 18px;
   width: 35px;
@@ -281,11 +283,15 @@ border: 1px solid #000;
 
 #filter-stævne {
   height: 18px;
-  width: 139px;
+  width: 125px;
 }
 
 #filter-tid {
   height: 18px;
-  width: 129px;
+  width: 80px;
 }
 
+#resultat-filters {
+  margin-left: 210px;
+  padding: 5px;
+}
