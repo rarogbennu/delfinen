@@ -1,6 +1,6 @@
 import {getData, getResultatData} from "./rest-services.js";
 
-let resultatData = {}; // Define a variable to store the result data globally
+let resultatData = {}; 
 let medlemData = [];
 
 // get medlemmer og tilføj til "svømmer" option 

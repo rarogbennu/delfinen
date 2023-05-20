@@ -5,7 +5,10 @@ body {
   font-family: "Flama medium",sans-serif;
     color:black;
     background-color: rgb(166, 213, 243);
-    border: 10px;
+    border: 0px;
+    margin: 0;
+    margin-top: 8px;
+
     /* height: 100%; */
 }
 
@@ -42,6 +45,9 @@ nav a:hover {
     background-color: rgb(255, 255, 255);
     color: rgb(0, 0, 0);
     border-radius: 25px;
+    margin-left: 5px;
+    margin-right: 5px;
+    
 }
 
 /* color of active link */
@@ -49,10 +55,14 @@ nav a.active {
     background-color: rgb(0, 0, 0);
     color: rgb(241, 241, 241);
     border-radius: 25px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 nav.hide {
     display: none;
+     margin-left: 5px;
+    margin-right: 5px;
 }
 
 /* show content class */
@@ -74,12 +84,16 @@ nav.hide {
 .show-content.active {
     display: block;
     height: auto;
+    padding: 0;
+    margin: 0;
+    border: 0;
 }
 
 .container {
   max-width: 960px;
   margin: 0 auto;
   padding: 20px;
+  margin-top: 40px;
 }
 
 input#searchField {
@@ -89,13 +103,26 @@ input#searchField {
   box-sizing: border-box;
 }
 
+.data-row:nth-child(even) {
+  background-color: #ffffff; /* Set the background color for even rows */
+}
+
+.data-row:nth-child(odd) {
+  background-color: transparent; /* Set the background color for odd rows */
+}
+
+/* Rest of the styles */
 .data-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #ddd;
   padding: 8px 0;
+  margin: 8px;
+  border: 0;
 }
+
+
 
 .data-cell {
   flex: 1;
@@ -133,6 +160,7 @@ button.delete {
     padding-bottom: 15px;
     padding-left: 44px;
     flex-direction: row;
+    background-color: rgba(255, 255, 255, 0.484);
 }
 
 /* Individual header cells */
@@ -206,33 +234,90 @@ button.delete {
 #home {
   justify-content: center;
   align-items: center;
-  height: 100vh;  /* Adjust this as needed */
-  z-index: -1;
+  height: 100%;  /* Adjust this as needed */
+  width: 100%;
 }
 
 .logo {
   position: absolute;
-  top: 10%;
-  left: 50%;
+  top: 20%;
+  left: 25%;
   transform: translate(-50%, -0%);
-  width: 750px; /* Adjust as needed */
-  height: 750px; /* Adjust as needed */
-  z-index: -21;
+  width: 650px; /* Adjust as needed */
+  height: 650px; /* Adjust as needed */
+  z-index: 1;
 }
+
+#opret-medlem {
+  margin: 8px;
+  border: 8px;
+  text-align: center;
+  margin-top: 100px;
+}
+
+#btn-create-resultat, #restance-button {
+  border-radius: 10px;
+  padding: 6px;
+}
+
 
 .home-content {
   text-align: center;
   position: relative;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.484); /* semi-transparent white, adjust as needed */
-  color: #c33b3b;
-  z-index: -1;
-  border-radius: 15px; /* rounded corners */
+  padding: 75px;
+  background: rgba(255, 255, 255, 0.484);
+  color: #000000;
+  margin-top: 180px;
+  padding-left: 883px;
+  top: 10%;
+}
+
+.club-name {
+  font-size: 50px;
+  margin-left: -404px; /* Adjust the value as needed */
+}
+.welcome {
+  margin-left: -455px;
+  font-size: 22px;
+}
+
+.subtext {
+  margin-left: -455px;
+  font-size: 20px;
 }
 
 /* resultater */
 
+#resultater {
+  margin: 8px;
+  border: 8px;
+}
+
+#resultat-filters {
+  margin-left: 355px;
+  padding: 10px;
+}
+
+
+tr:nth-child(even) {
+  background-color: #ffffff; /* Set the background color for even rows */
+}
+
+tr:nth-child(odd) {
+  background-color: transparent; /* Set the background color for odd rows */
+}
+
 /* kontingent */
+
+#kontingent {
+  margin: 8px;
+  border: 8px;
+}
+
+#restance-button {
+  border: 8px;
+  margin: 8px;
+}
 
 table {
     width: 100%; /* Gør tabellen fuld bredde */
@@ -242,8 +327,12 @@ table {
 th, td {
     padding: 10px; /* Tilføj lidt plads omkring teksten i cellerne */
     text-align: center; /* Centrer teksten horisontalt */
-    border: 1px solid #000; /* Tilføj en grænse omkring cellerne */
-}
+    border: 1px solid #000; /* Tilføj en grænse omkring cellerne */  
+  }
+
+  th {
+    background-color: rgba(255, 255, 255, 0.484);
+  }
 
 tfoot {
     font-weight: bold; /* Gør total-beløbet fedt */
@@ -268,6 +357,9 @@ border: 1px solid #000;
 
 #btn-sign-out {
     display: none;
+    border-radius: 10px;
+    padding: 8px;
+    cursor: pointer;
 }
 
 #btn-sign-out.show {
@@ -289,9 +381,4 @@ border: 1px solid #000;
 #filter-tid {
   height: 18px;
   width: 80px;
-}
-
-#resultat-filters {
-  margin-left: 210px;
-  padding: 5px;
 }

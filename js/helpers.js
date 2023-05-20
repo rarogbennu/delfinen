@@ -76,7 +76,7 @@ function createPageButtons(data) {
       window.currentPage = i;
       showData(data, window.currentPage);
     });
-    pageButtonContainer.appendChild(pageButton);  // Tilføj knappen til beholderen
+    //pageButtonContainer.appendChild(pageButton);  // Tilføj knappen til beholderen
   }
 
   // Tilføj beholderen til medlemmer-sektionen
