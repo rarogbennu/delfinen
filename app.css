@@ -1,3 +1,10 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
 
 /* body */
 
@@ -7,9 +14,15 @@ body {
     background-color: rgb(166, 213, 243);
     border: 0px;
     margin: 0;
-    margin-top: 8px;
-
+    margin-top: 0px;
+    display: flex;
+    flex-direction: column;
     /* height: 100%; */
+}
+
+main {
+  flex: 1 0 auto; /* This makes the main content to take all the available space. */
+  min-height: 60vh; /* You can adjust this value as needed */
 }
 
 /* NAVIGATION */
@@ -20,7 +33,9 @@ nav {
     position: center;
     text-align: center;
     border-radius: 25px;
-}
+    margin-top: 8px;
+  
+  }
 
 /* columns for nav-bar */
 @media (min-width: 700px) {
@@ -69,7 +84,6 @@ nav.hide {
 .show-content {
     display: none;
     padding: 286px 2em;
-    height: 0;
     overflow: hidden;
 }
 
@@ -122,7 +136,16 @@ input#searchField {
   border: 0;
 }
 
+#dataDisplay {
+  margin-bottom: 50px;
+  padding-bottom: 60px;
+  padding-left: 80px;
+  padding-right: 80px;
+}
 
+#resultsTableContainer {
+padding-right: 100px;
+}
 
 .data-cell {
   flex: 1;
@@ -148,6 +171,7 @@ button.delete {
   margin-left: 8px;
 
 }
+
 
 /* Container for the header row */
 .header-row {
@@ -258,6 +282,7 @@ button.delete {
 #btn-create-resultat, #restance-button {
   border-radius: 10px;
   padding: 6px;
+ 
 }
 
 
@@ -291,6 +316,7 @@ button.delete {
 #resultater {
   margin: 8px;
   border: 8px;
+  margin-left: 100px;
 }
 
 #resultat-filters {
@@ -312,6 +338,12 @@ tr:nth-child(odd) {
 #kontingent {
   margin: 8px;
   border: 8px;
+  margin-left: 100px;
+  margin-bottom: 100px;
+}
+
+#kontingentTableContainer {
+padding-right: 100px;
 }
 
 #restance-button {
@@ -351,7 +383,72 @@ border: 1px solid #000;
 
 #signin,
 #signup {
-    text-align: center;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+#signin form,
+#signup form {
+  width: 300px;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#signin h2,
+#signup h2 {
+  margin-bottom: 20px;
+}
+
+#signin input,
+#signup input {
+  width: 80%;
+  padding: 23px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+#togglePassword {
+  position: relative;
+  cursor: pointer;
+  margin-left: -26px; 
+}
+
+#signin button,
+#signup button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#signin button:hover,
+#signup button:hover {
+  background-color: #0056b3;
+}
+
+#signin p,
+#signup p {
+  margin-top: 20px;
+}
+
+#signin a,
+#signup a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+#signin a:hover,
+#signup a:hover {
+  text-decoration: underline;
 }
 
 
@@ -382,3 +479,21 @@ border: 1px solid #000;
   height: 18px;
   width: 80px;
 }
+
+
+/* footer */
+footer {
+  background-color: #6591de;
+  color: #fff;
+  padding: 2px;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer-content p {
+  margin: 0;
+  padding: 0;
+}
+

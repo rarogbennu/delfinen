@@ -14,6 +14,8 @@ function userIsSignedIn() {
     displayUserInfo();
     // Show the sign-out button
     document.getElementById('btn-sign-out').classList.add('show');
+    // Hide the sign-in form
+    document.querySelector('#signin').style.display = 'none';
 
     // Get user's role
     const userRole = localStorage.getItem("userRole");
@@ -47,6 +49,10 @@ function userIsSignedOut() {
     document.querySelector("nav").classList.add("hide");
     // Hide the sign-out button
     document.getElementById('btn-sign-out').classList.remove('show');
+
+     // Show the sign-in form
+    document.querySelector('#signin').style.display = 'flex';
+
 }
 
 function displayUserInfo() {
@@ -77,23 +83,44 @@ let users = [
     }
 ];
 
+// Check if user is signed in when the window loads
+window.onload = initAuth;
+
+// Toggle Password functionality
+const togglePassword = document.querySelector('#togglePassword');
+const passwordInput = document.querySelector('#password-input');
+
+togglePassword.addEventListener('click', function (e) {
+  // Toggle the type attribute
+  const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+  passwordInput.setAttribute('type', type);
+  // Toggle the eye slash icon
+  this.classList.toggle('fa-eye-slash');
+});
+
+// Sign In function
 function signIn(event) {
-    event.preventDefault();
-    const mail = event.target.mail.value;
-    const password = event.target.password.value;
+  event.preventDefault();
 
-    const user = users.find(user => user.mail === mail && user.password === password);
+  const mail = event.target.mail.value;
+  const password = event.target.password.value;
 
-    if (user) {
-        localStorage.setItem("authUser", mail);
-        localStorage.setItem("userRole", user.role);
-        document.querySelector("#signin-message").textContent = "";
+  const user = users.find(user => user.mail === mail && user.password === password);
 
-        userIsSignedIn();
-    } else {
-        document.querySelector("#signin-message").textContent = "Wrong mail and/or password";
-    }
+  if (user) {
+    localStorage.setItem('authUser', mail);
+    localStorage.setItem('userRole', user.role);
+    document.querySelector('#signin-message').textContent = '';
+
+    userIsSignedIn();
+
+    // Hide the sign-in form
+    document.querySelector('#signin').style.display = 'none';
+  } else {
+    document.querySelector('#signin-message').textContent = 'Wrong mail and/or password';
+  }
 }
+
 
 // Later, when checking if a user can perform an action or see a page
 function userCanSeePage() {
@@ -108,8 +135,13 @@ function userCanSeePage() {
 
 // On signout, make sure to also clear the user role
 function signOutUser() {
+    
     localStorage.removeItem("authUser");
     localStorage.removeItem("userRole");
+    
+    // Show the sign-in form
+    document.querySelector('#signin').style.display = 'flex'; // Or 'block' or whatever it was initially
+    
     userIsSignedOut();
 }
 
