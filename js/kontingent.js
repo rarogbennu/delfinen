@@ -64,7 +64,7 @@ async function applyFilters() {
   await generateKontingentTable(filteredDataAsObject);
 }
 
-// Initial table generation on page load
+// Generer tabel ved indlæsning af siden
 generateKontingentTable();
 
 
@@ -78,7 +78,7 @@ generateKontingentTable();
     await applyFilters();
   });
 
-  // Add event listener for the Restance button
+  // Tilføj event listener til Restance knappen
   const restanceButton = document.getElementById('restance-button');
   restanceButton.addEventListener('click', async () => {
     const medlemmerData = await getData();

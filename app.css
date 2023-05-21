@@ -18,8 +18,8 @@ body {
 }
 
 main {
-  flex: 1 0 auto; /* This makes the main content to take all the available space. */
-  min-height: 60vh; /* You can adjust this value as needed */
+  flex: 1 0 auto;
+  min-height: 60vh; 
 }
 
 /* NAVIGATION */

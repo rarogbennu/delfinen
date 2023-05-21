@@ -12,20 +12,20 @@ function userIsSignedIn() {
     location.hash = "#home";
     document.querySelector("nav").classList.remove("hide");
     displayUserInfo();
-    // Show the sign-out button
+    // Vis sign-out knappen
     document.getElementById('btn-sign-out').classList.add('show');
-    // Hide the sign-in form
+    // Skjul sign-in formularen
     document.querySelector('#signin').style.display = 'none';
 
-    // Get user's role
+    // Hent brugerens rolle
     const userRole = localStorage.getItem("userRole");
 
-    // Get the elements that should be hidden for 'viewer' role
+    // Hent elementerne der skal skjules for 'viewer' rollen
     const opretMedlemButton = document.getElementById('btn-create-medlem');
     const opretResultatButton = document.getElementById('btn-create-resultat');
 
     if (userRole === "admin" || userRole === "editor") {
-        // If the user is an admin or editor, show the buttons
+        // Hvis brugeren er admin eller editor, vis knapperne
         if (opretMedlemButton) {
             opretMedlemButton.style.display = "";
         }
@@ -33,7 +33,7 @@ function userIsSignedIn() {
             opretResultatButton.style.display = "";
         }
     } else {
-        // If the user is a viewer, hide the buttons
+        // Hvis brugeren er en viewer, skjul knapperne
         if (opretMedlemButton) {
             opretMedlemButton.style.display = "none";
         }
@@ -47,17 +47,17 @@ function userIsSignedIn() {
 function userIsSignedOut() {
     location.hash = "#signin";
     document.querySelector("nav").classList.add("hide");
-    // Hide the sign-out button
+    // Skjul sign-out knappen
     document.getElementById('btn-sign-out').classList.remove('show');
 
-     // Show the sign-in form
+     // Vis sign-in formularen
     document.querySelector('#signin').style.display = 'flex';
 
 }
 
 function displayUserInfo() {
     let userElement = document.querySelector("#profile .mail");
-    console.log(userElement); // this should log the element, or null if it doesn't exist
+    console.log(userElement); // dette skal logge elementet, eller null hvis det ikke findes
     if (userElement) {
         userElement.textContent = localStorage.getItem("authUser");
     }
@@ -83,22 +83,22 @@ let users = [
     }
 ];
 
-// Check if user is signed in when the window loads
+// Tjek om brugeren er logget ind når vinduet indlæses
 window.onload = initAuth;
 
-// Toggle Password functionality
+// Toggle Password funktionalitet
 const togglePassword = document.querySelector('#togglePassword');
 const passwordInput = document.querySelector('#password-input');
 
 togglePassword.addEventListener('click', function (e) {
-  // Toggle the type attribute
+  // Skift typen attribut
   const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
   passwordInput.setAttribute('type', type);
-  // Toggle the eye slash icon
+  // Skift ikonet til øje eller øje-slash
   this.classList.toggle('fa-eye-slash');
 });
 
-// Sign In function
+// Sign In funktion
 function signIn(event) {
   event.preventDefault();
 
@@ -114,33 +114,33 @@ function signIn(event) {
 
     userIsSignedIn();
 
-    // Hide the sign-in form
+    // Skjul sign-in formularen
     document.querySelector('#signin').style.display = 'none';
   } else {
-    document.querySelector('#signin-message').textContent = 'Wrong mail and/or password';
+    document.querySelector('#signin-message').textContent = 'Forkert mail og/eller kodeord';
   }
 }
 
 
-// Later, when checking if a user can perform an action or see a page
+// Senere, når der skal tjekkes om en bruger kan udføre en handling eller se en side
 function userCanSeePage() {
     const userRole = localStorage.getItem("userRole");
     
     if (userRole === "admin" || userRole === "editor") {
-        // The user is an admin or an editor and can see the page
+        // Brugeren er en admin eller editor og kan se siden
     } else {
-        // The user cannot see the page
+        // Brugeren kan ikke se siden
     }
 }
 
-// On signout, make sure to also clear the user role
+// Ved logud skal brugerens rolle også fjernes
 function signOutUser() {
     
     localStorage.removeItem("authUser");
     localStorage.removeItem("userRole");
     
-    // Show the sign-in form
-    document.querySelector('#signin').style.display = 'flex'; // Or 'block' or whatever it was initially
+    // Vis sign-in formularen
+    document.querySelector('#signin').style.display = 'flex'; // Eller 'block' eller hvad det var til at starte med
     
     userIsSignedOut();
 }

@@ -81,9 +81,8 @@ function createPageButtons(data) {
 
   // Tilføj beholderen til medlemmer-sektionen
   document.getElementById('medlemmer').appendChild(pageButtonContainer);
-}
-function searchData() {
-  // Reset current page
+}function searchData() {
+  // Nulstil nuværende side
   window.currentPage = 1;
   const searchField = document.getElementById("searchField");
   const searchTerm = searchField.value.toLowerCase();
@@ -93,9 +92,9 @@ function searchData() {
     .then((data) => {
       console.log("Data:", data); // Console log data
       if (data) {
-        const medlemmer = prepareData(data); // Convert data to an array using prepareData
+        const medlemmer = prepareData(data); // Konverter data til et array ved hjælp af prepareData
 
-        // Filter the data based on the search term
+        // Filtrer data baseret på søgetermen
         const filteredData = medlemmer.filter((item) => {
           return (
             item.fornavn.toLowerCase().includes(searchTerm) ||
@@ -105,21 +104,22 @@ function searchData() {
           );
         });
 
-        window.allData = filteredData; // Store the filtered data
+        window.allData = filteredData; // Gem de filtrerede data
 
-        // Create page number buttons
+        // Opret side-nummer knapper
         createPageButtons(window.allData);
 
-        // Show the first page after fetching and filtering the data
+        // Vis den første side efter at have hentet og filtreret dataene
         showData(window.allData, window.currentPage);
 
-        // If there's a sorting order and sorting field, sort the data
+        // Hvis der er en sorteringsrækkefølge og sorteringsfelt, sorter dataene
         if (window.currentSortBy && window.currentSortOrder) {
           sortData(window.currentSortBy, window.currentSortOrder);
         }
       }
     });
 }
+
 
 
   function capitalizeFirstLetter(str) {
