@@ -353,6 +353,10 @@ table {
     border-collapse: collapse; /* Fjern standard cell spacing */
 }
 
+#totalkol {
+  background-color: rgba(255, 255, 255, 0.484);
+}
+
 th, td {
     padding: 10px; /* Tilføj lidt plads omkring teksten i cellerne */
     text-align: center; /* Centrer teksten horisontalt */
@@ -480,7 +484,7 @@ border: 1px solid #000;
 
 /* footer */
 footer {
-  background-color: #6591de;
+  background-color: #000000bf;
   color: #fff;
   padding: 2px;
   text-align: center;
@@ -494,3 +498,6 @@ footer {
   padding: 0;
 }
 
+#mails{
+  color: #007bff;
+}

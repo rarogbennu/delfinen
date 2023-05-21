@@ -34,8 +34,8 @@ export async function generateKontingentTable(filteredData = null) {
   tableHTML += `</tbody>
       <tfoot>
           <tr>
-              <td colspan="4">Total</td>
-              <td>${totalKontingent}</td>
+              <td id="totalkol"colspan="4">Total</td>
+              <td id="totalkol">${totalKontingent}</td>
           </tr>
       </tfoot>
   </table>`;
