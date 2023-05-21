@@ -140,9 +140,6 @@ input#searchField {
   padding-right: 80px;
 }
 
-#resultsTableContainer {
-padding-right: 100px;
-}
 
 .data-cell {
   flex: 1;
@@ -317,10 +314,13 @@ button.delete {
 }
 
 #resultat-filters {
-  margin-left: 355px;
-  padding: 10px;
+padding: 10px;
+  padding-left: 250px;
 }
 
+#resultsTableContainer {
+padding-right: 100px;
+}
 
 tr:nth-child(even) {
   background-color: #ffffff; /* Set the background color for even rows */
