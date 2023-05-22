@@ -1,5 +1,5 @@
 import {getData, getResultatData, createMedlem, deleteMedlem, updateMedlem, createResultat} from "./rest-services.js"
-import {searchData, capitalizeFirstLetter} from "./helpers.js"
+import {searchData, capitalizeFirstLetter, closeDialog} from "./helpers.js"
 import {initViews} from "./views.js"
 import { sortData, showData, previousPage, nextPage, calcKontingent, calcAge, calcAldersgruppe} from "./data-handling.js";
 import { generateKontingentTable } from "./kontingent.js";
@@ -25,7 +25,7 @@ function initApp() {
     enableStævneInput();
     generateResultatTable();
     
-    document.querySelector("#btn-create-medlem").addEventListener("click", showCreateMedlemDialog);
+    document.querySelector("#opret-medlem-button").addEventListener("click", showCreateMedlemDialog);
     document.querySelector("#form-create-medlem").addEventListener("submit", createMedlemClicked);
     document.querySelector("#button-create-medlem").addEventListener("click", showMedlemCreated);
     document.querySelector("#form-update-medlem").addEventListener("submit", updateMedlemClicked);
@@ -77,6 +77,7 @@ async function createMedlemClicked(event) {
   form.reset();
 
   showMedlemCreated(medlem)
+  closeDialog()
 }
 
 // viser nyeste created medlem på #opretmedlem
@@ -102,6 +103,8 @@ const html = /*html*/ `
     <button id="godkend-button">Godkend</button>
 `;
 
+document.querySelector("#show-medlem-created").innerHTML = ""
+
 document.querySelector("#show-medlem-created").insertAdjacentHTML("beforeend", html);
 
 // document.querySelector("#opdater-button").addEventListener("click",  () => updateClicked(item));
@@ -124,12 +127,16 @@ function updateClicked(item) {
   updateForm.indmeldelsesdato.value = item.indmeldelsesdato;
   updateForm.setAttribute("data-id", item.id);
   document.querySelector("#dialog-update-medlem").showModal();
+
+  closeDialog()
 }
 
 function deleteClicked(item) {
   document.querySelector("#dialog-delete-medlem-navn").textContent = item.fornavn + " " + item.efternavn;
   document.querySelector("#form-delete-medlem").setAttribute("data-id", item.id);
   document.querySelector("#dialog-delete-medlem").showModal();
+
+  closeDialog()
 }
 
 
@@ -172,6 +179,8 @@ function deleteCancelClicked() {
 
 function showCreateResultatDialog() {
   document.querySelector("#dialog-create-resultat").showModal();
+
+  closeDialog();
 }
 
 async function createResultatClicked(event) {
