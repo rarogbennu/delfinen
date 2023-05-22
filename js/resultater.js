@@ -6,21 +6,25 @@ let medlemData = [];
 // get medlemmer og tilføj til "svømmer" option 
 async function medlemOptions () {
     const medlemmer = await getData();
-
+    const holdSelect = document.querySelector("#hold-create");
     const selectElement = document.querySelector("#medlem-assign-resultat");
 
-    const defaultOption = document.createElement("option");
-    defaultOption.disabled = true;
-    defaultOption.selected = true;
-    defaultOption.textContent = "-- vælg svømmer --";
-    selectElement.appendChild(defaultOption);
+    holdSelect.addEventListener("change", function () {
+      const selectedHold = holdSelect.value;
+      selectElement.innerHTML = "";
 
-    medlemmer.forEach(function(medlem) {
-    var option = document.createElement("option");
-    option.value = medlem.id;
-    option.textContent = medlem.fornavn + " " + medlem.efternavn;
-    selectElement.appendChild(option);
+      medlemmer.forEach(function(medlem) {
+
+      if (medlem.medlemstype === "konkurrence" && medlem.aldersgruppe === selectedHold){
+      const option = document.createElement("option");
+      option.value = medlem.id;
+      option.textContent = medlem.fornavn + " " + medlem.efternavn;
+      selectElement.appendChild(option);
+      }
     });
+  });
+
+    selectElement.required = true;
 }
 
 function enableStævneInput() {
