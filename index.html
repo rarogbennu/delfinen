@@ -14,7 +14,7 @@
     <nav>
         <a href="#home" class="show-link">Hjem</a>
         <a href="#medlemmer" class="show-link">Medlemmer</a>
-        <a href="#opret-medlem" class="show-link">Opret medlem</a>
+        <a href="#opret-medlem" id="opret-medlem-button" class="show-link">Opret medlem</a>
         <a href="#resultater" class="show-link">Resultater</a>
         <a href="#kontingent" class="show-link">Kontingent</a>
     </nav>
@@ -63,7 +63,7 @@
             <div id="dataDisplay"></div>
 
             <!-- dialog update medlem-->
-            <dialog id="dialog-update-medlem">
+            <dialog id="dialog-update-medlem" class="dialog">
               <h2>Opdater medlem</h2>
               <form id="form-update-medlem" method="dialog">
                 <label for="fornavn-update">Fornavn:</label>
@@ -104,7 +104,7 @@
             </dialog>
 
             <!-- dialog delete post -->
-            <dialog id="dialog-delete-medlem">
+            <dialog id="dialog-delete-medlem" class="dialog">
                 <h2>Vil du slette dette medlem?</h2>
                 <p id="dialog-delete-medlem-navn">Vil du slette: </p>
                 <form id="form-delete-medlem" method="dialog">
@@ -117,10 +117,8 @@
 
 <!--#opretmedlem section-->
         <section id="opret-medlem" class="show-content">
-            <h2>Opret medlem</h2>
-            <button id="btn-create-medlem">Opret medlem</button>
                   <!-- dialog - opret nyt medlem -->
-                    <dialog id="dialog-create-medlem">
+                    <dialog id="dialog-create-medlem" class="dialog">
                       <h2>Opret nyt medlem</h2>
                       <form id="form-create-medlem" method="dialog">
                         <label for="fornavn-create">Fornavn:</label>
@@ -171,7 +169,7 @@
         <section id="resultater" class="show-content">
             <h2>Resultater</h2>
             <button id="btn-create-resultat">Opret resultat</button>
-            <dialog id="dialog-create-resultat">
+            <dialog id="dialog-create-resultat" class="dialog">
               <div id="resultat-form">
                 <form id="form-create-resultat">
                   <label for="hold-create">Hold:</label>
@@ -190,6 +188,7 @@
                         </select>
                   <label for="medlem-assign-resultat">Svømmer:</label>
                         <select id="medlem-assign-resultat" name="medlem-assign-resultat" required>
+                          <option disabled selected value> -- vælg svømmer</option>
                         </select>
                   <label for="aktivitetstype-create">Aktivitetstype:</label>
                         <select id="aktivitetstype-create" name="aktivitetstype" required>
