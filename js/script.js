@@ -97,11 +97,15 @@ const html = /*html*/ `
     <p>Indmeldelsesdato: ${item.indmeldelsesdato}</p>
     <p>Kontingent: ${item.kontingent}</p>
     <p>Aldersgruppe: ${item.aldersgruppe}</p>
+    <button id="opdater-button">Opdater</button>
+    <button id="slet-medlem-button">Slet medlem</button>
+    <button id="godkend-button">Godkend</button>
 `;
 
-document.querySelector("#show-medlem-created").innerHTML = ""
-
 document.querySelector("#show-medlem-created").insertAdjacentHTML("beforeend", html);
+
+// document.querySelector("#opdater-button").addEventListener("click",  () => updateClicked(item));
+
 
 }
 

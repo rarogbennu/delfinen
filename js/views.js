@@ -23,6 +23,8 @@ function changeView() {
   }
   else if (hashLink === "#opret-medlem") {
     console.log("#opret-medlem")
+
+    document.querySelector("#show-medlem-created").innerHTML = ""
   }
   else if (hashLink === "#resultater") {
     console.log("#resultater")
