@@ -117,21 +117,25 @@ function calcAge(fødselsdatoinput) {
 }
 
 function calcKontingent(fødselsdato, aktivitetsstatus) {
-
-const ageObject = calcAge(fødselsdato);
-const age = ageObject.age;
+  const ageObject = calcAge(fødselsdato);
+  const age = ageObject.age;
+  let result = {};
 
   if (aktivitetsstatus === "passiv") {
-    return 500  
+    result.value = 500;
   } else if (aktivitetsstatus === "aktiv" && age < 18) {
-    return 1000
+    result.value = 1000;
   } else if (aktivitetsstatus === "aktiv" && age >= 60) {
-    return 1200
+    result.value = 1200;
   } else { 
-    return 1600
+    result.value = 1600;
   }
 
-}
+  if (Math.random() < 0.05) {
+    result.value = -result.value;
+  }
 
+  return result.value;
+}
 
 export {sortData, showData, previousPage, nextPage, calcAge, calcAldersgruppe, calcKontingent};
