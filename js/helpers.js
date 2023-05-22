@@ -126,5 +126,17 @@ function createPageButtons(data) {
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   }
 
+  function closeDialog() {
+    const dialogs = document.querySelectorAll(".dialog");
+  
+    dialogs.forEach((dialog) => {
+      dialog.addEventListener("click", (event) => {
+        if (event.target === dialog) {
+          dialog.close();
+        }
+      });
+    });
+  }
 
-export { searchData, createButtonContainer, prepareData, capitalizeFirstLetter };
+
+export { searchData, createButtonContainer, prepareData, capitalizeFirstLetter, closeDialog };
