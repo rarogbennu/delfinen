@@ -72,7 +72,7 @@ let users = [
         role: "admin" // Kan gøre alt
     }, 
     {
-        mail: "træner@mail.com", 
+        mail: "traener@mail.com", 
         password: "password2",
         role: "editor" // Kan redigere nogle ting. lige nu kan den også alt
     }, 
