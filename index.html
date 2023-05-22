@@ -73,7 +73,7 @@
                 <input type="text" id="efternavn-update" name="efternavn" placeholder="" required minlength="2">
               
                 <label for="fødselsdato-update">Fødselsdato:</label>
-                <input type="date" id="fødselsdato-update" name="fødselsdato" placeholder="" required min="1915-01-01">
+                <input type="date" id="fødselsdato-update" name="fødselsdato" placeholder="" required min="1920-01-01">
               
                 <label for="adresse-update">Adresse:</label>
                 <input type="text" id="adresse-update" name="adresse" placeholder="" required>
@@ -130,7 +130,7 @@
                         <input type="text" id="efternavn-create" name="efternavn" placeholder="" required minlength="2">
                       
                         <label for="fødselsdato-create">Fødselsdato:</label>
-                        <input type="date" id="fødselsdato-create" name="fødselsdato" placeholder="" required min="1915-01-01">
+                        <input type="date" id="fødselsdato-create" name="fødselsdato" placeholder="" required min="1920-01-01">
                       
                         <label for="adresse-create">Adresse:</label>
                         <input type="text" id="adresse-create" name="adresse" placeholder="" required>
@@ -198,13 +198,13 @@
                           <option value="Træning">Træning</option>
                         </select>
                   <label for="Stævne">Stævne:</label>
-                        <input type="text" id="stævne-create" name="stævne" placeholder="" required  min="1920-01-01">
+                        <input type="text" id="stævne-create" name="stævne" placeholder="" required  minlength="2">
                   <label for="dato-create">Dato:</label>
                         <input type="date" id="dato-create" name="resultat-dato" placeholder="" required  min="1920-01-01">
                   <label for="placering-create">Placering:</label>
-                        <input type="number" id="placering-create" name="placering" placeholder="" required>
+                        <input type="number" id="placering-create" name="placering" placeholder="" required min="1">
                   <label for="tid-create">Tid:</label>
-                        <input type="" id="tid-create" name="tid" placeholder="" required >
+                        <input type="time" id="tid-create" name="tid" step="2" required>
 
                   <button id="button-create-resultat">Opret resultat</button>
                   </form>
@@ -246,7 +246,7 @@
         <input type="text" id="filter-stævne" placeholder="Stævne">
 
         <label for="filter-tid">Tid:</label>
-    <input type="text" id="filter-tid" name="filter-tid" placeholder="    00:00:00">
+        <input type="text" id="filter-tid" name="filter-tid" placeholder="    00:00:00">
   </div>
 
     <div id="resultsTableContainer"></div>
