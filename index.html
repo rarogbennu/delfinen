@@ -67,37 +67,37 @@
               <h2>Opdater medlem</h2>
               <form id="form-update-medlem" method="dialog">
                 <label for="fornavn-update">Fornavn:</label>
-                <input type="text" id="fornavn-update" name="fornavn" placeholder="">
+                <input type="text" id="fornavn-update" name="fornavn" placeholder="" required minlength="2">
               
                 <label for="efternavn-update">Efternavn:</label>
-                <input type="text" id="efternavn-update" name="efternavn" placeholder="">
+                <input type="text" id="efternavn-update" name="efternavn" placeholder="" required minlength="2">
               
                 <label for="fødselsdato-update">Fødselsdato:</label>
-                <input type="date" id="fødselsdato-update" name="fødselsdato" placeholder="">
+                <input type="date" id="fødselsdato-update" name="fødselsdato" placeholder="" required min="1920-01-01">
               
                 <label for="adresse-update">Adresse:</label>
-                <input type="text" id="adresse-update" name="adresse" placeholder="">
+                <input type="text" id="adresse-update" name="adresse" placeholder="" required>
               
                 <label for="telefon-update">Telefon:</label>
-                <input type="tel" id="telefon-update" name="telefon" placeholder="">
+                <input type="tel" id="telefon-update" name="telefon" placeholder="+45 12345678" required pattern="[0-9+ ]{8,15}">
               
                 <label for="email-update">Email:</label>
-                <input type="email" id="email-update" name="email" placeholder="">
+                <input type="email" id="email-update" name="email" placeholder="" required>
               
                 <label for="medlemstype-update">Medlemstype:</label>
-                <select id="medlemstype-update" name="medlemstype">
+                <select id="medlemstype-update" name="medlemstype" required>
                   <option value="konkurrence">Konkurrence</option>
                   <option value="motionist">Motionist</option>
                 </select>
               
                 <label for="aktivitetsstatus-update">Aktivitetsstatus:</label>
-                <select id="aktivitetsstatus-update" name="aktivitetsstatus">
+                <select id="aktivitetsstatus-update" name="aktivitetsstatus" required>
                   <option value="aktiv">Aktiv</option>
                   <option value="passiv">Passiv</option>
                 </select>
               
                 <label for="indmeldelsesdato-update">Indmeldelsesdato:</label>
-                <input type="date" id="indmeldelsesdato-update" name="indmeldelsesdato" placeholder="">
+                <input type="date" id="indmeldelsesdato-update" name="indmeldelsesdato" required min="1933-01-01">
               
                 <button>Opdater medlem</button>
               </form>  
@@ -130,13 +130,13 @@
                         <input type="text" id="efternavn-create" name="efternavn" placeholder="" required minlength="2">
                       
                         <label for="fødselsdato-create">Fødselsdato:</label>
-                        <input type="date" id="fødselsdato-create" name="fødselsdato" placeholder="" required  min="1920-01-01">
+                        <input type="date" id="fødselsdato-create" name="fødselsdato" placeholder="" required min="1920-01-01">
                       
                         <label for="adresse-create">Adresse:</label>
                         <input type="text" id="adresse-create" name="adresse" placeholder="" required>
                       
                         <label for="telefon-create">Telefon:</label>
-                        <input type="tel" id="telefon-create" name="telefon" placeholder="" required pattern="[0-9+ ]{8,15}">
+                        <input type="tel" id="telefon-create" name="telefon" placeholder="+45 12345678" required pattern="[0-9+ ]{8,15}">
                       
                         <label for="email-create">Email:</label>
                         <input type="email" id="email-create" name="email" placeholder="" required>
@@ -156,7 +156,7 @@
                         </select>
                       
                         <label for="indmeldelsesdato-create">Indmeldelsesdato:</label>
-                        <input type="date" id="indmeldelsesdato-create" name="indmeldelsesdato" placeholder="" required min="2012-01-01">
+                        <input type="date" id="indmeldelsesdato-create" name="indmeldelsesdato" placeholder="" required min="1933-01-01">
                       
                         <button id="button-create-medlem">Opret medlem</button>
 
@@ -198,14 +198,13 @@
                           <option value="Træning">Træning</option>
                         </select>
                   <label for="Stævne">Stævne:</label>
-                        <input type="text" id="stævne-create" name="stævne" placeholder="" required  min="1920-01-01">
+                        <input type="text" id="stævne-create" name="stævne" placeholder="" required  minlength="2">
                   <label for="dato-create">Dato:</label>
                         <input type="date" id="dato-create" name="resultat-dato" placeholder="" required  min="1920-01-01">
                   <label for="placering-create">Placering:</label>
-                        <input type="number" id="placering-create" name="placering" placeholder="" required>
+                        <input type="number" id="placering-create" name="placering" placeholder="" required min="1">
                   <label for="tid-create">Tid:</label>
-                        <input type="" id="tid-create" name="tid" placeholder="hh:mm:ss" required >
-
+                        <input type="time" id="tid-create" name="tid" step="2" required>
                   <button id="button-create-resultat">Opret resultat</button>
                   </form>
         </div>
@@ -246,7 +245,7 @@
         <input type="text" id="filter-stævne" placeholder="Stævne">
 
         <label for="filter-tid">Tid:</label>
-    <input type="text" id="filter-tid" name="filter-tid" placeholder="    00:00:00">
+        <input type="text" id="filter-tid" name="filter-tid" placeholder="    00:00:00">
   </div>
 
     <div id="resultsTableContainer"></div>
