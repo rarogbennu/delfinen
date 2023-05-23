@@ -1,4 +1,4 @@
-import { showData, updateMedlemTable } from "./script.js";
+import { showData, updateMedlemTable, updateResultatTable } from "./script.js";
 import { prepareData } from "./helpers.js";
 
 const endpoint = "https://delfinen-724e2-default-rtdb.europe-west1.firebasedatabase.app";
@@ -6,9 +6,7 @@ const endpoint = "https://delfinen-724e2-default-rtdb.europe-west1.firebasedatab
 // Henter data fra JSON-fil
 async function getData() {
   const response = await fetch (`${endpoint}/medlemmer.json`);
-  // console.log("Svar:", response); 
   const data = await response.json();
-  // console.log("Analyseret JSON:", data);
   const medlemmer = prepareData(data); // ændret fra data.medlemmer til data
 
   return medlemmer; // returner medlemmer-data i stedet for udefineret element
@@ -19,7 +17,6 @@ async function getResultatData() {
   const response = await fetch(`${endpoint}/resultater.json`);
   const resultatData = await response.json();
   const resultater = prepareData(resultatData);
-  console.log("Analyseret JSON resultater:", resultatData);
   return resultater;
 }
 
@@ -90,9 +87,24 @@ async function createResultat(hold, disciplin, svømmerId, aktivitetstype, stæv
 
   if (response.ok) {
     console.log("Resultat succesfully added to Firebase 🔥");
-    // updateResultatTable();
+    updateResultatTable();
+  }
+}
+
+async function updateResultat(hold, disciplin, svømmerId, aktivitetstype, stævne, dato, placering, tid) {
+  const resultatToUpdate = {hold, disciplin, svømmerId, aktivitetstype, stævne, dato, placering, tid};
+  const json = JSON.stringify(resultatToUpdate);
+
+  const response = await fetch(`${endpoint}/resultater/${id}.json`, {
+    method: "PUT",
+    body: json
+  });
+
+  if (response.ok) {
+    console.log("Resultat succesfully updated in Firebase");
+    updateResultatTable();
   }
 }
 
 
-export {getData, getResultatData, createMedlem, updateMedlem, deleteMedlem, createResultat, endpoint}
+export {getData, getResultatData, createMedlem, updateMedlem, deleteMedlem, createResultat, updateResultat, endpoint}

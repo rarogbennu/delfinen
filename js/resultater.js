@@ -1,4 +1,5 @@
 import {getData, getResultatData} from "./rest-services.js";
+import {createResultatButtonContainer} from "./helpers.js";
 
 let resultatData = {}; 
 let medlemData = [];
@@ -34,6 +35,15 @@ function enableStævneInput() {
     aktivitetstypeSelect.addEventListener("change", function() {
         stænveInput.disabled = (this.value !== "Konkurrence");
     })
+}
+
+function enablePlaceringInput() {
+  const aktivitetstypeSelect = document.querySelector("#aktivitetstype-create");
+  const placeringInput = document.querySelector("#placering-create");
+
+  aktivitetstypeSelect.addEventListener("change", function() {
+      placeringInput.disabled = (this.value !== "Konkurrence");
+  })
 }
 
 async function generateResultatTable(filteredData = null) {
@@ -94,6 +104,7 @@ async function generateResultatTable(filteredData = null) {
         <td>${result.placering}</td>
         <td>${result.stævne}</td>
         <td>${result.tid}</td>
+        <td>${createResultatButtonContainer(result).outerHTML}</td>
       </tr>
     `;
   }
@@ -236,5 +247,5 @@ async function applyResultatFilters() {
 }
 
 
-export {medlemOptions, enableStævneInput, generateResultatTable}
+export {medlemOptions, enableStævneInput, enablePlaceringInput, generateResultatTable}
 
