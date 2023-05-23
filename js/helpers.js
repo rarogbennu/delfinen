@@ -1,5 +1,5 @@
 // Importer funktioner og variabler fra andre moduler
-import { updateClicked, deleteClicked } from "./script.js";
+import { updateClicked, deleteClicked, updateResultatClicked } from "./script.js";
 import { sortData, showData} from "./data-handling.js";
 import { endpoint } from "./rest-services.js";
 
@@ -63,11 +63,11 @@ function createResultatButtonContainer(resultat) {
   editResultatButton.addEventListener("click", () => updateResultatClicked(resultat));
   buttonResultatContainer.appendChild(editResultatButton);
 
-  const deleteResultatButton = document.createElement("button");
-  deleteResultatButton.classList.add("delete");
-  deleteResultatButton.innerHTML = "&#128465;";
-  deleteResultatButton.addEventListener("click", () => deleteResultatClicked(resultat));
-  buttonResultatContainer.appendChild(deleteResultatButton);
+  // const deleteResultatButton = document.createElement("button");
+  // deleteResultatButton.classList.add("delete");
+  // deleteResultatButton.innerHTML = "&#128465;";
+  // deleteResultatButton.addEventListener("click", () => deleteResultatClicked(resultat));
+  // buttonResultatContainer.appendChild(deleteResultatButton);
 
   return buttonResultatContainer;
 }

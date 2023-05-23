@@ -211,6 +211,41 @@ async function createResultatClicked(event) {
   // showResultCreated();
 }
 
+function updateResultatClicked(resultat) {
+  console.log(resultat);
+  const updateForm = document.querySelector("#form-update-resultat");
+  updateForm.hold.value = resultat.hold;
+  updateForm.disciplin.value = resultat.disciplin;
+  updateForm.svømmerId.value = resultat.svømmerId;
+  updateForm.aktivitetstype.value = resultat.aktivitetstype;
+  updateForm.stævne.value = resultat.stævne;
+  updateForm.dato.value = resultat.dato;
+  updateForm.placering.value = resultat.placering;
+  updateForm.tid.value = resultat.tid;
+  updateForm.setAttribute("data-id", resultat.id);
+  document.querySelector("#dialog-update-resultat").showModal();
+
+  closeDialog();
+}
+
+function updateResultatConfirmClicked(event) {
+  const form = event.target;
+
+  const hold = form.hold.value.trim();
+  const disciplin = form.disciplin.value.trim();
+  const svømmerId = form.svømmerId.value.trim();
+  const aktivitetstype = form.aktivitetstype.value.trim();
+  const stævne = form.stævne.value.trim();
+  const dato = form.dato.value;
+  const placering = form.placering.value.trim();
+  const tid = form.tid.value.trim();
+
+  const id = form.getAttribute("resultat-id");
+  updateResultat(id, hold, disciplin, svømmerId, aktivitetstype, stævne, dato, placering, tid);
+}
+
+
+
 async function updateResultatTable(resultater) {
   resultater = await getResultatData();
   generateResultatTable(resultater);
@@ -224,6 +259,8 @@ export {
   updateMedlemClicked,
   updateMedlemTable,
   createResultatClicked,
+  updateResultatClicked,
+  updateResultatConfirmClicked,
   updateResultatTable,
   nextPage,
   previousPage,

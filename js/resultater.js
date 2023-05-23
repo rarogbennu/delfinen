@@ -107,6 +107,8 @@ async function generateResultatTable(filteredData = null) {
         <td>${createResultatButtonContainer(result).outerHTML}</td>
       </tr>
     `;
+
+    resultsTableContainer.insertAdjacentHTML("beforeend", tableHTML);
   }
 
   tableHTML += `</tbody>
