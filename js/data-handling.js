@@ -113,12 +113,11 @@ function calcAge(fødselsdatoinput) {
     age--;
   }
 
-  return {age};
+  return age;
 }
 
 function calcKontingent(fødselsdato, aktivitetsstatus) {
-  const ageObject = calcAge(fødselsdato);
-  const age = ageObject.age;
+  const age = calcAge(fødselsdato);
   let result = {};
 
   if (aktivitetsstatus === "passiv") {
