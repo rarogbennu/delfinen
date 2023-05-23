@@ -1,9 +1,9 @@
-import {getData, getResultatData, createMedlem, deleteMedlem, updateMedlem, createResultat} from "./rest-services.js"
+import {getData, getResultatData, createMedlem, deleteMedlem, updateMedlem, createResultat, updateResultat} from "./rest-services.js"
 import {searchData, capitalizeFirstLetter, closeDialog} from "./helpers.js"
 import {initViews} from "./views.js"
 import { sortData, showData, previousPage, nextPage, calcKontingent, calcAge, calcAldersgruppe} from "./data-handling.js";
 import { generateKontingentTable } from "./kontingent.js";
-import {medlemOptions, enableStævneInput, generateResultatTable} from "./resultater.js";
+import {medlemOptions, enableStævneInput, generateResultatTable, enablePlaceringInput} from "./resultater.js";
 import { initAuth, signIn, signOutUser } from "./simple-auth.js";
 
 const pageSize = 1500;
@@ -23,6 +23,7 @@ function initApp() {
     generateKontingentTable();
     medlemOptions();
     enableStævneInput();
+    enablePlaceringInput();
     generateResultatTable();
     
     document.querySelector("#opret-medlem-button").addEventListener("click", showCreateMedlemDialog);
@@ -55,6 +56,7 @@ document.querySelectorAll(".sort-btn").forEach((button) => {
 // Funktion til at vise dialogboksen for oprettelse af medlem
 function showCreateMedlemDialog() {
   document.querySelector("#dialog-create-medlem").showModal();
+  closeDialog()
 }
 
 // Funktion der kaldes, når der klikkes på knappen til at oprette et medlem
@@ -77,7 +79,6 @@ async function createMedlemClicked(event) {
   form.reset();
 
   showMedlemCreated(medlem)
-  closeDialog()
 }
 
 // viser nyeste created medlem på #opretmedlem
@@ -85,6 +86,7 @@ function showMedlemCreated(item) {
 
 console.log(item)
 console.log("show medlem")
+
 
 const html = /*html*/ `
     <p>Fornavn: ${item.fornavn}</p>
@@ -98,14 +100,16 @@ const html = /*html*/ `
     <p>Indmeldelsesdato: ${item.indmeldelsesdato}</p>
     <p>Kontingent: ${item.kontingent}</p>
     <p>Aldersgruppe: ${item.aldersgruppe}</p>
-    <button id="opdater-button">Opdater</button>
+<!--    <button id="opdater-button">Opdater</button>
     <button id="slet-medlem-button">Slet medlem</button>
-    <button id="godkend-button">Godkend</button>
+    <button id="godkend-button">Godkend</button> -->
 `;
 
 document.querySelector("#show-medlem-created").innerHTML = ""
-
-document.querySelector("#show-medlem-created").insertAdjacentHTML("beforeend", html);
+  
+  if(item.fornavn !== undefined){
+    document.querySelector("#show-medlem-created").insertAdjacentHTML("beforeend", html);
+  }
 
 // document.querySelector("#opdater-button").addEventListener("click",  () => updateClicked(item));
 
@@ -199,9 +203,18 @@ async function createResultatClicked(event) {
   const tid = form.tid.value
 
   const resultat = await createResultat(hold, disciplin, svømmerId, aktivitetstype, stævne, dato, placering, tid);
+
+  document.querySelector("#dialog-create-resultat").close();
+
   form.reset();
 
   // showResultCreated();
+}
+
+async function updateResultatTable(resultater) {
+  resultater = await getResultatData();
+  generateResultatTable(resultater);
+
 }
 
 export {
@@ -211,6 +224,7 @@ export {
   updateMedlemClicked,
   updateMedlemTable,
   createResultatClicked,
+  updateResultatTable,
   nextPage,
   previousPage,
   deleteClicked,
