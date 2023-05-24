@@ -19,6 +19,7 @@ function prepareData(dataObject) {
       }
     }
   }
+
   return dataArray;
 }
 

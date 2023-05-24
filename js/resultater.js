@@ -125,7 +125,14 @@ async function generateResultatTable(filteredData = null) {
       applyResultatSort(sortAttribute, sortOrder);
     });
   });
+
+  resultatData.sort(sortResultatByTime);
 }
+
+function sortResultatByTime(resultatA, resultatB){
+  return resultatA.tid.localeCompare(resultatB.tid)
+}
+
 
 function applyResultatSort(sortAttribute, sortOrder) {
   const sortButtons = document.querySelectorAll('.sort-btn');
@@ -211,6 +218,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 async function applyResultatFilters() {
   const resultatData = await getResultatData();
+
+  resultatData.sort(sortResultatByTime);
+
+
 
   const filterAktivitetstypeValue = document.getElementById('filter-aktivitetstype').value;
   const filterDatoValue = document.getElementById('filter-dato').value;
