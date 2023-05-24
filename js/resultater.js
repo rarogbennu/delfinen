@@ -194,23 +194,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   const filterAktivitetstype = document.getElementById('filter-aktivitetstype');
   filterAktivitetstype.addEventListener('change', applyResultatFilters);
 
-  const filterDato = document.getElementById('filter-dato');
-  filterDato.addEventListener('input', applyResultatFilters);
-
   const filterDisciplin = document.getElementById('filter-disciplin');
   filterDisciplin.addEventListener('change', applyResultatFilters);
 
   const filterHold = document.getElementById('filter-hold');
   filterHold.addEventListener('change', applyResultatFilters);
-
-  const filterPlacering = document.getElementById('filter-placering');
-  filterPlacering.addEventListener('input', applyResultatFilters);
-
-  const filterStævne = document.getElementById('filter-stævne');
-  filterStævne.addEventListener('input', applyResultatFilters);
-
-  const filterTid = document.getElementById('filter-tid');
-  filterTid.addEventListener('input', applyResultatFilters);
 
   // Initial table generation on page load
   await generateResultatTable();
@@ -224,30 +212,18 @@ async function applyResultatFilters() {
 
 
   const filterAktivitetstypeValue = document.getElementById('filter-aktivitetstype').value;
-  const filterDatoValue = document.getElementById('filter-dato').value;
   const filterDisciplinValue = document.getElementById('filter-disciplin').value;
   const filterHoldValue = document.getElementById('filter-hold').value;
-  const filterPlaceringValue = document.getElementById('filter-placering').value;
-  const filterStævneValue = document.getElementById('filter-stævne').value;
-  const filterTidValue = document.getElementById('filter-tid').value;
 
   const filteredData = Object.values(resultatData).filter((resultat) => {
     const aktivitetstypeMatch = !filterAktivitetstypeValue || resultat.aktivitetstype === filterAktivitetstypeValue;
-    const datoMatch = !filterDatoValue || resultat.dato === filterDatoValue;
     const disciplinMatch = !filterDisciplinValue || resultat.disciplin === filterDisciplinValue;
     const holdMatch = !filterHoldValue || resultat.hold === filterHoldValue;
-    const placeringMatch = !filterPlaceringValue || resultat.placering === filterPlaceringValue;
-    const stævneMatch = !filterStævneValue || resultat.stævne === filterStævneValue;
-    const tidMatch = !filterTidValue || resultat.tid === filterTidValue;
 
     return (
       aktivitetstypeMatch &&
-      datoMatch &&
       disciplinMatch &&
-      holdMatch &&
-      placeringMatch &&
-      stævneMatch &&
-      tidMatch
+      holdMatch
     );
   });
 
