@@ -199,7 +199,7 @@
                   <label for="Stævne">Stævne:</label>
                         <input type="text" id="stævne-create" name="stævne" placeholder="" required  minlength="2">
                   <label for="dato-create">Dato:</label>
-                        <input type="date" id="dato-create" name="resultat-dato" placeholder="" required  min="1920-01-01">
+                        <input type="date" id="dato-create" name="dato" placeholder="" required  min="1920-01-01">
                   <label for="placering-create">Placering:</label>
                         <input type="number" id="placering-create" name="placering" placeholder="" required min="1">
                   <label for="tid-create">Tid:</label>
@@ -211,9 +211,51 @@
 
             <dialog id="dialog-update-resultat">
               <form id="form-update-resultat">
+                <label for="hold-update">Hold:</label>
+                        <select id="hold-update" name="hold" required>
+                          <option disabled selected value> -- vælg hold -- </option>
+                          <option value="ungdom">Ungdom</option>
+                          <option value="senior">Senior</option>
+                        </select>
+                  <label for="disciplin-update">Disciplin:</label>
+                        <select id="disciplin-update" name="disciplin" required>
+                          <option disabled selected value> -- vælg disciplin -- </option>
+                          <option value="butterfly">Butterfly</option>
+                          <option value="crawl">Crawl</option>
+                          <option value="rygcrawl">Rygcrawl</option>
+                          <option value="brystsvømning">Brystsvømning</option>
+                        </select>
+                  <!-- <label for="medlem-assign-resultat">Svømmer:</label>
+                        <select id="medlem-assign-resultat" name="medlem-assign-resultat" required>
+                          <option disabled selected value> -- vælg svømmer --</option>
+                        </select> -->
+                  <label for="aktivitetstype-update">Aktivitetstype:</label>
+                        <select id="aktivitetstype-update" name="aktivitetstype" required>
+                          <option disabled selected value> -- vælg aktivitetstype -- </option>
+                          <option value="Konkurrence">Konkurrence</option>
+                          <option value="Træning">Træning</option>
+                        </select>
+                  <label for="Stævne">Stævne:</label>
+                        <input type="text" id="stævne-update" name="stævne" placeholder="" required  minlength="2">
+                  <label for="dato-update">Dato:</label>
+                        <input type="date" id="dato-update" name="dato" placeholder="" required  min="1920-01-01">
+                  <label for="placering-update">Placering:</label>
+                        <input type="number" id="placering-update" name="placering" placeholder="" required min="1">
+                  <label for="tid-update">Tid:</label>
+                        <input type="time" id="tid-update" name="tid" step="1" required>
+                  <button id="button-update-resultat">Opdater resultat</button>
+                  </form>
                 
               </form>
             </dialog>
+
+            <dialog id="dialog-delete-resultat" class="dialog">
+              <h2>Vil du slette dette resultat?</h2>
+              <form id="form-delete-resultat" method="dialog">
+                  <button type="button" class="btn-cancel">Nej</button>
+                  <button>Ja</button>
+              </form>
+          </dialog>
     <!-- Filters Section -->
     <div id="resultat-filters">
 
@@ -241,7 +283,51 @@
         </select>
   </div>
 
-    <div id="resultsTableContainer"></div>
+    <div id="resultsTableContainer">
+      <table>
+        <thead>
+          <tr>
+            <th>Navn
+              <button class="sort-btn" data-sort="navn" data-order="asc">&#9650;</button>
+              <button class="sort-btn" data-sort="navn" data-order="desc">&#9660;</button>
+            </th>
+            <th>Aktivitetstype
+              <button class="sort-btn" data-sort="aktivitetstype" data-order="asc">&#9650;</button>
+              <button class="sort-btn" data-sort="aktivitetstype" data-order="desc">&#9660;</button>
+            </th>
+            <th>Dato
+              <button class="sort-btn" data-sort="dato" data-order="asc">&#9650;</button>
+              <button class="sort-btn" data-sort="dato" data-order="desc">&#9660;</button>
+            </th>
+            <th>Disciplin
+              <button class="sort-btn" data-sort="disciplin" data-order="asc">&#9650;</button>
+              <button class="sort-btn" data-sort="disciplin" data-order="desc">&#9660;</button>
+            </th>
+            <th>Hold
+              <button class="sort-btn" data-sort="hold" data-order="asc">&#9650;</button>
+              <button class="sort-btn" data-sort="hold" data-order="desc">&#9660;</button>
+            </th>
+            <th>Placering
+              <button class="sort-btn" data-sort="placering" data-order="asc">&#9650;</button>
+              <button class="sort-btn" data-sort="placering" data-order="desc">&#9660;</button>
+            </th>
+            <th>Stævne
+              <button class="sort-btn" data-sort="stævne" data-order="asc">&#9650;</button>
+              <button class="sort-btn" data-sort="stævne" data-order="desc">&#9660;</button>
+            </th>
+            <th>Tid
+              <button class="sort-btn" data-sort="tid" data-order="asc">&#9650;</button>
+              <button class="sort-btn" data-sort="tid" data-order="desc">&#9660;</button>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+        </table>
+        
+
+
+    </div>
 </section>
 
 
