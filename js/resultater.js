@@ -1,5 +1,5 @@
 import {getData, getResultatData} from "./rest-services.js";
-import {createResultatButtonContainer} from "./helpers.js";
+import {updateResultatClicked, deleteResultatClicked} from "./script.js";
 
 let resultatData = {}; 
 let medlemData = [];
@@ -50,51 +50,14 @@ async function generateResultatTable(filteredData = null) {
   resultatData = filteredData || (await getResultatData());
   const medlemData = await getData();
 
-  let tableHTML = `
-    <table>
-      <thead>
-        <tr>
-          <th>Navn
-            <button class="sort-btn" data-sort="navn" data-order="asc">&#9650;</button>
-            <button class="sort-btn" data-sort="navn" data-order="desc">&#9660;</button>
-          </th>
-          <th>Aktivitetstype
-            <button class="sort-btn" data-sort="aktivitetstype" data-order="asc">&#9650;</button>
-            <button class="sort-btn" data-sort="aktivitetstype" data-order="desc">&#9660;</button>
-          </th>
-          <th>Dato
-            <button class="sort-btn" data-sort="dato" data-order="asc">&#9650;</button>
-            <button class="sort-btn" data-sort="dato" data-order="desc">&#9660;</button>
-          </th>
-          <th>Disciplin
-            <button class="sort-btn" data-sort="disciplin" data-order="asc">&#9650;</button>
-            <button class="sort-btn" data-sort="disciplin" data-order="desc">&#9660;</button>
-          </th>
-          <th>Hold
-            <button class="sort-btn" data-sort="hold" data-order="asc">&#9650;</button>
-            <button class="sort-btn" data-sort="hold" data-order="desc">&#9660;</button>
-          </th>
-          <th>Placering
-            <button class="sort-btn" data-sort="placering" data-order="asc">&#9650;</button>
-            <button class="sort-btn" data-sort="placering" data-order="desc">&#9660;</button>
-          </th>
-          <th>Stævne
-            <button class="sort-btn" data-sort="stævne" data-order="asc">&#9650;</button>
-            <button class="sort-btn" data-sort="stævne" data-order="desc">&#9660;</button>
-          </th>
-          <th>Tid
-            <button class="sort-btn" data-sort="tid" data-order="asc">&#9650;</button>
-            <button class="sort-btn" data-sort="tid" data-order="desc">&#9660;</button>
-          </th>
-        </tr>
-      </thead>
-      <tbody>`;
+  const resultsTableContainer = document.querySelector("#resultsTableContainer table tbody");
 
   for (let id in resultatData) {
     let result = resultatData[id];
     const medlem = medlemData.find((medlem) => medlem.id === result.svømmerId);
+    console.log(result);
 
-    tableHTML += `
+    const tableHTML = /*html*/`
       <tr>
         <td>${medlem.fornavn} ${medlem.efternavn}</td>
         <td>${result.aktivitetstype}</td>
@@ -104,18 +67,23 @@ async function generateResultatTable(filteredData = null) {
         <td>${result.placering}</td>
         <td>${result.stævne}</td>
         <td>${result.tid}</td>
-        <td>${createResultatButtonContainer(result).outerHTML}</td>
+        <td><div class="button-resultat-container"><button class="edit">✎</button><button class="delete">🗑</button></div></td>
       </tr>
     `;
 
     resultsTableContainer.insertAdjacentHTML("beforeend", tableHTML);
+
+    const editButton = document.querySelector("#resultsTableContainer tr:last-child button.edit");
+    editButton.addEventListener("click", () => updateResultatClicked(result));
+
+    const deleteButton = document.querySelector("#resultsTableContainer tr:last-child button.delete");
+    deleteButton.addEventListener("click", () => deleteResultatClicked(result));
   }
 
-  tableHTML += `</tbody>
-    </table>`;
 
-  const tableContainer = document.getElementById('resultsTableContainer');
-  tableContainer.innerHTML = tableHTML;
+
+ // const tableContainer = document.getElementById('resultsTableContainer');
+ // tableContainer.innerHTML = tableHTML;
 
   const sortButtons = document.querySelectorAll('.sort-btn');
   sortButtons.forEach((button) => {
