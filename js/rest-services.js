@@ -106,5 +106,16 @@ async function updateResultat(hold, disciplin, svømmerId, aktivitetstype, stæv
   }
 }
 
+async function deleteResultat(id){
+  const response = await fetch(`${endpoint}/resultater/${id}.json`, {
+    method: "DELETE"
+});
+if (response.ok) {
+    console.log("Resultat succesfully deleted from Firebase 🔥");
+    updateResultatTable();
 
-export {getData, getResultatData, createMedlem, updateMedlem, deleteMedlem, createResultat, updateResultat, endpoint}
+}
+}
+
+
+export {getData, getResultatData, createMedlem, updateMedlem, deleteMedlem, createResultat, updateResultat, deleteResultat, endpoint}
