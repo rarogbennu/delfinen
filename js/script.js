@@ -1,4 +1,4 @@
-import {getData, getResultatData, createMedlem, deleteMedlem, updateMedlem, createResultat, updateResultat} from "./rest-services.js"
+import {getData, getResultatData, createMedlem, deleteMedlem, updateMedlem, createResultat, updateResultat, deleteResultat} from "./rest-services.js"
 import {searchData, capitalizeFirstLetter, closeDialog} from "./helpers.js"
 import {initViews} from "./views.js"
 import { sortData, showData, previousPage, nextPage, calcKontingent, calcAge, calcAldersgruppe} from "./data-handling.js";
@@ -34,7 +34,9 @@ function initApp() {
     document.querySelector("#form-delete-medlem .btn-cancel").addEventListener("click", deleteCancelClicked);
     document.querySelector("#btn-create-resultat").addEventListener("click", showCreateResultatDialog);
     document.querySelector("#form-create-resultat").addEventListener("submit", createResultatClicked);
-    
+    document.querySelector("#form-update-resultat").addEventListener("submit", updateResultatConfirmClicked);
+    document.querySelector("#form-delete-resultat").addEventListener("submit", deleteResultatConfirmClicked);
+    document.querySelector("#form-delete-resultat .btn-cancel").addEventListener("click", deleteResultatCancelClicked);
  
     initAuth();
     document.querySelector("#form-signin").addEventListener("submit", signIn);
@@ -212,11 +214,12 @@ async function createResultatClicked(event) {
 }
 
 function updateResultatClicked(resultat) {
+  console.log("updateResultatClicked");
   console.log(resultat);
   const updateForm = document.querySelector("#form-update-resultat");
   updateForm.hold.value = resultat.hold;
   updateForm.disciplin.value = resultat.disciplin;
-  updateForm.svømmerId.value = resultat.svømmerId;
+  // updateForm.svømmerId.value = resultat.svømmerId;
   updateForm.aktivitetstype.value = resultat.aktivitetstype;
   updateForm.stævne.value = resultat.stævne;
   updateForm.dato.value = resultat.dato;
@@ -233,7 +236,7 @@ function updateResultatConfirmClicked(event) {
 
   const hold = form.hold.value.trim();
   const disciplin = form.disciplin.value.trim();
-  const svømmerId = form.svømmerId.value.trim();
+  // const svømmerId = form.svømmerId.value.trim();
   const aktivitetstype = form.aktivitetstype.value.trim();
   const stævne = form.stævne.value.trim();
   const dato = form.dato.value;
@@ -241,8 +244,25 @@ function updateResultatConfirmClicked(event) {
   const tid = form.tid.value.trim();
 
   const id = form.getAttribute("resultat-id");
-  updateResultat(id, hold, disciplin, svømmerId, aktivitetstype, stævne, dato, placering, tid);
+  updateResultat(id, hold, disciplin, aktivitetstype, stævne, dato, placering, tid);
 }
+
+function deleteResultatClicked(item) {
+  document.querySelector("#form-delete-resultat").setAttribute("data-id", item.id);
+  document.querySelector("#dialog-delete-resultat").showModal();
+
+  closeDialog()
+}
+
+function deleteResultatConfirmClicked(event) {
+  const id = event.target.getAttribute("data-id"); // event.target is the delete form
+  deleteResultat(id); // call deletePost with id
+}
+
+function deleteResultatCancelClicked() {
+  document.querySelector("#dialog-delete-resultat").close();
+}
+
 
 
 
@@ -261,6 +281,7 @@ export {
   createResultatClicked,
   updateResultatClicked,
   updateResultatConfirmClicked,
+  deleteResultatClicked,
   updateResultatTable,
   nextPage,
   previousPage,
