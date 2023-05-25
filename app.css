@@ -204,6 +204,13 @@ button.delete {
   cursor: pointer;
 }
 
+.sort-btn-update {
+  border: none;
+  background: none;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
 /* dialogs */
 
 #form-update-medlem {

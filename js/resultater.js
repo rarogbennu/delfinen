@@ -101,7 +101,7 @@ async function generateResultatTable(filteredData = null) {
     deleteButton.addEventListener("click", () => deleteResultatClicked(result));
   }
 
-  const sortButtons = document.querySelectorAll('.sort-btn');
+  const sortButtons = document.querySelectorAll('.sort-btn-update');
   sortButtons.forEach((button) => {
     button.addEventListener('click', () => {
       const sortAttribute = button.getAttribute('data-sort');
@@ -118,12 +118,12 @@ async function generateResultatTable(filteredData = null) {
 
 
 function applyResultatSort(sortAttribute, sortOrder) {
-  const sortButtons = document.querySelectorAll('.sort-btn');
+  const sortButtons = document.querySelectorAll('.sort-btn-update');
   sortButtons.forEach((button) => {
     button.classList.remove('active');
   });
 
-  const sortButton = document.querySelector(`.sort-btn[data-sort="${sortAttribute}"][data-order="${sortOrder}"]`);
+  const sortButton = document.querySelector(`.sort-btn-update[data-sort="${sortAttribute}"][data-order="${sortOrder}"]`);
   sortButton.classList.add('active');
 
   const sortDirection = sortOrder === 'asc' ? 1 : -1;
@@ -140,8 +140,8 @@ function applyResultatSort(sortAttribute, sortOrder) {
         valueA = `${medlemA.fornavn} ${medlemA.efternavn}`;
         valueB = `${medlemB.fornavn} ${medlemB.efternavn}`;
       } else if (sortAttribute === 'placering') {
-        valueA = parseInt(a[sortAttribute], 10);
-        valueB = parseInt(b[sortAttribute], 10);
+        valueA = parseInt(a[sortAttribute], 10) || 0;
+        valueB = parseInt(b[sortAttribute], 10) || 0;
       } else {
         valueA = a[sortAttribute];
         valueB = b[sortAttribute];
@@ -164,7 +164,7 @@ function applyResultatSort(sortAttribute, sortOrder) {
 
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const sortButtons = document.querySelectorAll('.sort-btn');
+  const sortButtons = document.querySelectorAll('.sort-btn-update');
   sortButtons.forEach((button) => {
     button.addEventListener('click', () => {
       const sortAttribute = button.getAttribute('data-sort');
