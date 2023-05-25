@@ -1,5 +1,4 @@
 import {createButtonContainer} from "./helpers.js"
-import { pageSize } from "./script.js";
 
 // Funktion til at sortere data efter en bestemt kategori og rækkefølge
 function sortData(sortBy, sortOrder) {
@@ -25,17 +24,12 @@ function sortData(sortBy, sortOrder) {
 }
 
 // Funktion til at vise data i visningen
-function showData(data, page = 1) {
-  const start = (page - 1) * pageSize;
-  const end = start + pageSize;
-
-  // Her filtrerer vi data for den aktuelle side
-  const pageData = data.slice(start, end);
+function showData(data) {
 
   const dataView = document.getElementById('dataDisplay');
   dataView.innerHTML = '';
 
-  pageData.forEach((item) => {
+  data.forEach((item) => {
     const dataRow = document.createElement('div');
     dataRow.classList.add('data-row');
 
@@ -66,19 +60,6 @@ function transformDateFormat(dateString) {
   return `${day}/${month}/${year}`;
 }
 
-// Funktion til at vise data for den foregående side
-function previousPage(data) {
-  window.currentPage--;
-  if (window.currentPage < 1) window.currentPage = 1;
-  showData(data, window.currentPage);
-}
-
-// Funktion til at vise data for den næste side
-function nextPage(data) {
-  window.currentPage++;
-  showData(data, window.currentPage);
-}
-
 function calcAldersgruppe(fødselsdatoinput) {
   const today = new Date();
   const fødselsdato = new Date(fødselsdatoinput)
@@ -91,7 +72,7 @@ function calcAldersgruppe(fødselsdatoinput) {
     age--;
   }
 
-  let category;
+
   if (age < 18) {
     return "ungdom";
   } else if (age >= 60) {
@@ -137,4 +118,4 @@ function calcKontingent(fødselsdato, aktivitetsstatus) {
   return result.value;
 }
 
-export {sortData, showData, previousPage, nextPage, calcAge, calcAldersgruppe, calcKontingent};
+export {sortData, showData, calcAge, calcAldersgruppe, calcKontingent};
