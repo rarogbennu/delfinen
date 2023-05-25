@@ -57,7 +57,6 @@ function userIsSignedOut() {
 
 function displayUserInfo() {
     let userElement = document.querySelector("#profile .mail");
-    console.log(userElement); // dette skal logge elementet, eller null hvis det ikke findes
     if (userElement) {
         userElement.textContent = localStorage.getItem("authUser");
     }
