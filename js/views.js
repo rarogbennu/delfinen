@@ -29,6 +29,8 @@ function changeView() {
     document.querySelector("#show-medlem-created").innerHTML = ""
   }
   else if (hashLink === "#resultater") {
+    // forsøg på at kalde page specifikke funktioner fra views i stedet for initApp
+    
     console.log("#resultater")
     medlemOptions();
     enableStævneInput();
