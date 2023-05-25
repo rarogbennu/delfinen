@@ -233,6 +233,7 @@ function updateResultatClicked(resultat) {
 
 function updateResultatConfirmClicked(event) {
   const form = event.target;
+  console.log("confirm clicked")
 
   const hold = form.hold.value.trim();
   const disciplin = form.disciplin.value.trim();

@@ -47,17 +47,22 @@ function enablePlaceringInput() {
 }
 
 async function generateResultatTable(filteredData = null) {
-  resultatData = filteredData || (await getResultatData());
+  resultatData = filteredData || await getResultatData();
   const medlemData = await getData();
 
   const resultsTableContainer = document.querySelector("#resultsTableContainer table tbody");
 
+  resultsTableContainer.innerHTML = '';
+
+  // resultatData.sort(sortResultatByTime);
+
   for (let id in resultatData) {
     let result = resultatData[id];
     const medlem = medlemData.find((medlem) => medlem.id === result.svømmerId);
-    console.log(result);
 
-    const tableHTML = /*html*/`
+    let tableHTML = "";
+
+    tableHTML = /*html*/`
       <tr>
         <td>${medlem.fornavn} ${medlem.efternavn}</td>
         <td>${result.aktivitetstype}</td>
@@ -80,11 +85,6 @@ async function generateResultatTable(filteredData = null) {
     deleteButton.addEventListener("click", () => deleteResultatClicked(result));
   }
 
-
-
- // const tableContainer = document.getElementById('resultsTableContainer');
- // tableContainer.innerHTML = tableHTML;
-
   const sortButtons = document.querySelectorAll('.sort-btn');
   sortButtons.forEach((button) => {
     button.addEventListener('click', () => {
@@ -93,9 +93,8 @@ async function generateResultatTable(filteredData = null) {
       applyResultatSort(sortAttribute, sortOrder);
     });
   });
-
-  resultatData.sort(sortResultatByTime);
 }
+
 
 function sortResultatByTime(resultatA, resultatB){
   return resultatA.tid.localeCompare(resultatB.tid)

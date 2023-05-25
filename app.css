@@ -330,6 +330,13 @@ tr:nth-child(odd) {
   background-color: transparent; /* Set the background color for odd rows */
 }
 
+#form-update-resultat {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+  padding: 2em;
+}
+
 /* kontingent */
 
 #kontingent {

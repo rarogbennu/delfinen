@@ -91,7 +91,7 @@ async function createResultat(hold, disciplin, svømmerId, aktivitetstype, stæv
   }
 }
 
-async function updateResultat(hold, disciplin, svømmerId, aktivitetstype, stævne, dato, placering, tid) {
+async function updateResultat(id, hold, disciplin, svømmerId, aktivitetstype, stævne, dato, placering, tid) {
   const resultatToUpdate = {hold, disciplin, svømmerId, aktivitetstype, stævne, dato, placering, tid};
   const json = JSON.stringify(resultatToUpdate);
 
