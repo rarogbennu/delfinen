@@ -1,5 +1,5 @@
-import { showData, updateMedlemTable, updateResultatTable } from "./script.js";
-import { prepareData } from "./helpers.js";
+import {updateMedlemTable, updateResultatTable} from "./script.js";
+import {prepareData} from "./helpers.js";
 
 const endpoint = "https://delfinen-724e2-default-rtdb.europe-west1.firebasedatabase.app";
 
@@ -118,12 +118,11 @@ async function deleteResultat(id){
   const response = await fetch(`${endpoint}/resultater/${id}.json`, {
     method: "DELETE"
 });
-if (response.ok) {
+  if (response.ok) {
     console.log("Resultat succesfully deleted from Firebase 🔥");
     updateResultatTable();
 
+  }
 }
-}
-
 
 export {getData, getResultatData, createMedlem, updateMedlem, deleteMedlem, createResultat, updateResultat, deleteResultat, endpoint, getMedlem}

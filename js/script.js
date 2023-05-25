@@ -1,13 +1,11 @@
 import {getData, getResultatData, createMedlem, deleteMedlem, updateMedlem, createResultat, updateResultat, deleteResultat, getMedlem} from "./rest-services.js"
 import {searchData, capitalizeFirstLetter, closeDialog} from "./helpers.js"
 import {initViews} from "./views.js"
-import { sortData, showData, previousPage, nextPage, calcKontingent, calcAge, calcAldersgruppe} from "./data-handling.js";
-import { generateKontingentTable } from "./kontingent.js";
-import {medlemOptions, enableStævneInput, generateResultatTable, enablePlaceringInput} from "./resultater.js";
-import { initAuth, signIn, signOutUser } from "./simple-auth.js";
+import {sortData, showData, calcKontingent, calcAldersgruppe} from "./data-handling.js";
+import {generateKontingentTable } from "./kontingent.js";
+import {generateResultatTable} from "./resultater.js";
+import {initAuth, signIn, signOutUser} from "./simple-auth.js";
 
-const pageSize = 1500;
-window.currentPage = 1;
 window.currentSortBy = '';
 window.currentSortOrder = '';
 
@@ -98,9 +96,6 @@ const html = /*html*/ `
     <p>Indmeldelsesdato: ${item.indmeldelsesdato}</p>
     <p>Kontingent: ${item.kontingent}</p>
     <p>Aldersgruppe: ${item.aldersgruppe}</p>
-<!--    <button id="opdater-button">Opdater</button>
-    <button id="slet-medlem-button">Slet medlem</button>
-    <button id="godkend-button">Godkend</button> -->
 `;
 
 document.querySelector("#show-medlem-created").innerHTML = ""
@@ -110,9 +105,9 @@ document.querySelector("#show-medlem-created").innerHTML = ""
   }
 
 // document.querySelector("#opdater-button").addEventListener("click",  () => updateClicked(item));
-
-
 }
+
+// UPDATE MEDLEM
 
 // Funktion der kaldes, når der klikkes på knappen til at opdatere et medlem
 function updateClicked(item) {
@@ -129,23 +124,8 @@ function updateClicked(item) {
   updateForm.indmeldelsesdato.value = item.indmeldelsesdato;
   updateForm.setAttribute("data-id", item.id);
   document.querySelector("#dialog-update-medlem").showModal();
-
+  
   closeDialog()
-}
-
-function deleteClicked(item) {
-  document.querySelector("#dialog-delete-medlem-navn").textContent = item.fornavn + " " + item.efternavn;
-  document.querySelector("#form-delete-medlem").setAttribute("data-id", item.id);
-  document.querySelector("#dialog-delete-medlem").showModal();
-
-  closeDialog()
-}
-
-
-// Funktion der kaldes, når der klikkes på knappen til at slette et medlem
-function deleteMedlemClicked(event) {
-  const id = event.target.getAttribute("data-id"); // event.target is the delete form
-  deleteMedlem(id); // call deletePost with id
 }
 
 function updateMedlemClicked(event) {
@@ -172,10 +152,28 @@ async function updateMedlemTable(medlemmer) {
   showData(medlemmer); 
 }
 
+// DELETE MEDLEM
+
+function deleteClicked(item) {
+  document.querySelector("#dialog-delete-medlem-navn").textContent = item.fornavn + " " + item.efternavn;
+  document.querySelector("#form-delete-medlem").setAttribute("data-id", item.id);
+  document.querySelector("#dialog-delete-medlem").showModal();
+
+  closeDialog()
+}
+
+// Funktion der kaldes, når der klikkes på knappen til at slette et medlem
+function deleteMedlemClicked(event) {
+  const id = event.target.getAttribute("data-id"); // event.target is the delete form
+  deleteMedlem(id); // call deletePost with id
+}
+
+
 // Funktion til at annullere sletning af medlem
 function deleteCancelClicked() {
   document.querySelector("#dialog-delete-medlem").close();
 }
+
 
 // CRUD resultat helpers
 
@@ -250,6 +248,12 @@ function updateResultatConfirmClicked(event) {
   document.querySelector("#dialog-update-resultat").close();
 }
 
+async function updateResultatTable(resultater) {
+  resultater = await getResultatData();
+  generateResultatTable(resultater);
+
+}
+
 function deleteResultatClicked(item) {
   document.querySelector("#form-delete-resultat").setAttribute("data-id", item.id);
   document.querySelector("#dialog-delete-resultat").showModal();
@@ -267,14 +271,6 @@ function deleteResultatCancelClicked() {
 }
 
 
-
-
-async function updateResultatTable(resultater) {
-  resultater = await getResultatData();
-  generateResultatTable(resultater);
-
-}
-
 export {
   showData,
   updateClicked,
@@ -286,9 +282,6 @@ export {
   updateResultatConfirmClicked,
   deleteResultatClicked,
   updateResultatTable,
-  nextPage,
-  previousPage,
   deleteClicked,
   sortData,
-  pageSize
 };
