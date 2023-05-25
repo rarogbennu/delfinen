@@ -1,3 +1,5 @@
+import {medlemOptions, enableStævneInput, enablePlaceringInput, generateResultatTable, enableStævneInputUpdate, enablePlaceringInputUpdate} from "./resultater.js"
+
 function initViews() {
     console.log("initViews");
     window.addEventListener("hashchange", changeView);
@@ -27,7 +29,15 @@ function changeView() {
     document.querySelector("#show-medlem-created").innerHTML = ""
   }
   else if (hashLink === "#resultater") {
+    // forsøg på at kalde page specifikke funktioner fra views i stedet for initApp
+    
     console.log("#resultater")
+    medlemOptions();
+    enableStævneInput();
+    enablePlaceringInput();
+    generateResultatTable();
+    enableStævneInputUpdate();
+    enablePlaceringInputUpdate();
   }
   else if (hashLink === "#kontingent") {
     console.log("#kontingent")

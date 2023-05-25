@@ -1,5 +1,5 @@
 import {getData, getResultatData} from "./rest-services.js";
-import {createResultatButtonContainer} from "./helpers.js";
+import {updateResultatClicked, deleteResultatClicked} from "./script.js";
 
 let resultatData = {}; 
 let medlemData = [];
@@ -46,55 +46,39 @@ function enablePlaceringInput() {
   })
 }
 
+function enableStævneInputUpdate() {
+  const aktivitetstypeSelectUpdate = document.querySelector("#aktivitetstype-update");
+  const stævneInputUpdate = document.querySelector("#stævne-update");
+
+  aktivitetstypeSelectUpdate.addEventListener("change", function(){
+      stævneInputUpdate.disabled = (this.value !== "Konkurrence");
+  })
+}
+
+function enablePlaceringInputUpdate() {
+  const aktivitetstypeSelectUpdate = document.querySelector("#aktivitetstype-update");
+  const placeringInputUpdate = document.querySelector("#placering-update");
+
+  aktivitetstypeSelectUpdate.addEventListener("change", function(){
+      placeringInputUpdate.disabled = (this.value !== "Konkurrence");
+  })
+}
+
+
 async function generateResultatTable(filteredData = null) {
-  resultatData = filteredData || (await getResultatData());
+  resultatData = filteredData || await getResultatData();
   const medlemData = await getData();
 
-  let tableHTML = `
-    <table>
-      <thead>
-        <tr>
-          <th>Navn
-            <button class="sort-btn" data-sort="navn" data-order="asc">&#9650;</button>
-            <button class="sort-btn" data-sort="navn" data-order="desc">&#9660;</button>
-          </th>
-          <th>Aktivitetstype
-            <button class="sort-btn" data-sort="aktivitetstype" data-order="asc">&#9650;</button>
-            <button class="sort-btn" data-sort="aktivitetstype" data-order="desc">&#9660;</button>
-          </th>
-          <th>Dato
-            <button class="sort-btn" data-sort="dato" data-order="asc">&#9650;</button>
-            <button class="sort-btn" data-sort="dato" data-order="desc">&#9660;</button>
-          </th>
-          <th>Disciplin
-            <button class="sort-btn" data-sort="disciplin" data-order="asc">&#9650;</button>
-            <button class="sort-btn" data-sort="disciplin" data-order="desc">&#9660;</button>
-          </th>
-          <th>Hold
-            <button class="sort-btn" data-sort="hold" data-order="asc">&#9650;</button>
-            <button class="sort-btn" data-sort="hold" data-order="desc">&#9660;</button>
-          </th>
-          <th>Placering
-            <button class="sort-btn" data-sort="placering" data-order="asc">&#9650;</button>
-            <button class="sort-btn" data-sort="placering" data-order="desc">&#9660;</button>
-          </th>
-          <th>Stævne
-            <button class="sort-btn" data-sort="stævne" data-order="asc">&#9650;</button>
-            <button class="sort-btn" data-sort="stævne" data-order="desc">&#9660;</button>
-          </th>
-          <th>Tid
-            <button class="sort-btn" data-sort="tid" data-order="asc">&#9650;</button>
-            <button class="sort-btn" data-sort="tid" data-order="desc">&#9660;</button>
-          </th>
-        </tr>
-      </thead>
-      <tbody>`;
+  const resultsTableContainer = document.querySelector("#resultsTableContainer table tbody");
+
+  resultsTableContainer.innerHTML = '';
 
   for (let id in resultatData) {
     let result = resultatData[id];
     const medlem = medlemData.find((medlem) => medlem.id === result.svømmerId);
+    let tableHTML = "";
 
-    tableHTML += `
+    tableHTML = /*html*/`
       <tr>
         <td>${medlem.fornavn} ${medlem.efternavn}</td>
         <td>${result.aktivitetstype}</td>
@@ -104,20 +88,20 @@ async function generateResultatTable(filteredData = null) {
         <td>${result.placering}</td>
         <td>${result.stævne}</td>
         <td>${result.tid}</td>
-        <td>${createResultatButtonContainer(result).outerHTML}</td>
+        <td><div class="button-resultat-container"><button class="edit">✎</button><button class="delete">🗑</button></div></td>
       </tr>
     `;
 
     resultsTableContainer.insertAdjacentHTML("beforeend", tableHTML);
+
+    const editButton = document.querySelector("#resultsTableContainer tr:last-child button.edit");
+    editButton.addEventListener("click", () => updateResultatClicked(result));
+
+    const deleteButton = document.querySelector("#resultsTableContainer tr:last-child button.delete");
+    deleteButton.addEventListener("click", () => deleteResultatClicked(result));
   }
 
-  tableHTML += `</tbody>
-    </table>`;
-
-  const tableContainer = document.getElementById('resultsTableContainer');
-  tableContainer.innerHTML = tableHTML;
-
-  const sortButtons = document.querySelectorAll('.sort-btn');
+  const sortButtons = document.querySelectorAll('.sort-btn-update');
   sortButtons.forEach((button) => {
     button.addEventListener('click', () => {
       const sortAttribute = button.getAttribute('data-sort');
@@ -125,22 +109,21 @@ async function generateResultatTable(filteredData = null) {
       applyResultatSort(sortAttribute, sortOrder);
     });
   });
-
-  resultatData.sort(sortResultatByTime);
 }
 
-function sortResultatByTime(resultatA, resultatB){
-  return resultatA.tid.localeCompare(resultatB.tid)
-}
+
+// function sortResultatByTime(resultatA, resultatB){
+//   return resultatA.tid.localeCompare(resultatB.tid)
+// }
 
 
 function applyResultatSort(sortAttribute, sortOrder) {
-  const sortButtons = document.querySelectorAll('.sort-btn');
+  const sortButtons = document.querySelectorAll('.sort-btn-update');
   sortButtons.forEach((button) => {
     button.classList.remove('active');
   });
 
-  const sortButton = document.querySelector(`.sort-btn[data-sort="${sortAttribute}"][data-order="${sortOrder}"]`);
+  const sortButton = document.querySelector(`.sort-btn-update[data-sort="${sortAttribute}"][data-order="${sortOrder}"]`);
   sortButton.classList.add('active');
 
   const sortDirection = sortOrder === 'asc' ? 1 : -1;
@@ -157,8 +140,8 @@ function applyResultatSort(sortAttribute, sortOrder) {
         valueA = `${medlemA.fornavn} ${medlemA.efternavn}`;
         valueB = `${medlemB.fornavn} ${medlemB.efternavn}`;
       } else if (sortAttribute === 'placering') {
-        valueA = parseInt(a[sortAttribute], 10);
-        valueB = parseInt(b[sortAttribute], 10);
+        valueA = parseInt(a[sortAttribute], 10) || 0;
+        valueB = parseInt(b[sortAttribute], 10) || 0;
       } else {
         valueA = a[sortAttribute];
         valueB = b[sortAttribute];
@@ -181,7 +164,7 @@ function applyResultatSort(sortAttribute, sortOrder) {
 
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const sortButtons = document.querySelectorAll('.sort-btn');
+  const sortButtons = document.querySelectorAll('.sort-btn-update');
   sortButtons.forEach((button) => {
     button.addEventListener('click', () => {
       const sortAttribute = button.getAttribute('data-sort');
@@ -206,9 +189,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 async function applyResultatFilters() {
   const resultatData = await getResultatData();
-
-  resultatData.sort(sortResultatByTime);
-
 
 
   const filterAktivitetstypeValue = document.getElementById('filter-aktivitetstype').value;
@@ -236,5 +216,5 @@ async function applyResultatFilters() {
 }
 
 
-export {medlemOptions, enableStævneInput, enablePlaceringInput, generateResultatTable}
+export {medlemOptions, enableStævneInput, enablePlaceringInput, enableStævneInputUpdate, enablePlaceringInputUpdate, generateResultatTable}
 

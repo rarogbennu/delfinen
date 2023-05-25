@@ -54,25 +54,6 @@ function createButtonContainer(item) {
   return buttonContainer;
 }
 
-function createResultatButtonContainer(resultat) {
-  const buttonResultatContainer = document.createElement("div");
-  buttonResultatContainer.classList.add("button-resultat-container");
-
-  const editResultatButton = document.createElement("button");
-  editResultatButton.classList.add("edit");
-  editResultatButton.innerHTML = "&#9998;";
-  editResultatButton.addEventListener("click", () => updateResultatClicked(resultat));
-  buttonResultatContainer.appendChild(editResultatButton);
-
-  // const deleteResultatButton = document.createElement("button");
-  // deleteResultatButton.classList.add("delete");
-  // deleteResultatButton.innerHTML = "&#128465;";
-  // deleteResultatButton.addEventListener("click", () => deleteResultatClicked(resultat));
-  // buttonResultatContainer.appendChild(deleteResultatButton);
-
-  return buttonResultatContainer;
-}
-
 // Funktion til at oprette sidens knapper
 function createPageButtons(data) {
   const totalPages = Math.ceil(data.length / pageSize);
@@ -159,4 +140,4 @@ function createPageButtons(data) {
   }
 
 
-export { searchData, createButtonContainer, createResultatButtonContainer, prepareData, capitalizeFirstLetter, closeDialog };
+export { searchData, createButtonContainer, prepareData, capitalizeFirstLetter, closeDialog };
