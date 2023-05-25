@@ -1,3 +1,5 @@
+import {medlemOptions, enableStævneInput, enablePlaceringInput, generateResultatTable, enableStævneInputUpdate, enablePlaceringInputUpdate} from "./resultater.js"
+
 function initViews() {
     console.log("initViews");
     window.addEventListener("hashchange", changeView);
@@ -28,6 +30,12 @@ function changeView() {
   }
   else if (hashLink === "#resultater") {
     console.log("#resultater")
+    medlemOptions();
+    enableStævneInput();
+    enablePlaceringInput();
+    generateResultatTable();
+    enableStævneInputUpdate();
+    enablePlaceringInputUpdate();
   }
   else if (hashLink === "#kontingent") {
     console.log("#kontingent")

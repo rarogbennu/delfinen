@@ -209,10 +209,10 @@
                 </div>
             </dialog>
 
-            <dialog id="dialog-update-resultat">
+            <dialog id="dialog-update-resultat" class="dialog">
               <form id="form-update-resultat">
                 <label for="hold-update">Hold:</label>
-                        <select id="hold-update" name="hold" required>
+                        <select id="hold-update" name="hold" disabled>
                           <option disabled selected value> -- vælg hold -- </option>
                           <option value="ungdom">Ungdom</option>
                           <option value="senior">Senior</option>
@@ -225,10 +225,8 @@
                           <option value="rygcrawl">Rygcrawl</option>
                           <option value="brystsvømning">Brystsvømning</option>
                         </select>
-                  <!-- <label for="medlem-assign-resultat">Svømmer:</label>
-                        <select id="medlem-assign-resultat" name="medlem-assign-resultat" required>
-                          <option disabled selected value> -- vælg svømmer --</option>
-                        </select> -->
+                  <label for="medlem-assign-resultat">Svømmer:</label>
+                        <input id="medlem-assign-resultat-update" name="svømmerId" disabled>
                   <label for="aktivitetstype-update">Aktivitetstype:</label>
                         <select id="aktivitetstype-update" name="aktivitetstype" required>
                           <option disabled selected value> -- vælg aktivitetstype -- </option>

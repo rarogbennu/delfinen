@@ -46,6 +46,25 @@ function enablePlaceringInput() {
   })
 }
 
+function enableStævneInputUpdate() {
+  const aktivitetstypeSelectUpdate = document.querySelector("#aktivitetstype-update");
+  const stævneInputUpdate = document.querySelector("#stævne-update");
+
+  aktivitetstypeSelectUpdate.addEventListener("change", function(){
+      stævneInputUpdate.disabled = (this.value !== "Konkurrence");
+  })
+}
+
+function enablePlaceringInputUpdate() {
+  const aktivitetstypeSelectUpdate = document.querySelector("#aktivitetstype-update");
+  const placeringInputUpdate = document.querySelector("#placering-update");
+
+  aktivitetstypeSelectUpdate.addEventListener("change", function(){
+      placeringInputUpdate.disabled = (this.value !== "Konkurrence");
+  })
+}
+
+
 async function generateResultatTable(filteredData = null) {
   resultatData = filteredData || await getResultatData();
   const medlemData = await getData();
@@ -54,12 +73,9 @@ async function generateResultatTable(filteredData = null) {
 
   resultsTableContainer.innerHTML = '';
 
-  // resultatData.sort(sortResultatByTime);
-
   for (let id in resultatData) {
     let result = resultatData[id];
     const medlem = medlemData.find((medlem) => medlem.id === result.svømmerId);
-
     let tableHTML = "";
 
     tableHTML = /*html*/`
@@ -96,9 +112,9 @@ async function generateResultatTable(filteredData = null) {
 }
 
 
-function sortResultatByTime(resultatA, resultatB){
-  return resultatA.tid.localeCompare(resultatB.tid)
-}
+// function sortResultatByTime(resultatA, resultatB){
+//   return resultatA.tid.localeCompare(resultatB.tid)
+// }
 
 
 function applyResultatSort(sortAttribute, sortOrder) {
@@ -174,9 +190,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 async function applyResultatFilters() {
   const resultatData = await getResultatData();
 
-  resultatData.sort(sortResultatByTime);
-
-
 
   const filterAktivitetstypeValue = document.getElementById('filter-aktivitetstype').value;
   const filterDisciplinValue = document.getElementById('filter-disciplin').value;
@@ -203,5 +216,5 @@ async function applyResultatFilters() {
 }
 
 
-export {medlemOptions, enableStævneInput, enablePlaceringInput, generateResultatTable}
+export {medlemOptions, enableStævneInput, enablePlaceringInput, enableStævneInputUpdate, enablePlaceringInputUpdate, generateResultatTable}
 

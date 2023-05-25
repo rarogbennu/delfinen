@@ -12,6 +12,13 @@ async function getData() {
   return medlemmer; // returner medlemmer-data i stedet for udefineret element
 }
 
+async function getMedlem(id) {
+  const response = await fetch (`${endpoint}/medlemmer/${id}.json`);
+  const medlem = await response.json();
+
+  return medlem; // returner medlemmer-data i stedet for udefineret element
+}
+
 // Henter resultat data fra JSON-fil
 async function getResultatData() {
   const response = await fetch(`${endpoint}/resultater.json`);
@@ -91,12 +98,13 @@ async function createResultat(hold, disciplin, svømmerId, aktivitetstype, stæv
   }
 }
 
-async function updateResultat(id, hold, disciplin, svømmerId, aktivitetstype, stævne, dato, placering, tid) {
-  const resultatToUpdate = {hold, disciplin, svømmerId, aktivitetstype, stævne, dato, placering, tid};
+async function updateResultat(id, disciplin, aktivitetstype, stævne, dato, placering, tid) {
+  const resultatToUpdate = {disciplin, aktivitetstype, stævne, dato, placering, tid};
+  console.log(resultatToUpdate);
   const json = JSON.stringify(resultatToUpdate);
 
   const response = await fetch(`${endpoint}/resultater/${id}.json`, {
-    method: "PUT",
+    method: "PATCH",
     body: json
   });
 
@@ -118,4 +126,4 @@ if (response.ok) {
 }
 
 
-export {getData, getResultatData, createMedlem, updateMedlem, deleteMedlem, createResultat, updateResultat, deleteResultat, endpoint}
+export {getData, getResultatData, createMedlem, updateMedlem, deleteMedlem, createResultat, updateResultat, deleteResultat, endpoint, getMedlem}
