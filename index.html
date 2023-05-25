@@ -257,7 +257,14 @@
     <!-- Filters Section -->
     <div id="resultat-filters">
 
-        <label for="filter-disciplin">Disciplin:</label>
+      <label for="filter-aktivitetstype">Aktivitetstype:</label>
+        <select id="filter-aktivitetstype">
+            <option value=""> -- Alle -- </option>
+            <option value="Konkurrence">Konkurrence</option>
+            <option value="Træning">Træning</option>
+        </select>
+
+          <label for="filter-disciplin">Disciplin:</label>
         <select id="filter-disciplin">
             <option value=""> -- Alle -- </option>
             <option value="butterfly">Butterfly</option>
@@ -271,13 +278,6 @@
             <option value=""> -- Alle -- </option>
             <option value="ungdom">Ungdom</option>
             <option value="senior">Senior</option>
-        </select>
-
-        <label for="filter-aktivitetstype">Aktivitetstype:</label>
-        <select id="filter-aktivitetstype">
-            <option value=""> -- Alle -- </option>
-            <option value="Konkurrence">Konkurrence</option>
-            <option value="Træning">Træning</option>
         </select>
   </div>
 
@@ -333,13 +333,6 @@
 <section id="kontingent" class="show-content">
   <h2>Kontingent</h2>
   <div>
-    <label for="filter-restance">Betalingsstatus:</label>
-    <select id="filter-restance">
-      <option value="">Alle</option>
-      <option value="negativ">Negativ</option>
-    </select>
-  </div>
-  <div>
     <label for="filter-aldersgruppe">Aldersgruppe:</label>
     <select id="filter-aldersgruppe">
       <option value="">Alle</option>
@@ -354,6 +347,13 @@
       <option value="">Alle</option>
       <option value="aktiv">Aktiv</option>
       <option value="passiv">Passiv</option>
+    </select>
+  </div>
+  <div>
+    <label for="filter-restance">Betalingsstatus:</label>
+    <select id="filter-restance">
+      <option value="">Alle</option>
+      <option value="negativ">Negativ</option>
     </select>
   </div>
   <div id="kontingentTableContainer"></div>
